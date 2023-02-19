@@ -7,8 +7,8 @@ const siteMetadata = {
   theme: 'system', // system, dark or light
   siteUrl: 'https://fjbarrena.dev',
   siteRepo: 'https://github.com/fjbarrena/blog',
-  siteLogo: '/static/images/logo.png',
-  image: '/static/images/avatar.png',
+  siteLogo: '/static/images/fjbarrena-portrait.png',
+  image: '/static/images/fjbarrena-portrait.png',
   socialBanner: '/static/images/twitter-card.png',
   email: 'fjbarrena@gmail.com',
   github: 'https://github.com/fjbarrena',
