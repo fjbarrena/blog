@@ -1,16 +1,18 @@
 ---
-name: Tails Azimuth
-avatar: /static/images/avatar.png
-occupation: Professor of Atmospheric Science
-company: Stanford University
-email: address@yoursite.com
-twitter: https://twitter.com/Twitter
-linkedin: https://www.linkedin.com
-github: https://github.com
+name: Francisco Javier Barrena
+avatar: /static/images/fjbarrena-portrait.png
+occupation: Senior Software Architect
+company: CTO at Kyso Inc.
+email: fjbarrena@gmail.com
+twitter: https://twitter.com/DogDeveloper
+linkedin: https://www.linkedin.com/in/fjbarrena
+github: https://github.com/fjbarrena
 ---
 
-Tails Azimuth is a professor of atmospheric sciences at the Stanford AI Lab. His research interests includes complexity modelling of tailwinds, headwinds and crosswinds.
+Francisco is a **software architect** and **software developer** specialized in scalable systems based on decoupled architectures, microservices (if there is a reason to use them :D) and cloud environments.
 
-He leads the clean energy group which develops 3D air pollution-climate models, writes differential equation solvers, and manufactures titanium plated air ballons. In his free time he bakes raspberry pi.
+He has a wide experience leading and managing heterogeneous technical teams (developers, devops, security, machine learning and data analyst), for example as **Head of engineering** and **Head of cybersecurity research group** at ITI, and as **CTO** at Kyso. But even in management roles, Francisco is a **hands-on** person that likes to build things.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.
+Francisco is proactive in learning new technologies and paradigms, with a strong interest in developing software products with quality and security, in the code and in the infrastructure.
+
+Finally, he is a frequent speaker in technical events, and a former professor at the **Politechnic University of Valencia**, in the **Big Data Analytics Master**, and in the **University of Mondragón**, teaching **Cloud Security** in the Specialist Course of National Security Scheme.
