@@ -1,141 +1,82 @@
 ---
-title: Deriving the OLS Estimator
+title: Machine Learning applied to cybersecurity
 date: '2020-12-21'
-tags: ['next js', 'math', 'ols']
+tags: ['ai', 'cybersecurity']
 draft: false
-summary: 'How to derive the OLS Estimator with matrix notation and a tour of math typesetting using markdown with the help of KaTeX.'
+summary: 'Discover the Shocking Truth About the Rise of Cybercrime and How AI is Changing the Game!'
 ---
 
-# Introduction
+> This article was originally posted at [ITI Blog](https://www.iti.es/blog/machine-learning-aplicado-a-ciberseguridad/) (in spanish)
 
-Parsing and display of math equations is included in this blog template. Parsing of math is enabled by `remark-math` and `rehype-katex`.
-KaTeX and its associated font is included in `_document.js` so feel free to use it on any page.
-^[For the full list of supported TeX functions, check out the [KaTeX documentation](https://katex.org/docs/supported.html)]
+# New trends in risk detection based on Machine Learning
 
-Inline math symbols can be included by enclosing the term between the `$` symbol.
+For all of us who are dedicated, in one way or another, to cybersecurity, it is clear that we are facing an arms
+race between cybercrime and those who defend us from them, the Blue Teams. Not surprisingly, a 2019 study already
+shocked us when it found that cybercrime already moves more money than drug trafficking, and the trend in 2020
+and 2021 has been on the rise. This can only be explained by the professionalisation of cybercrime, a fact
+confirmed by law enforcement authorities.
 
-Math code blocks are denoted by `$$`.
+We can fall into the cliché of thinking of cybercrime as some kind of evil organisation, like Kingpin in Spiderman.
+While this cliché is accurate in some cases, there is a large part of cybercrime that is not committed by evil,
+criminal organisations, but is perpetrated by companies or individuals who want to make an illegitimate profit, or
+want to harm a company or an individual. It is not uncommon to find cybercrime sponsored by a company that wants
+to increase the operating costs of its main competitor by creating traffic through bots to force it to scale up
+its cloud infrastructure, and thus increase its cost; nor is it uncommon to find employees, or former employees,
+exploiting internal company knowledge to undermine its position, or damage it in some way.
 
-If you intend to use the `$` sign instead of math, you can escape it (`\$`), or specify the HTML entity (`&dollar;`) [^2]
+Of course, there is also the more familiar version of this story. A criminal organisation impersonates a legitimate
+user and executes malicious actions on their behalf. This is made possible by the fragility of users, especially
+negligent ones who do not apply company security policies to their accounts, or who use the same password on their
+social networks as on their corporate accounts, for example. It is not too complicated to extrapolate password
+leaks from cloud services (social networks, video game platform accounts, etc.) to professional accounts, and it
+is an increasingly common and dangerous entry vector.
 
-Inline or manually enumerated footnotes are also supported. Click on the links above to see them in action.
+And as you can guess, it's not all malware or ransomware. It's not all mayhem and destruction. There are many
+problems that are not as gaudy as ransomware, but can be even more damaging. It takes an average of 280 days for a
+company to identify and contain a data breach, according to a recent IBM study. There is therefore plenty of room
+for improvement when it comes to detecting and stopping data breaches. Many of these leaks are caused by insiders,
+legitimate users of an organisation who conspire against it for personal gain, or to cause harm. Often these
+insiders are not conscious users, but rather "puppets" operated by cybercriminals, usually compromised by poor
+security policies or user negligence.
 
-[^2]: \$10 and &dollar;20.
+In order to detect such attacks earlier, we need to stop looking at what things are, and start looking at how they
+behave. From a classic intrusion detection point of view, a user who logs in legitimately from the platform, and
+has not had a strange pattern of behaviour from an authentication point of view (e.g. has not had 500 failed
+authentications in the last hour...), is legitimate and there is nothing more to talk about. It is not a threat.
+But, as we have already advanced before, there are legitimate users who behave maliciously. So we need to look at
+HOW a user behaves and not just how they authenticate.
 
-# Deriving the OLS Estimator
+And what technology is particularly good at detecting patterns of behaviour? Artificial intelligence in general,
+and machine learning in particular. This is precisely the approach being taken in the OPOSSUM project.
 
-Using matrix notation, let $n$ denote the number of observations and $k$ denote the number of regressors.
+The approach is simple in its conception, but rather more complex in its implementation. Basically, the OPOSSUM
+project acts as a reverse proxy between users and applications. In this way, it is in a privileged position to
+apply security checks, like a classic Web Application Firewall (WAF), but it is also in a privileged position to
+analyse how a user uses a given application, since all communication between the user and the application
+necessarily goes through OPOSSUM.
 
-The vector of outcome variables $\mathbf{Y}$ is a $n \times 1$ matrix,
+An interesting novelty of this project lies in the concept of context. Classically, cybersecurity solutions have
+focused on analysing flat data. Take an HTTP request for example, for a WAF to determine whether the request is
+malicious or not, it analyses the content of the request in isolation. This is effective in many cases, but not
+for detecting anomalous behaviour. It is true that there are products that take into account a set of data, e.g.
+the last 50 requests, but even so, the data on which they are based is still sparse. The OPOSSUM project, on the
+other hand, increases the context of the request by enriching the data on which predictions are made, using
+external threat intelligence sources such as Shodan, Spyse or Alienvault. These platforms add more information
+to the simple HTTP request, such as whether that IP has been involved in security incidents, or whether the
+payload of a request contains any indicators of compromise. This enrichment is done in real time, using the
+Apache Big Data stack (Hadoop, Kafka, Cassandra, etc.) as well as other interesting technologies as shown in the
+figure below.
 
-```tex
-\mathbf{Y} = \left[\begin{array}
-  {c}
-  y_1 \\
-  . \\
-  . \\
-  . \\
-  y_n
-\end{array}\right]
-```
+This enriched data provides much more information, which can be processed by machine learning models to detect
+anomalies in user behaviour.
 
-$$
-\mathbf{Y} = \left[\begin{array}
-  {c}
-  y_1 \\
-  . \\
-  . \\
-  . \\
-  y_n
-\end{array}\right]
-$$
+Clearly, new challenges arise, such as updating machine learning models. User behaviour is variable, and evolves
+over time. It is also subject to changes in the user's own attributions, such as a natural change of roles due to
+a promotion in the organisation, for example. Naturally, in this case, more doors and accesses open for that user,
+and their behaviour with corporate applications will vary. Therefore, constant training of these models is a
+fundamental requirement. This is why OPOSSUM researches and implements machine learning models based on techniques
+such as Adaptive Learning.
 
-The matrix of regressors $\mathbf{X}$ is a $n \times k$ matrix (or each row is a $k \times 1$ vector),
-
-```latex
-\mathbf{X} = \left[\begin{array}
-  {ccccc}
-  x_{11} & . & . & . & x_{1k} \\
-  . & . & . & . & .  \\
-  . & . & . & . & .  \\
-  . & . & . & . & .  \\
-  x_{n1} & . & . & . & x_{nn}
-\end{array}\right] =
-\left[\begin{array}
-  {c}
-  \mathbf{x}'_1 \\
-  . \\
-  . \\
-  . \\
-  \mathbf{x}'_n
-\end{array}\right]
-```
-
-$$
-\mathbf{X} = \left[\begin{array}
-  {ccccc}
-  x_{11} & . & . & . & x_{1k} \\
-  . & . & . & . & .  \\
-  . & . & . & . & .  \\
-  . & . & . & . & .  \\
-  x_{n1} & . & . & . & x_{nn}
-\end{array}\right] =
-\left[\begin{array}
-  {c}
-  \mathbf{x}'_1 \\
-  . \\
-  . \\
-  . \\
-  \mathbf{x}'_n
-\end{array}\right]
-$$
-
-The vector of error terms $\mathbf{U}$ is also a $n \times 1$ matrix.
-
-At times it might be easier to use vector notation. For consistency, I will use the bold small x to denote a vector and capital letters to denote a matrix. Single observations are denoted by the subscript.
-
-## Least Squares
-
-**Start**:  
-$$y_i = \mathbf{x}'_i \beta + u_i$$
-
-**Assumptions**:
-
-1. Linearity (given above)
-2. $E(\mathbf{U}|\mathbf{X}) = 0$ (conditional independence)
-3. rank($\mathbf{X}$) = $k$ (no multi-collinearity i.e. full rank)
-4. $Var(\mathbf{U}|\mathbf{X}) = \sigma^2 I_n$ (Homoskedascity)
-
-**Aim**:  
-Find $\beta$ that minimises the sum of squared errors:
-
-$$
-Q = \sum_{i=1}^{n}{u_i^2} = \sum_{i=1}^{n}{(y_i - \mathbf{x}'_i\beta)^2} = (Y-X\beta)'(Y-X\beta)
-$$
-
-**Solution**:  
-Hints: $Q$ is a $1 \times 1$ scalar, by symmetry $\frac{\partial b'Ab}{\partial b} = 2Ab$.
-
-Take matrix derivative w.r.t $\beta$:
-
-```tex
-\begin{aligned}
-  \min Q           & = \min_{\beta} \mathbf{Y}'\mathbf{Y} - 2\beta'\mathbf{X}'\mathbf{Y} +
-  \beta'\mathbf{X}'\mathbf{X}\beta \\
-                   & = \min_{\beta} - 2\beta'\mathbf{X}'\mathbf{Y} + \beta'\mathbf{X}'\mathbf{X}\beta \\
-  \text{[FOC]}~~~0 & =  - 2\mathbf{X}'\mathbf{Y} + 2\mathbf{X}'\mathbf{X}\hat{\beta}                  \\
-  \hat{\beta}      & = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{Y}                              \\
-                   & = (\sum^{n} \mathbf{x}_i \mathbf{x}'_i)^{-1} \sum^{n} \mathbf{x}_i y_i
-\end{aligned}
-```
-
-$$
-\begin{aligned}
-  \min Q           & = \min_{\beta} \mathbf{Y}'\mathbf{Y} - 2\beta'\mathbf{X}'\mathbf{Y} +
-  \beta'\mathbf{X}'\mathbf{X}\beta \\
-                   & = \min_{\beta} - 2\beta'\mathbf{X}'\mathbf{Y} + \beta'\mathbf{X}'\mathbf{X}\beta \\
-  \text{[FOC]}~~~0 & =  - 2\mathbf{X}'\mathbf{Y} + 2\mathbf{X}'\mathbf{X}\hat{\beta}                  \\
-  \hat{\beta}      & = (\mathbf{X}'\mathbf{X})^{-1}\mathbf{X}'\mathbf{Y}                              \\
-                   & = (\sum^{n} \mathbf{x}_i \mathbf{x}'_i)^{-1} \sum^{n} \mathbf{x}_i y_i
-\end{aligned}
-$$
+The OPOSSUM project is therefore a good example of Machine Learning applied to cybersecurity, which protects
+corporate applications from classic attacks, but also from more sophisticated attacks such as data exfiltration,
+detection of malicious bots or detection of insiders.

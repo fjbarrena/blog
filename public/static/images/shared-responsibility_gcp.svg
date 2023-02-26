@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xl="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" version="1.1" viewBox="877 376 593 544" width="593" height="544">
+  <defs>
+    <clipPath id="inner_stroke_clip_path">
+      <path d="M 877 420.8 L 1470 420.8 L 1470 449 L 877 449 Z"/>
+    </clipPath>
+    <font-face font-family="Roboto" font-size="12" panose-1="2 0 0 0 0 0 0 0 0 0" units-per-em="1000" underline-position="-73.24219" underline-thickness="48.828125" slope="0" x-height="528.3203" cap-height="710.9375" ascent="927.7344" descent="-244.14062" font-weight="400">
+      <font-face-src>
+        <font-face-name name="Roboto-Regular"/>
+      </font-face-src>
+    </font-face>
+    <clipPath id="inner_stroke_clip_path_2">
+      <path d="M 877 447.8 L 1470 447.8 L 1470 476 L 877 476 Z"/>
+    </clipPath>
+    <clipPath id="inner_stroke_clip_path_3">
+      <path d="M 877 475.0654 L 1470 475.0654 L 1470 503.2654 L 877 503.2654 Z"/>
+    </clipPath>
+    <clipPath id="inner_stroke_clip_path_4">
+      <path d="M 877 502.0654 L 1470 502.0654 L 1470 530.2654 L 877 530.2654 Z"/>
+    </clipPath>
+    <clipPath id="inner_stroke_clip_path_5">
+      <path d="M 877 529.33084 L 1470 529.33084 L 1470 557.5308 L 877 557.5308 Z"/>
+    </clipPath>
+    <clipPath id="inner_stroke_clip_path_6">
+      <path d="M 877 556.33084 L 1470 556.33084 L 1470 584.5308 L 877 584.5308 Z"/>
+    </clipPath>
+    <clipPath id="inner_stroke_clip_path_7">
+      <path d="M 877 583.59625 L 1470 583.59625 L 1470 611.79624 L 877 611.79624 Z"/>
+    </clipPath>
+    <clipPath id="inner_stroke_clip_path_8">
+      <path d="M 877 610.59625 L 1470 610.59625 L 1470 638.79624 L 877 638.79624 Z"/>
+    </clipPath>
+    <clipPath id="inner_stroke_clip_path_9">
+      <path d="M 877 637.8617 L 1470 637.8617 L 1470 666.06166 L 877 666.06166 Z"/>
+    </clipPath>
+    <clipPath id="inner_stroke_clip_path_10">
+      <path d="M 877 664.8617 L 1470 664.8617 L 1470 693.0617 L 877 693.0617 Z"/>
+    </clipPath>
+    <clipPath id="inner_stroke_clip_path_11">
+      <path d="M 877 692.1271 L 1470 692.1271 L 1470 720.3271 L 877 720.3271 Z"/>
+    </clipPath>
+    <clipPath id="inner_stroke_clip_path_12">
+      <path d="M 877 719.1271 L 1470 719.1271 L 1470 747.3271 L 877 747.3271 Z"/>
+    </clipPath>
+    <clipPath id="inner_stroke_clip_path_13">
+      <path d="M 877 746.3925 L 1470 746.3925 L 1470 774.5925 L 877 774.5925 Z"/>
+    </clipPath>
+    <clipPath id="inner_stroke_clip_path_14">
+      <path d="M 877 773.3925 L 1470 773.3925 L 1470 801.5925 L 877 801.5925 Z"/>
+    </clipPath>
+    <clipPath id="inner_stroke_clip_path_15">
+      <path d="M 877 800.6579 L 1470 800.6579 L 1470 828.8579 L 877 828.8579 Z"/>
+    </clipPath>
+    <clipPath id="inner_stroke_clip_path_16">
+      <path d="M 877 828.0736 L 1470 828.0736 L 1470 856.2736 L 877 856.2736 Z"/>
+    </clipPath>
+    <font-face font-family="Roboto" font-size="10" panose-1="2 0 0 0 0 0 0 0 0 0" units-per-em="1000" underline-position="-73.24219" underline-thickness="48.828125" slope="0" x-height="528.3203" cap-height="710.9375" ascent="927.7344" descent="-244.14062" font-weight="500">
+      <font-face-src>
+        <font-face-name name="Roboto-Medium"/>
+      </font-face-src>
+    </font-face>
+    <clipPath id="inner_stroke_clip_path_17">
+      <path d="M 877 876.2736 L 1209.4 876.2736 L 1209.4 919.6986 L 877 919.6986 Z"/>
+    </clipPath>
+    <font-face font-family="Roboto" font-size="10" panose-1="2 0 0 0 0 0 0 0 0 0" units-per-em="1000" underline-position="-73.24219" underline-thickness="48.828125" slope="0" x-height="528.3203" cap-height="710.9375" ascent="927.7344" descent="-244.14062" font-weight="400">
+      <font-face-src>
+        <font-face-name name="Roboto-Regular"/>
+      </font-face-src>
+    </font-face>
+  </defs>
+  <metadata> Produced by OmniGraffle 7.19.1\n2022-05-18 05:35:46 +0000</metadata>
+  <g id="Diagram_DESIGN_-_CISO_s_Guide_to_Cloud_Security_Transformation" stroke="none" fill="none" stroke-opacity="1" stroke-dasharray="none" fill-opacity="1">
+    <title>Diagram_DESIGN - CISO&apos;s Guide to Cloud Security Transformation</title>
+    <rect fill="white" x="877" y="376" width="593" height="544"/>
+    <g id="Diagram_DESIGN_-_CISO_s_Guide_to_Cloud_Security_Transformation_Layer_1">
+      <title>Layer 1</title>
+      <g id="Group_81">
+        <g id="Group_78">
+          <g id="Graphic_15">
+            <rect x="877" y="420.8" width="592.99995" height="28.199994" fill="white"/>
+            <rect x="877" y="420.8" width="592.99995" height="28.199994" stroke="#dfdfdf" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" clip-path="url(#inner_stroke_clip_path)"/>
+            <text transform="translate(893 427.9)" fill="#212121">
+              <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#212121" x="0" y="11">Content</tspan>
+            </text>
+          </g>
+          <g id="Graphic_18">
+            <rect x="877" y="447.8" width="592.99995" height="28.199994" fill="white"/>
+            <rect x="877" y="447.8" width="592.99995" height="28.199994" stroke="#dfdfdf" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" clip-path="url(#inner_stroke_clip_path_2)"/>
+            <text transform="translate(893 454.9)" fill="#212121">
+              <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#212121" x="0" y="11">Access policy</tspan>
+            </text>
+          </g>
+          <g id="Graphic_20">
+            <rect x="877" y="475.0654" width="592.99995" height="28.199994" fill="white"/>
+            <rect x="877" y="475.0654" width="592.99995" height="28.199994" stroke="#dfdfdf" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" clip-path="url(#inner_stroke_clip_path_3)"/>
+            <text transform="translate(893 482.1654)" fill="#212121">
+              <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#212121" x="0" y="11">Usage</tspan>
+            </text>
+          </g>
+          <g id="Graphic_19">
+            <rect x="877" y="502.0654" width="592.99995" height="28.199994" fill="white"/>
+            <rect x="877" y="502.0654" width="592.99995" height="28.199994" stroke="#dfdfdf" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" clip-path="url(#inner_stroke_clip_path_4)"/>
+            <text transform="translate(893 509.1654)" fill="#212121">
+              <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#212121" x="0" y="11">Deployment</tspan>
+            </text>
+          </g>
+          <g id="Graphic_24">
+            <rect x="877" y="529.33084" width="592.99995" height="28.199994" fill="white"/>
+            <rect x="877" y="529.33084" width="592.99995" height="28.199994" stroke="#dfdfdf" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" clip-path="url(#inner_stroke_clip_path_5)"/>
+            <text transform="translate(893 536.43083)" fill="#212121">
+              <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#212121" x="0" y="11">Web application security</tspan>
+            </text>
+          </g>
+          <g id="Graphic_23">
+            <rect x="877" y="556.33084" width="592.99995" height="28.199994" fill="white"/>
+            <rect x="877" y="556.33084" width="592.99995" height="28.199994" stroke="#dfdfdf" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" clip-path="url(#inner_stroke_clip_path_6)"/>
+            <text transform="translate(893 563.4308)" fill="#212121">
+              <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#212121" x="0" y="11">Identity</tspan>
+            </text>
+          </g>
+          <g id="Graphic_22">
+            <rect x="877" y="583.59625" width="592.99995" height="28.199994" fill="white"/>
+            <rect x="877" y="583.59625" width="592.99995" height="28.199994" stroke="#dfdfdf" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" clip-path="url(#inner_stroke_clip_path_7)"/>
+            <text transform="translate(893 590.69625)" fill="#212121">
+              <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#212121" x="0" y="11">Operations</tspan>
+            </text>
+          </g>
+          <g id="Graphic_21">
+            <rect x="877" y="610.59625" width="592.99995" height="28.199994" fill="white"/>
+            <rect x="877" y="610.59625" width="592.99995" height="28.199994" stroke="#dfdfdf" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" clip-path="url(#inner_stroke_clip_path_8)"/>
+            <text transform="translate(893 617.69625)" fill="#212121">
+              <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#212121" x="0" y="11">Access and authentication</tspan>
+            </text>
+          </g>
+          <g id="Graphic_32">
+            <rect x="877" y="637.8617" width="592.99995" height="28.199994" fill="white"/>
+            <rect x="877" y="637.8617" width="592.99995" height="28.199994" stroke="#dfdfdf" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" clip-path="url(#inner_stroke_clip_path_9)"/>
+            <text transform="translate(893 644.9617)" fill="#212121">
+              <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#212121" x="0" y="11">Network security</tspan>
+            </text>
+          </g>
+          <g id="Graphic_31">
+            <rect x="877" y="664.8617" width="592.99995" height="28.199994" fill="white"/>
+            <rect x="877" y="664.8617" width="592.99995" height="28.199994" stroke="#dfdfdf" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" clip-path="url(#inner_stroke_clip_path_10)"/>
+            <text transform="translate(893 671.9617)" fill="#212121">
+              <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#212121" x="0" y="11">Guest OS, data, and content</tspan>
+            </text>
+          </g>
+          <g id="Graphic_30">
+            <rect x="877" y="692.1271" width="592.99995" height="28.199994" fill="white"/>
+            <rect x="877" y="692.1271" width="592.99995" height="28.199994" stroke="#dfdfdf" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" clip-path="url(#inner_stroke_clip_path_11)"/>
+            <text transform="translate(893 699.2271)" fill="#212121">
+              <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#212121" x="0" y="11">Audit logging</tspan>
+            </text>
+          </g>
+          <g id="Graphic_29">
+            <rect x="877" y="719.1271" width="592.99995" height="28.199994" fill="white"/>
+            <rect x="877" y="719.1271" width="592.99995" height="28.199994" stroke="#dfdfdf" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" clip-path="url(#inner_stroke_clip_path_12)"/>
+            <text transform="translate(893 726.2271)" fill="#212121">
+              <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#212121" x="0" y="11">Network</tspan>
+            </text>
+          </g>
+          <g id="Graphic_28">
+            <rect x="877" y="746.3925" width="592.99995" height="28.199994" fill="white"/>
+            <rect x="877" y="746.3925" width="592.99995" height="28.199994" stroke="#dfdfdf" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" clip-path="url(#inner_stroke_clip_path_13)"/>
+            <text transform="translate(893 753.4925)" fill="#212121">
+              <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#212121" x="0" y="11">Storage and encryption</tspan>
+            </text>
+          </g>
+          <g id="Graphic_27">
+            <rect x="877" y="773.3925" width="592.99995" height="28.199994" fill="white"/>
+            <rect x="877" y="773.3925" width="592.99995" height="28.199994" stroke="#dfdfdf" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" clip-path="url(#inner_stroke_clip_path_14)"/>
+            <text transform="translate(893 780.4925)" fill="#212121">
+              <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#212121" x="0" y="11">Hardened kernel and IPC</tspan>
+            </text>
+          </g>
+          <g id="Graphic_26">
+            <rect x="877" y="800.6579" width="592.99995" height="28.199994" fill="white"/>
+            <rect x="877" y="800.6579" width="592.99995" height="28.199994" stroke="#dfdfdf" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" clip-path="url(#inner_stroke_clip_path_15)"/>
+            <text transform="translate(893 807.7579)" fill="#212121">
+              <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#212121" x="0" y="11">Boot</tspan>
+            </text>
+          </g>
+          <g id="Graphic_33">
+            <rect x="877" y="828.0736" width="592.99995" height="28.199994" fill="white"/>
+            <rect x="877" y="828.0736" width="592.99995" height="28.199994" stroke="#dfdfdf" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" clip-path="url(#inner_stroke_clip_path_16)"/>
+            <text transform="translate(893 835.1736)" fill="#212121">
+              <tspan font-family="Roboto" font-size="12" font-weight="400" fill="#212121" x="0" y="11">Hardware</tspan>
+            </text>
+          </g>
+          <g id="Graphic_39">
+            <title>zone external - grey</title>
+            <rect x="1072" y="376.6" width="79.49998" height="479.6736" fill="#efebe9"/>
+            <text transform="translate(1082 391.6)" fill="#757575">
+              <tspan font-family="Roboto" font-size="10" font-weight="500" fill="#757575" x="10.257805" y="9">On-prem</tspan>
+            </text>
+          </g>
+          <g id="Graphic_35">
+            <title>spacer</title>
+            <rect x="1091.75" y="420.8" width="40" height="435.4736" fill="#4185f4"/>
+          </g>
+          <g id="Graphic_43">
+            <title>zone external - grey</title>
+            <rect x="1171.5" y="376.6" width="79.49998" height="479.6736" fill="#efebe9"/>
+            <text transform="translate(1181.5 391.6)" fill="#757575">
+              <tspan font-family="Roboto" font-size="10" font-weight="500" fill="#757575" x="19.916008" y="9">IaaS</tspan>
+            </text>
+          </g>
+          <g id="Graphic_42">
+            <title>spacer</title>
+            <rect x="1191.25" y="420.8" width="40" height="435.4736" fill="#4185f4"/>
+          </g>
+          <g id="Graphic_45">
+            <title>zone external - grey</title>
+            <rect x="1271" y="376.6" width="79.49998" height="479.6736" fill="#efebe9"/>
+            <text transform="translate(1281 391.6)" fill="#757575">
+              <tspan font-family="Roboto" font-size="10" font-weight="500" fill="#757575" x="18.167961" y="9">PaaS</tspan>
+            </text>
+          </g>
+          <g id="Graphic_44">
+            <title>spacer</title>
+            <rect x="1290.75" y="420.8" width="40" height="435.4736" fill="#4185f4"/>
+          </g>
+          <g id="Graphic_47">
+            <title>zone external - grey</title>
+            <rect x="1370.5" y="376.6" width="79.49998" height="479.6736" fill="#efebe9"/>
+            <text transform="translate(1380.5 391.6)" fill="#757575">
+              <tspan font-family="Roboto" font-size="10" font-weight="500" fill="#757575" x="18.30468" y="9">SaaS</tspan>
+            </text>
+          </g>
+          <g id="Graphic_46">
+            <title>spacer</title>
+            <rect x="1390.25" y="420.8" width="40" height="435.4736" fill="#4185f4"/>
+          </g>
+          <g id="Graphic_57">
+            <title>spacer</title>
+            <rect x="1191.25" y="692.1271" width="40" height="164.1465" fill="#f4b400"/>
+          </g>
+          <g id="Graphic_59">
+            <title>spacer</title>
+            <rect x="1290.75" y="556.33084" width="40" height="299.94275" fill="#f4b400"/>
+          </g>
+          <g id="Graphic_60">
+            <title>spacer</title>
+            <rect x="1390.25" y="475.0654" width="40" height="381.20816" fill="#f4b400"/>
+          </g>
+        </g>
+        <g id="Group_80">
+          <g id="Graphic_67">
+            <rect x="877" y="876.2736" width="332.4" height="43.425" fill="white"/>
+            <rect x="877" y="876.2736" width="332.4" height="43.425" stroke="#dfdfdf" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" clip-path="url(#inner_stroke_clip_path_17)"/>
+          </g>
+          <g id="Graphic_64">
+            <text transform="translate(917 890.9635)" fill="#212121">
+              <tspan font-family="Roboto" font-size="10" font-weight="400" fill="#212121" x="0" y="12">Cloud provider responsibility</tspan>
+            </text>
+          </g>
+          <g id="Graphic_68">
+            <title>small spacer</title>
+            <rect x="892" y="889.5222" width="20" height="20" fill="#f4b400"/>
+          </g>
+          <g id="Graphic_72">
+            <text transform="translate(1086.6 890.9635)" fill="#212121">
+              <tspan font-family="Roboto" font-size="10" font-weight="400" fill="#212121" x="0" y="12">Customer responsibility</tspan>
+            </text>
+          </g>
+          <g id="Graphic_71">
+            <title>small spacer</title>
+            <rect x="1061.6" y="889.5222" width="20" height="20" fill="#4185f4"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,198 +1,107 @@
 ---
-title: 'Markdown Guide'
+title: 'Cloud Cybersecurity: Can`t someone else DO it?'
 date: '2019-10-11'
-tags: ['github', 'guide']
+tags: ['cybersecurity', 'cloud', 'shared responsibility']
 draft: false
 summary: 'Markdown cheatsheet for all your blogging needs - headers, lists, images, tables and more! An illustrated guide based on GitHub Flavored Markdown.'
 ---
 
-# Introduction
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/0Fw-J2dIGfE"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
 
-Markdown and Mdx parsing is supported via `unified`, and other remark and rehype packages. `next-mdx-remote` allows us to parse `.mdx` and `.md` files in a more flexible manner without touching webpack.
+You may be reading this article while thinking, **"Isn't cybersecurity in the cloud already taken care of by someone
+else?"**. If that's the case, I recommend that you keep reading this article because you're sure to be surprised by
+many things.
 
-GitHub flavored markdown is used. `mdx-prism` provides syntax highlighting capabilities for code blocks. Here's a demo of how everything looks.
+The _promised land of the cloud_ has made us believe that we don't have to worry about many things that we used
+to worry about, such as _"system things"_ or _"network things,"_ but what about _"security things?"_.
 
-The following markdown cheatsheet is adapted from: https://guides.github.com/features/mastering-markdown/
+Don't get me wrong, it's not that Cloud marketing has directly lied to us, it's just that they haven't told us
+the whole truth. And while it's true that thanks to the Cloud, we abstract ourselves from many details, and it's
+well worth it, it's also true that we've extrapolated that thinking to other areas, such as security, leaving it
+practically unattended, hoping that my provider, such as AWS or Azure, will keep me safe from threats.
 
-# What is Markdown?
+In this sense, according to a study in India (which, by the way, is a global IT powerhouse), 72% of companies
+wrongly believe that the security provided by the Cloud provider is sufficient protection. In the national (Spain :D)
+sphere, a study by Kaspersky Lab concludes that 70% of surveyed companies do not have a clear plan to deal with
+security incidents. The same study indicates that 43% of companies do not feel well-protected, and 24% have
+experienced security incidents affecting their third-party hosted IT infrastructures. **A statistic that seems
+particularly delicious to me is that 37% of companies do not know where some of their data is located**. Other
+relevant security actors, such as Palo Alto Networks or McAfee, are also focusing on this issue, even claiming
+that security in the Cloud is much worse than we imagined. Another study claims that 99% of bad configurations in
+IaaS are simply not detected.
 
-Markdown is a way to style text on the web. You control the display of the document; formatting words as bold or italic, adding images, and creating lists are just a few of the things we can do with Markdown. Mostly, Markdown is just regular text with a few non-alphabetic characters thrown in, like `#` or `*`.
+So... what does my Cloud provider protect me from? The answer depends on each provider. Thus, Amazon Web Services
+specifies the following:
 
-# Syntax guide
+![Shared Responsibility Chart in AWS](/static/images/shared-responsibility-aws.jpg)
 
-Here’s an overview of Markdown syntax that you can use anywhere on GitHub.com or in your own text files.
+This is the responsibility that Microsoft's Azure defines:
 
-## Headers
+![Shared Responsibility Azure](/static/images/shared-responsibility-azure.svg)
 
-```
-# This is a h1 tag
+And this is the responsibility that Google Cloud Platform defines:
 
-## This is a h2 tag
+![Shared Responsibility GCP](/static/images/shared-responsibility_gcp.svg)
 
-#### This is a h4 tag
-```
+This model is called the **Shared Responsibility Model**. So, as you can see, depending on the type of service
+you're using (IaaS, PaaS, or SaaS), your responsibility is greater or lesser.
 
-# This is a h1 tag
+So, dear friends, although our applications are hosted in the Cloud, we still have an important part of the
+responsibility, for example, the responsibility for _the security of the web applications we develop will always
+be ours_.
 
-## This is a h2 tag
+100% real. Not fake.
 
-#### This is a h4 tag
+And let's be honest, how many of you have mechanisms defined that at least minimize the number of vulnerabilities
+your web applications have? How many of you have a monitoring system defined for your web applications? How many
+of you introduce specific security elements into your software architectures?
 
-## Emphasis
+But this is not the worst thing. The worst thing is that **those who used to defend us no longer do so**. The
+worst thing is that **the tools that helped us defend ourselves before are no longer as effective in these new
+Cloud environments**. This is because **these tools made technical assumptions that are no longer true**. For
+example, consider a somewhat crude security control that takes IP addresses into account. In virtual machines,
+where IPs are kept fixed for months, years and even... well, forever, such rules were effective. But in a
+container-based environment, where IPs change very frequently, these rules are no longer valid. Another example
+could be tools that monitor traffic in and out of physical network interfaces. Such tools are **blind to traffic
+between virtual networks within the same physical node**, for example, within a node of a Kubernetes cluster. In
+fact, there are already attacks that take these restrictions into account, and in order not to be detected, they
+only act on virtual networks. **In conclusion, Cloud and containers require specific security and monitoring tools
+that take into account these implementation details**.
 
-```
-_This text will be italic_
+Cybercriminals (who you know are not hackers, they are cybercriminals) know this. And they exploit it. In fact,
+there are some things that we've even made it easy for them. Before, they had to find out, for each company,
+where they kept their static assets, and based on that, put together an attack. Now they know where those assets
+are: Amazon's S3, Microsoft's OneDrive or Dropbox. Before, they had to find out where the keys or API keys were
+in the organisation. Now they know where they are, in Gitlab, Github or Bitbucket. They just have to compromise a
+key from someone with access to those services. Or easier still, they only have to exploit a misconfiguration of
+these services. I remind you of the statistic that 99% of IaaS misconfigurations go undetected. This environment
+has favoured the emergence of automatic and widespread attacks. This milestone is important, as attacks are no
+longer done in human time, they are done in machine time. There is no longer a person behind it, typing on the
+command line. What you have is a bot, executing instructions at the highest possible speed, or in the worst case,
+what you have is a swarm of bots testing all the seams of the system.
 
-**This text will be bold**
+This has a direct implication, and that is that countermeasures can no longer be in human time, they also have to
+be in machine time. This is why security systems must evolve to become more autonomous, more automatic and more
+specific. To achieve this, we have to rely on new technologies and new paradigms, especially those based on Big
+Data and Artificial Intelligence, which will give us the autonomy we need, and also the speed of response in
+machine time. These tools will also have to broaden their horizons to obtain more information to help them
+determine whether they are under attack. To do this, they will have to integrate with numerous data sources, such
+as databases of CVEs, or Threat Intelligence, but also using OSINT techniques, which allow us to obtain the
+maximum possible useful information around an HTTP request.
 
-_You **can** combine them_
-```
+We have a long way to go to raise the security standards of our applications. I truly believe that the future of
+applications will be secure, or it will not be, because there will come a time when applications that do not meet
+these security standards will simply not be used. For that we will need to improve our development processes, but
+we will also need to have new tools to make that job easier.
 
-_This text will be italic_
+Stay secure!
 
-**This text will be bold**
-
-_You **can** combine them_
-
-## Lists
-
-### Unordered
-
-```
-- Item 1
-- Item 2
-  - Item 2a
-  - Item 2b
-```
-
-- Item 1
-- Item 2
-  - Item 2a
-  - Item 2b
-
-### Ordered
-
-```
-1. Item 1
-1. Item 2
-1. Item 3
-   1. Item 3a
-   1. Item 3b
-```
-
-1. Item 1
-1. Item 2
-1. Item 3
-   1. Item 3a
-   1. Item 3b
-
-## Images
-
-```
-![GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
-Format: ![Alt Text](url)
-```
-
-![GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
-
-## Links
-
-```
-http://github.com - automatic!
-[GitHub](http://github.com)
-```
-
-http://github.com - automatic!
-[GitHub](http://github.com)
-
-## Blockquotes
-
-```
-As Kanye West said:
-
-> We're living the future so
-> the present is our past.
-```
-
-As Kanye West said:
-
-> We're living the future so
-> the present is our past.
-
-## Inline code
-
-```
-I think you should use an
-`<addr>` element here instead.
-```
-
-I think you should use an
-`<addr>` element here instead.
-
-## Syntax highlighting
-
-Here’s an example of how you can use syntax highlighting with [GitHub Flavored Markdown](https://help.github.com/articles/basic-writing-and-formatting-syntax/):
-
-````
-```js:fancyAlert.js
-function fancyAlert(arg) {
-  if (arg) {
-    $.facebox({ div: '#foo' })
-  }
-}
-```
-````
-
-And here's how it looks - nicely colored with styled code titles!
-
-```js:fancyAlert.js
-function fancyAlert(arg) {
-  if (arg) {
-    $.facebox({ div: '#foo' })
-  }
-}
-```
-
-## Footnotes
-
-```
-Here is a simple footnote[^1]. With some additional text after it.
-
-[^1]: My reference.
-```
-
-Here is a simple footnote[^1]. With some additional text after it.
-
-[^1]: My reference.
-
-## Task Lists
-
-```
-- [x] list syntax required (any unordered or ordered list supported)
-- [x] this is a complete item
-- [ ] this is an incomplete item
-```
-
-- [x] list syntax required (any unordered or ordered list supported)
-- [x] this is a complete item
-- [ ] this is an incomplete item
-
-## Tables
-
-You can create tables by assembling a list of words and dividing them with hyphens `-` (for the first row), and then separating each column with a pipe `|`:
-
-```
-| First Header                | Second Header                |
-| --------------------------- | ---------------------------- |
-| Content from cell 1         | Content from cell 2          |
-| Content in the first column | Content in the second column |
-```
-
-| First Header                | Second Header                |
-| --------------------------- | ---------------------------- |
-| Content from cell 1         | Content from cell 2          |
-| Content in the first column | Content in the second column |
-
-## Strikethrough
-
-Any word wrapped with two tildes (like `~~this~~`) will appear ~~crossed out~~.
+PS: Don't miss the webinar, you can watch it at [this link](https://www.youtube.com/watch?v=0Fw-J2dIGfE)_(in spanish)_
