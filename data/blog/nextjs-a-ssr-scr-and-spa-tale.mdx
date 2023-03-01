@@ -1,0 +1,106 @@
+---
+title: 'NextJS: A SSR, SCR and SPA tale'
+date: '2022-01-22'
+tags: ['NextJS', 'SPA']
+draft: false
+summary: "Can NextJS be used as a Single Page Application? The answer may surprise you! Learn how to make it work, but be warned: it's hacky and unsupported. Read on to find out more."
+---
+
+Can we use NextJS as a Single Page Application? That's what I learned...
+
+# Server Side Rendering (SSR)?
+
+Let's see it with a simple use case.
+
+Figure out that we have a simple page at /pages/[organization]/index.tsx with this simple content
+
+```typescript
+const Index = () => {
+  const router = useRouter()
+  const { organization } = (router as any).query
+
+  return <div>{organization}</div>
+}
+```
+
+If we execute npm run dev and open the browser at http://localhost:3000/lightside, this is what we will see
+
+![image 1](/static/images/nextjs_img1.png)
+
+It's working... or not? Well, it's working, but this is **because the npm run dev command raises up a NodeJS server
+under the hood**, and all works as expected.
+
+Let's try then to build the app for production and then serve it with a simple nginx, or a similar technology
+(reverse proxy or static server content). For that we can execute a npm run build-prod, and if all goes well,
+we will have the compiled site ready for production in the out directory
+
+```shell
+$ npm run build prod
+...
+Export successful. Files written to xyz
+```
+
+We can use the utility serve, which, using their own words:
+
+> Assuming you would like to serve a static site, single page application or just a static file (no matter if on your device or on the local network), this package is just the right choice for you.
+
+Then, we can go to the out directory and just execute the serve command, and this is what you will see
+
+```shell
+$ serve
+   ┌───────────────────────────────────────────────────┐
+   │                                                   │
+   │   Serving!                                        │
+   │                                                   │
+   │   - Local:            http://localhost:3000       │
+   │   - On Your Network:  http://192.168.1.136:3000   │
+   │                                                   │
+   │   Copied local address to clipboard!              │
+   │                                                   │
+   └───────────────────────────────────────────────────┘
+```
+
+So, if we the open the browser at http://localhost:3000/lightside, we should see the same as the npm run dev
+command, but we see this:
+
+![image two](/static/images/nextjs_img2.png)
+
+WHY???? **Because we don't have a server behind**, we are just serving content, and NextJS don't know what the
+hell is lightside.
+
+<h1>Road to Static Server Content</h1>
+
+Reading carefully the NextJS documentation, we just realized that we are not coding to be static server compilant.
+For that we need to implement two functions:
+
+- getStaticPaths()
+  - Called at build time
+  - Returns all the routes that page could have
+  - If we are using a dynamic route, like [organization], we must return all the possible values that route can take
+    - In our case, we should return here all the possible organizations
+- getStaticProps(params: any)
+  - Called at build time
+  - This function is used to, using the data returned by getStaticPaths(), retrieve all the data that is going to be rendered at the page
+    - For example, if we return a list of organization id's in getStaticPaths, we can query to an API to retrieve the data of that organization
+
+This, by nature, **can't be used in dynamic applications that allows users to create content at will**. Think
+about it, every time a new user creates a new report at Kyso, we must **rebuild the entire application and deploy
+it to production** to allow the user to see the change.
+
+<h1>What about a Single Page Application?</h1>
+
+Officially, NextJS only supports two of these paradigms Server Side Rendering (SSR) and Static Content Rendering
+(SCR). That means, **NextJS don't support Single Page Applications (SPA)**.
+
+Is possible to use NextJS as an SPA but it's officially unsupported
+
+[This post explains pretty well the odyssey to convert NextJS to a SPA](https://colinhacks.com/essays/building-a-spa-with-nextjs)
+
+In summary, is hacky and put at risk future migrations, so I think we must not do it.
+
+<h1>Conclusions</h1>
+
+- NextJS should not be used an as SPA, because is not officially supported, is hacky and put at risk the future upgrades
+- For an application as Kyso, which has an API behind and dynamic routes, a Static Content Rendering is not suitable as well, becase we can't anticipate at build time the data we are going to serve
+- Then, only the Server Side Rendering is suitable for us
+- OR, we can change the underlying technology which supports SPA, like Angular, Vue or Vanilla React.
