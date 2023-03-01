@@ -1,113 +1,455 @@
-import { MDXLayoutRenderer } from '@/components/MDXComponents'
 import { getFileBySlug } from '@/lib/mdx'
-import { Fragment } from 'react'
-import { Menu, Popover, Transition } from '@headlessui/react'
-import {
-  ArrowLongLeftIcon,
-  CheckIcon,
-  HandThumbUpIcon,
-  HomeIcon,
-  MagnifyingGlassIcon,
-  PaperClipIcon,
-  QuestionMarkCircleIcon,
-  UserIcon,
-} from '@heroicons/react/20/solid'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { CheckIcon, HandThumbUpIcon, UserIcon } from '@heroicons/react/20/solid'
 
-const user = {
-  name: 'Whitney Francis',
-  email: 'whitney@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80',
-}
-const navigation = [
-  { name: 'Dashboard', href: '#' },
-  { name: 'Jobs', href: '#' },
-  { name: 'Applicants', href: '#' },
-  { name: 'Company', href: '#' },
-]
-const breadcrumbs = [
-  { name: 'Jobs', href: '#', current: false },
-  { name: 'Front End Developer', href: '#', current: false },
-  { name: 'Applicants', href: '#', current: true },
-]
-const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
-]
-const attachments = [
-  { name: 'resume_front_end_developer.pdf', href: '#' },
-  { name: 'coverletter_front_end_developer.pdf', href: '#' },
-]
 const eventTypes = {
   applied: { icon: UserIcon, bgColorClass: 'bg-gray-400' },
   advanced: { icon: HandThumbUpIcon, bgColorClass: 'bg-blue-500' },
   completed: { icon: CheckIcon, bgColorClass: 'bg-green-500' },
 }
-const timeline = [
+
+const talks = [
   {
     id: 1,
-    type: eventTypes.applied,
-    content: 'Applied to',
-    target: 'Front End Developer',
-    date: 'Sep 20',
-    datetime: '2020-09-20',
+    year: 2022,
+    title: 'API Security: Workshop to harden your API',
+    slidesUrl: 'https://www.slideshare.net/fjbarrena/codemotion-2022-api-security-workshoppdf',
+    videoUrl: null,
+    confImageUrl: '/static/images/companies/codemotion.png',
   },
   {
     id: 2,
-    type: eventTypes.advanced,
-    content: 'Advanced to phone screening by',
-    target: 'Bethany Blake',
-    date: 'Sep 22',
-    datetime: '2020-09-22',
+    year: 2021,
+    title: 'Hard as a pod. How to secure your Kubernetes Deployments',
+    slidesUrl:
+      'https://es.slideshare.net/fjbarrena/vlcsofting-2021-hard-as-a-pod-hardening-de-despliegues-en-kubernetes-con-mucho-flow',
+    videoUrl: 'https://www.youtube.com/watch?v=QJU3FR9v9Bs',
+    confImageUrl: '/static/images/companies/vlcsofting.png',
   },
   {
     id: 3,
-    type: eventTypes.completed,
-    content: 'Completed phone screening with',
-    target: 'Martha Gardner',
-    date: 'Sep 28',
-    datetime: '2020-09-28',
+    year: 2021,
+    title: 'Welcome to Gotham. New and terrifying ways of cyberattacks',
+    slidesUrl:
+      'https://es.slideshare.net/fjbarrena/welcome-to-gotham-nuevas-formas-ingeniosas-y-terrorficas-de-ciberataques',
+    videoUrl: 'https://www.youtube.com/watch?v=ngrlQeFYlQM&t=3141s',
+    confImageUrl: '/static/images/companies/t3chfest.png',
   },
   {
     id: 4,
-    type: eventTypes.advanced,
-    content: 'Advanced to interview by',
-    target: 'Bethany Blake',
-    date: 'Sep 30',
-    datetime: '2020-09-30',
+    year: 2021,
+    title: 'The Rustalorian. This is the way',
+    slidesUrl:
+      'https://es.slideshare.net/fjbarrena/codemotion-2021-the-rustalorian-este-es-el-camino',
+    videoUrl: null,
+    confImageUrl: '/static/images/companies/codemotion.png',
   },
   {
     id: 5,
-    type: eventTypes.completed,
-    content: 'Completed interview with',
-    target: 'Katherine Snyder',
-    date: 'Oct 4',
-    datetime: '2020-10-04',
+    year: 2020,
+    title: 'Stop being the weakest rival with DevSecOps',
+    slidesUrl: 'https://www.slideshare.net/fjbarrena/deja-de-ser-el-rival-ms-dbil-con-devsecops',
+    videoUrl: 'https://www.youtube.com/watch?v=Uhx9VQYWSCE',
+    confImageUrl: '/static/images/companies/vlctesting.png',
+  },
+  {
+    id: 6,
+    year: 2020,
+    title: 'Big Data in Cybersecurity: Better to die on your feet than to live on your knees',
+    slidesUrl:
+      'https://es.slideshare.net/fjbarrena/codemotion-2020-big-data-en-ciberseguridad-mejor-morir-de-pie-que-vivir-arrodillado',
+    videoUrl:
+      'https://www.youtube.com/watch?v=jxvqOGjTal0&list=PLq2-o3pBTowcAgqgVzqC4S7IeYSiVYIR2&index=9&t=1877s',
+    confImageUrl: '/static/images/companies/codemotion.png',
+  },
+  {
+    id: 7,
+    year: 2020,
+    title: 'Speaker at a round table about API Security',
+    slidesUrl: null,
+    videoUrl: 'https://www.youtube.com/watch?v=HjqXgDzxS10',
+    confImageUrl: '/static/images/companies/apiaddicts.png',
+  },
+  {
+    id: 8,
+    year: 2020,
+    title: 'Pirates of the Cloud: whose responsibility is it?',
+    slidesUrl: 'https://es.slideshare.net/fjbarrena/webinar-codemotion-2020-piratas-del-cloud',
+    videoUrl: 'https://www.youtube.com/watch?v=N3pf08xcWtE',
+    confImageUrl: '/static/images/companies/codemotion.png',
+  },
+  {
+    id: 9,
+    year: 2020,
+    title: 'OSINT Techniques that will leave you with a crooked ass',
+    slidesUrl:
+      'https://es.slideshare.net/fjbarrena/totoconf2020-tcnicas-osint-que-te-dejarn-con-el-papo-torcido',
+    videoUrl: 'https://www.youtube.com/watch?v=W4PTlwDJgZI',
+    confImageUrl: '/static/images/companies/totoconf.png',
+  },
+  {
+    id: 10,
+    year: 2020,
+    title: 'Speaker at a round table of cybersecurity experts',
+    slidesUrl: null,
+    videoUrl: 'https://www.youtube.com/watch?v=daxXWmmbgLQ',
+    confImageUrl: '/static/images/companies/codemotion.png',
+  },
+  {
+    id: 11,
+    year: 2019,
+    title: 'Machine Learning at full throttle with GraalVM',
+    slidesUrl: 'https://es.slideshare.net/fjbarrena/machine-learning-a-todo-gas-con-graalvm',
+    videoUrl: 'https://www.youtube.com/watch?v=XAHRPlse62w',
+    confImageUrl: '/static/images/companies/commitconf.jpg',
+  },
+  {
+    id: 12,
+    year: 2019,
+    title: 'Insanely fast apps with Quarkus',
+    slidesUrl: 'https://es.slideshare.net/fjbarrena/aplicaciones-absurdamente-rpidas-con-quarkusio',
+    videoUrl: null,
+    confImageUrl: '/static/images/companies/vlcsofting.png',
+  },
+  {
+    id: 13,
+    year: 2019,
+    title: 'Kubernetes: The Cloud King',
+    slidesUrl: 'https://es.slideshare.net/fjbarrena/kubernetes-the-cloud-king',
+    videoUrl: null,
+    confImageUrl: '/static/images/companies/iti.png',
+  },
+  {
+    id: 14,
+    year: 2018,
+    title: "NestJS: Backends in Node for Javas' & DotNets'",
+    slidesUrl:
+      'https://es.slideshare.net/fjbarrena/nestjs-backends-en-node-para-javeros-y-puntoneteros',
+    videoUrl: 'https://www.youtube.com/watch?v=7oEV4p8IJVM',
+    confImageUrl: '/static/images/companies/codemotion.png',
   },
 ]
-const comments = [
+const training = [
+  {
+    id: 2020,
+    items: [
+      'C1b3rWall Academy - Ministerio del Interior, Guardia Civil, Policia Nacional',
+      'Hardening in Docker containers and microservices-based architectures',
+    ],
+  },
+  {
+    id: 2018,
+    items: ['Big Data implementation strategy for Managers'],
+  },
+  {
+    id: 2016,
+    items: ['Project Management with Scrum Manager'],
+  },
+  {
+    id: 2015,
+    items: ['Requirements management in software projects'],
+  },
+]
+
+const courses = [
+  {
+    id: 2021,
+    items: [
+      'University specialist course in the National Security Scheme for the University of Mondragón',
+      'Subject of the Master Big Data Analytics: Machine Learning applied to cybersecurity for the Polytechnic University of Valencia',
+      'National Security Scheme Course (ENS)',
+      'Introduction to cybersecurity for organizations, cloud security and application security for REDIT',
+      'Introduction to cybersecurity of organizations for REDIT',
+    ],
+  },
+  {
+    id: 2020,
+    items: ['Introduction to cybersecurity of organizations for REDIT'],
+  },
+  {
+    id: 2019,
+    items: [
+      'Complete course of FullStack application development in Java for Stadler',
+      'Kubernetes: from zero to hero',
+      'Enterprise applications with React (also in 2018)',
+    ],
+  },
+  {
+    id: 2018,
+    items: [
+      'Java Forensics - How to improve performance in Java applications(also in 2017)',
+      'Advanced application development in Angular 6',
+    ],
+  },
+  {
+    id: 2017,
+    items: ['Advanced application development in Angular 4'],
+  },
+  {
+    id: 2016,
+    items: [
+      'Full course of FullStack application development in Java for Tecnocom (also editions in 2015 and 2014)',
+      'Advanced application development in Angular 2',
+      'Introduction to AngularJS (also in 2015)',
+      'Introduction to NodeJS (also in 2015)',
+      'Mobile application development with iONIC',
+    ],
+  },
+  {
+    id: 2015,
+    items: [
+      'Software transfer and exploitation course',
+      'Advanced SharePoint 2013',
+      'SOA Architectures in Java',
+    ],
+  },
+  {
+    id: 2014,
+    items: [
+      'Advanced course: Spring & Hibernate (also in 2013)',
+      'Advanced development using Liferay Portal for Fujitsu',
+    ],
+  },
+]
+
+const experience = [
   {
     id: 1,
-    name: 'Leslie Alexander',
-    date: '4d ago',
-    imageId: '1494790108377-be9c29b29330',
+    position: 'CTO',
+    company: 'Kyso Inc.',
+    companyUrl: 'https://about.kyso.io',
+    date: 'nov 2021 - act',
+    image: '/static/images/companies/kyso.svg',
     body: 'Ducimus quas delectus ad maxime totam doloribus reiciendis ex. Tempore dolorem maiores. Similique voluptatibus tempore non ut.',
+    tags: [
+      'leadership',
+      'docker',
+      'kubernetes',
+      'security',
+      'customer relationships',
+      'nextjs',
+      'react',
+      'typescript',
+      'nodejs',
+      'nestjs',
+      'elasticsearch',
+      'jupyter',
+    ],
+    language: '🇺🇸 english',
   },
   {
     id: 2,
-    name: 'Michael Foster',
-    date: '4d ago',
-    imageId: '1519244703995-f4e0f30006d5',
-    body: 'Et ut autem. Voluptatem eum dolores sint necessitatibus quos. Quis eum qui dolorem accusantium voluptas voluptatem ipsum. Quo facere iusto quia accusamus veniam id explicabo et aut.',
+    position: 'Software Architect',
+    company: 'Nexica Econocom',
+    companyUrl: 'https://www.nexica.com/',
+    date: 'oct 2019 - nov 2021',
+    image: '/static/images/companies/nexica.png',
+    body: `Responsible for the refactoring of the CloudManager
+          (website and public documentation), a tool to manage
+          Cloud infrastructure that works on top of VCloud and
+          VCenter (VMWare). Starting from a legacy code base, we
+          are refactoring module by module to a new modern and
+          scalable architecture. The technologies we are using are
+          Java and Golang for the backend part, Angular for the
+          frontend and Docker and Kubernetes for packaging and
+          deployment. The integration with the Cloud infrastructure
+          is done directly through the VCenter and VCloud API,
+          together with an event broker that triggers serverless
+          functions based on OpenFaaS.`,
+    tags: [
+      'kubernetes',
+      'docker',
+      'management',
+      'security',
+      'java',
+      'angular',
+      'vmware',
+      'nodejs',
+      'elasticsearch',
+      'openfaas',
+    ],
+    language: '🇪🇸 spanish',
   },
   {
     id: 3,
-    name: 'Dries Vincent',
-    date: '4d ago',
-    imageId: '1506794778202-cad84cf45f1d',
-    body: 'Expedita consequatur sit ea voluptas quo ipsam recusandae. Ab sint et voluptatem repudiandae voluptatem et eveniet. Nihil quas consequatur autem. Perferendis rerum et.',
+    position: 'Head of Cybersecurity Research Group',
+    company: 'Instituto Tecnológico de Informática',
+    companyUrl: 'https://www.iti.es/',
+    date: 'feb 2020 - nov 2021',
+    image: '/static/images/companies/iti.png',
+    body: `Technical Leader, responsible for opening a new line of
+    work on cybersecurity, focusing on application security
+    and Cloud environments using new security paradigms,
+    based on Machine Learning, Big Data, DevSecOps and
+    Security as a Code. These works are part of different
+    research projects, in which the European's project ZDMP
+    highlights. My role in ZDMP is Technical Manager,
+    coordinating the technical efforts of more than 15
+    European partners. It also highlights the OPOSSUM
+    project, in which I coordinate a technical team to develop
+    technology based on Machine Learning to improve the
+    security of the applications, through a next-generation
+    Web Application & API Protection (WAAP) prototype,
+    using the following technologies: Rust, Java, Angular,
+    Kubernetes, NodeJS and Docker`,
+    tags: [
+      'leadership',
+      'cybersecurity',
+      'cloud security',
+      'management',
+      'rust',
+      'java',
+      'angular',
+      'kubernetes',
+      'nodejs',
+      'docker',
+    ],
+    language: '🇬🇧 english & 🇪🇸 spanish',
+  },
+  {
+    id: 4,
+    position: 'Professor',
+    company: 'Univesitat Politécnica de València',
+    companyUrl: 'https://www.upv.es/en',
+    date: '2021 - 2022',
+    image: '/static/images/companies/upv.jpg',
+    body: `Professor of the subject "Machine Learning applied to
+    Cybersecurity" at Big Data Analytics Master`,
+    tags: ['python', 'data analytics', 'AI', 'cybersecurity', 'jupyter'],
+    language: '🇪🇸 spanish',
+  },
+  {
+    id: 5,
+    position: 'Professor',
+    company: 'Univesidad de Mondragón',
+    companyUrl: 'https://www.mondragon.edu/en/home',
+    date: '2021 - 2022',
+    image: '/static/images/companies/mondragon.png',
+    body: `Professor of the subject "Cybersecurity in the Cloud" at
+    University Expert Course in the National Security Scheme (ENS)`,
+    tags: ['cloud cybersecurity', 'ens', 'nist'],
+    language: '🇪🇸 spanish',
+  },
+  {
+    id: 6,
+    position: 'Software Architect',
+    company: 'GFT',
+    companyUrl: 'https://www.gft.com/int/en/',
+    date: 'jun 2019 - feb 2020',
+    image: '/static/images/companies/gft.png',
+    body: `Software architect for projects related to the banking
+    sector. I worked with a team of international and offshored
+    technicians and managers, using agile methodologies.
+    Our technology stack was based on Java for the backend
+    part, and React for the frontend part. Participated in
+    integration projects with other banking platforms using
+    REST APIs.`,
+    tags: ['banking', 'java', 'react', 'agile'],
+    language: '🇬🇧 english',
+  },
+  {
+    id: 7,
+    position: 'Head of Engineering',
+    company: 'Instituto Tecnológico de Informática',
+    companyUrl: 'https://www.iti.es/',
+    date: 'ene 2018 - jun 2019',
+    image: '/static/images/companies/iti.png',
+    body: `Responsible for the technical execution and software
+    engineering of all ITI R&D projects. Management of a
+    technical team of 26 people. Big Data, Machine Learning,
+    IoT, Cloud Computing, choice of technologies and
+    DevOps. Promoter of Open Source initiatives. Relevant
+    projects: Radiatus, Kancerbero, SaaSDK`,
+    tags: [
+      'leadership',
+      'big data',
+      'AI',
+      'management',
+      'R&D',
+      'nestjs',
+      'nodejs',
+      'angular',
+      'react',
+      'python',
+      'spark',
+      'cloud',
+    ],
+    language: '🇬🇧 english & 🇪🇸 spanish',
+  },
+  {
+    id: 8,
+    position: 'CTO & Co-Founder',
+    company: 'Bioscore Sustainability',
+    companyUrl: 'https://bioscore.info/',
+    date: 'feb 2017 - mar 2018',
+    image: '/static/images/companies/bioscore.png',
+    body: `Architecture, design and head of implementation of a
+    travel portal specialized in ecological destinations`,
+    tags: [
+      'startup',
+      'leadership',
+      'management',
+      'security',
+      'nestjs',
+      'angular',
+      'typescript',
+      'java',
+    ],
+    language: '🇺🇸 english & 🇪🇸 spanish',
+  },
+  {
+    id: 9,
+    position: 'Software Architect & Team Leader',
+    company: 'Instituto Tecnológico de Informática',
+    companyUrl: 'https://www.iti.es/',
+    date: '2015 - ene 2018',
+    image: '/static/images/companies/iti.png',
+    body: `Architect and manager of a team of seven engineers.
+    Driver of the change to architectures based on
+    microservices and front-back decoupling, becoming the
+    development standard of the company. Technological
+    stack: Java, JPA, Hibernate, JAX-WS, Maven, Spring,
+    Angular. Relevant projects: Consum Asset Management,
+    BoxPlus, Java applications optimization for Orizon`,
+    tags: [
+      'team management',
+      'java',
+      'enterprise',
+      'spring',
+      'performance',
+      'angular',
+      'typescript',
+    ],
+    language: '🇪🇸 spanish',
+  },
+  {
+    id: 10,
+    position: 'Software Engineer',
+    company: 'Instituto Tecnológico de Informática',
+    companyUrl: 'https://www.iti.es/',
+    date: '2011 - 2015',
+    image: '/static/images/companies/iti.png',
+    body: `Java FullStack Developer for end customers and R&D
+    projects. Technological stack: Spring, JPA, Hibernate,
+    JAX-WS, JSF, JSP, Maven. Deployment on Tomcat and
+    JBoss servers. Relevant projects: Episteme, Fet-Eye.eu,
+    PangeaMT, Consum Energía`,
+    tags: ['java', 'enterprise', 'spring', 'liferay', 'sharepoint'],
+    language: '🇪🇸 spanish',
+  },
+  {
+    id: 11,
+    position: 'Software Engineer',
+    company: 'iSOCO',
+    companyUrl: 'https://www.linkedin.com/company/isoco-clever/?originalSubdomain=es',
+    date: '2008 - 2011',
+    image: '/static/images/companies/isoco.png',
+    body: `Development of applications in .NET on SharePoint. Java
+    application development with Liferay. Direct deal with the
+    client, capture of requirements, change and time
+    management. Relevant projects: CHGUV, Repsol, Mapfre
+    and La Caixa`,
+    tags: ['java', 'enterprise', 'spring', 'liferay', 'sharepoint'],
+    language: '🇪🇸 spanish',
   },
 ]
 
@@ -127,264 +469,7 @@ export default function About({ authorDetails }) {
 
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
       <div className="min-h-full">
-        <header className="bg-white shadow">
-          <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
-            <Popover className="flex h-16 justify-between">
-              <div className="flex px-2 lg:px-0">
-                <div className="flex flex-shrink-0 items-center">
-                  <a href="#">
-                    <img
-                      className="h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=blue&shade=600"
-                      alt="Your Company"
-                    />
-                  </a>
-                </div>
-                <nav
-                  aria-label="Global"
-                  className="hidden lg:ml-6 lg:flex lg:items-center lg:space-x-4"
-                >
-                  {navigation.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className="px-3 py-2 text-sm font-medium text-gray-900"
-                    >
-                      {item.name}
-                    </a>
-                  ))}
-                </nav>
-              </div>
-              <div className="flex flex-1 items-center justify-center px-2 lg:ml-6 lg:justify-end">
-                <div className="w-full max-w-lg lg:max-w-xs">
-                  <label htmlFor="search" className="sr-only">
-                    Search
-                  </label>
-                  <div className="relative">
-                    <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                      <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-                    </div>
-                    <input
-                      id="search"
-                      name="search"
-                      className="block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 leading-5 placeholder-gray-500 shadow-sm focus:border-blue-600 focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-600 sm:text-sm"
-                      placeholder="Search"
-                      type="search"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center lg:hidden">
-                {/* Mobile menu button */}
-                <Popover.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
-                  <span className="sr-only">Open main menu</span>
-                  <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                </Popover.Button>
-              </div>
-              <Transition.Root as={Fragment}>
-                <div className="lg:hidden">
-                  <Transition.Child
-                    as={Fragment}
-                    enter="duration-150 ease-out"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="duration-150 ease-in"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                  >
-                    <Popover.Overlay
-                      className="fixed inset-0 z-20 bg-black bg-opacity-25"
-                      aria-hidden="true"
-                    />
-                  </Transition.Child>
-
-                  <Transition.Child
-                    as={Fragment}
-                    enter="duration-150 ease-out"
-                    enterFrom="opacity-0 scale-95"
-                    enterTo="opacity-100 scale-100"
-                    leave="duration-150 ease-in"
-                    leaveFrom="opacity-100 scale-100"
-                    leaveTo="opacity-0 scale-95"
-                  >
-                    <Popover.Panel
-                      focus
-                      className="absolute top-0 right-0 z-30 w-full max-w-none origin-top transform p-2 transition"
-                    >
-                      <div className="divide-y divide-gray-200 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
-                        <div className="pt-3 pb-2">
-                          <div className="flex items-center justify-between px-4">
-                            <div>
-                              <img
-                                className="h-8 w-auto"
-                                src="https://tailwindui.com/img/logos/mark.svg?color=blue&shade=600"
-                                alt="Your Company"
-                              />
-                            </div>
-                            <div className="-mr-2">
-                              <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
-                                <span className="sr-only">Close menu</span>
-                                <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-                              </Popover.Button>
-                            </div>
-                          </div>
-                          <div className="mt-3 space-y-1 px-2">
-                            {navigation.map((item) => (
-                              <a
-                                key={item.name}
-                                href={item.href}
-                                className="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100 hover:text-gray-800"
-                              >
-                                {item.name}
-                              </a>
-                            ))}
-                          </div>
-                        </div>
-                        <div className="pt-4 pb-2">
-                          <div className="flex items-center px-5">
-                            <div className="flex-shrink-0">
-                              <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
-                            </div>
-                            <div className="ml-3">
-                              <div className="text-base font-medium text-gray-800">{user.name}</div>
-                              <div className="text-sm font-medium text-gray-500">{user.email}</div>
-                            </div>
-                            <button
-                              type="button"
-                              className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                            >
-                              <span className="sr-only">View notifications</span>
-                              <BellIcon className="h-6 w-6" aria-hidden="true" />
-                            </button>
-                          </div>
-                          <div className="mt-3 space-y-1 px-2">
-                            {userNavigation.map((item) => (
-                              <a
-                                key={item.name}
-                                href={item.href}
-                                className="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-100 hover:text-gray-800"
-                              >
-                                {item.name}
-                              </a>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </Popover.Panel>
-                  </Transition.Child>
-                </div>
-              </Transition.Root>
-              <div className="hidden lg:ml-4 lg:flex lg:items-center">
-                <button
-                  type="button"
-                  className="flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
-
-                {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-4 flex-shrink-0">
-                  <div>
-                    <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                      <span className="sr-only">Open user menu</span>
-                      <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
-                    </Menu.Button>
-                  </div>
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      {userNavigation.map((item) => (
-                        <Menu.Item key={item.name}>
-                          {({ active }) => (
-                            <a
-                              href={item.href}
-                              className={classNames(
-                                active ? 'bg-gray-100' : '',
-                                'block px-4 py-2 text-sm text-gray-700'
-                              )}
-                            >
-                              {item.name}
-                            </a>
-                          )}
-                        </Menu.Item>
-                      ))}
-                    </Menu.Items>
-                  </Transition>
-                </Menu>
-              </div>
-            </Popover>
-          </div>
-
-          <div className="mx-auto max-w-7xl px-4 sm:px-6">
-            <div className="border-t border-gray-200 py-3">
-              <nav className="flex" aria-label="Breadcrumb">
-                <div className="flex sm:hidden">
-                  <a
-                    href="#"
-                    className="group inline-flex space-x-3 text-sm font-medium text-gray-500 hover:text-gray-700"
-                  >
-                    <ArrowLongLeftIcon
-                      className="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-600"
-                      aria-hidden="true"
-                    />
-                    <span>Back to Applicants</span>
-                  </a>
-                </div>
-                <div className="hidden sm:block">
-                  <ol role="list" className="flex items-center space-x-4">
-                    <li>
-                      <div>
-                        <a href="#" className="text-gray-400 hover:text-gray-500">
-                          <HomeIcon className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
-                          <span className="sr-only">Home</span>
-                        </a>
-                      </div>
-                    </li>
-                    {breadcrumbs.map((item) => (
-                      <li key={item.name}>
-                        <div className="flex items-center">
-                          <svg
-                            className="h-5 w-5 flex-shrink-0 text-gray-300"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                            aria-hidden="true"
-                          >
-                            <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
-                          </svg>
-                          <a
-                            href={item.href}
-                            className="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
-                            aria-current={item.current ? 'page' : undefined}
-                          >
-                            {item.name}
-                          </a>
-                        </div>
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-              </nav>
-            </div>
-          </div>
-        </header>
-
         <main className="py-10">
           {/* Page header */}
           <div className="mx-auto max-w-3xl px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
@@ -393,165 +478,85 @@ export default function About({ authorDetails }) {
                 <div className="relative">
                   <img
                     className="h-16 w-16 rounded-full"
-                    src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80"
+                    src="/static/images/fjbarrena-portrait.png"
                     alt=""
                   />
                   <span className="absolute inset-0 rounded-full shadow-inner" aria-hidden="true" />
                 </div>
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Ricardo Cooper</h1>
-                <p className="text-sm font-medium text-gray-500">
-                  Applied for{' '}
-                  <a href="#" className="text-gray-900">
-                    Front End Developer
-                  </a>{' '}
-                  on <time dateTime="2020-08-25">August 25, 2020</time>
+                <h1 className="text-2xl font-bold ">Francisco Javier Barrena 🇪🇸 🇬🇧 </h1>
+                <p className="text-sm font-medium ">
+                  Senior Software Architect & Application Security
                 </p>
               </div>
             </div>
-            <div className="justify-stretch mt-6 flex flex-col-reverse space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-y-0 sm:space-x-3 sm:space-x-reverse md:mt-0 md:flex-row md:space-x-3">
-              <button
-                type="button"
-                className="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
-              >
-                Disqualify
-              </button>
-              <button
-                type="button"
-                className="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100"
-              >
-                Advance to offer
-              </button>
-            </div>
           </div>
 
-          <div className="mx-auto mt-8 grid max-w-3xl grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
-            <div className="space-y-6 lg:col-span-2 lg:col-start-1">
+          <div className="mx-auto mt-2 grid max-w-3xl grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
+            <div className="space-y-1 lg:col-span-2 lg:col-start-1">
               {/* Description list*/}
               <section aria-labelledby="applicant-information-title">
-                <div className="bg-white shadow sm:rounded-lg">
-                  <div className="px-4 py-5 sm:px-6">
-                    <h2
-                      id="applicant-information-title"
-                      className="text-lg font-medium leading-6 text-gray-900"
-                    >
-                      Applicant Information
-                    </h2>
-                    <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                      Personal details and application.
+                <div className="sm:rounded-lg">
+                  <div className="px-2 py-2 sm:px-2">
+                    <p className="mt-1 max-w-2xl text-sm">
+                      Software architect and developer specialized in scalable systems based on
+                      decoupled architectures, microservices and cloud environments. Proactive in
+                      learning new technologies and software development paradigms, as well as
+                      quality and security in code and infrastructures. Speaker and trainer.
                     </p>
-                  </div>
-                  <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
-                    <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
-                      <div className="sm:col-span-1">
-                        <dt className="text-sm font-medium text-gray-500">Application for</dt>
-                        <dd className="mt-1 text-sm text-gray-900">Backend Developer</dd>
-                      </div>
-                      <div className="sm:col-span-1">
-                        <dt className="text-sm font-medium text-gray-500">Email address</dt>
-                        <dd className="mt-1 text-sm text-gray-900">ricardocooper@example.com</dd>
-                      </div>
-                      <div className="sm:col-span-1">
-                        <dt className="text-sm font-medium text-gray-500">Salary expectation</dt>
-                        <dd className="mt-1 text-sm text-gray-900">$120,000</dd>
-                      </div>
-                      <div className="sm:col-span-1">
-                        <dt className="text-sm font-medium text-gray-500">Phone</dt>
-                        <dd className="mt-1 text-sm text-gray-900">+1 555-555-5555</dd>
-                      </div>
-                      <div className="sm:col-span-2">
-                        <dt className="text-sm font-medium text-gray-500">About</dt>
-                        <dd className="mt-1 text-sm text-gray-900">
-                          Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt
-                          cillum culpa consequat. Excepteur qui ipsum aliquip consequat sint. Sit id
-                          mollit nulla mollit nostrud in ea officia proident. Irure nostrud pariatur
-                          mollit ad adipisicing reprehenderit deserunt qui eu.
-                        </dd>
-                      </div>
-                      <div className="sm:col-span-2">
-                        <dt className="text-sm font-medium text-gray-500">Attachments</dt>
-                        <dd className="mt-1 text-sm text-gray-900">
-                          <ul
-                            role="list"
-                            className="divide-y divide-gray-200 rounded-md border border-gray-200"
-                          >
-                            {attachments.map((attachment) => (
-                              <li
-                                key={attachment.name}
-                                className="flex items-center justify-between py-3 pl-3 pr-4 text-sm"
-                              >
-                                <div className="flex w-0 flex-1 items-center">
-                                  <PaperClipIcon
-                                    className="h-5 w-5 flex-shrink-0 text-gray-400"
-                                    aria-hidden="true"
-                                  />
-                                  <span className="ml-2 w-0 flex-1 truncate">
-                                    {attachment.name}
-                                  </span>
-                                </div>
-                                <div className="ml-4 flex-shrink-0">
-                                  <a
-                                    href={attachment.href}
-                                    className="font-medium text-blue-600 hover:text-blue-500"
-                                  >
-                                    Download
-                                  </a>
-                                </div>
-                              </li>
-                            ))}
-                          </ul>
-                        </dd>
-                      </div>
-                    </dl>
-                  </div>
-                  <div>
-                    <a
-                      href="#"
-                      className="block bg-gray-50 px-4 py-4 text-center text-sm font-medium text-gray-500 hover:text-gray-700 sm:rounded-b-lg"
-                    >
-                      Read full application
-                    </a>
                   </div>
                 </div>
               </section>
 
-              {/* Comments*/}
+              {/* Experience */}
               <section aria-labelledby="notes-title">
-                <div className="bg-white shadow sm:overflow-hidden sm:rounded-lg">
+                <div className="sm:overflow-hidden sm:rounded-lg">
                   <div className="divide-y divide-gray-200">
-                    <div className="px-4 py-5 sm:px-6">
-                      <h2 id="notes-title" className="text-lg font-medium text-gray-900">
-                        Notes
+                    <div className="px-3 py-5 sm:px-3">
+                      <h2 id="notes-title" className="text-lg font-medium ">
+                        Experience
                       </h2>
                     </div>
                     <div className="px-4 py-6 sm:px-6">
                       <ul role="list" className="space-y-8">
-                        {comments.map((comment) => (
-                          <li key={comment.id}>
+                        {experience.map((item) => (
+                          <li key={item.id}>
                             <div className="flex space-x-3">
                               <div className="flex-shrink-0">
-                                <img
-                                  className="h-10 w-10 rounded-full"
-                                  src={`https://images.unsplash.com/photo-${comment.imageId}?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80`}
-                                  alt=""
-                                />
+                                <img className="w-28" src={`${item.image}`} alt="" />
                               </div>
                               <div>
-                                <div className="text-sm">
-                                  <a href="#" className="font-medium text-gray-900">
-                                    {comment.name}
+                                <div className="text-lg">{item.position}</div>
+                                <div className="text-sm underline">
+                                  <a
+                                    href={item.companyUrl}
+                                    className="font-medium"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                  >
+                                    {item.company}
                                   </a>
                                 </div>
-                                <div className="mt-1 text-sm text-gray-700">
-                                  <p>{comment.body}</p>
+                                <div className="mb-2 space-x-2 text-sm">
+                                  <span className="font-medium ">{item.date}</span>
                                 </div>
-                                <div className="mt-2 space-x-2 text-sm">
-                                  <span className="font-medium text-gray-500">{comment.date}</span>{' '}
-                                  <span className="font-medium text-gray-500">&middot;</span>{' '}
-                                  <button type="button" className="font-medium text-gray-900">
-                                    Reply
-                                  </button>
+                                <div className="mt-1 text-sm">
+                                  <p>{item.body}</p>
+                                </div>
+
+                                <div className="mt-1 text-sm">
+                                  {item.tags.map((tag) => (
+                                    <span
+                                      key={tag}
+                                      className="mb-1 mr-1 inline-flex items-center rounded-md bg-blue-100 px-2.5 py-0.5 text-sm font-medium text-blue-800"
+                                    >
+                                      {tag}
+                                    </span>
+                                  ))}
+                                </div>
+                                <div className="mt-1 text-sm">
+                                  <p>{item.language}</p>
                                 </div>
                               </div>
                             </div>
@@ -560,62 +565,189 @@ export default function About({ authorDetails }) {
                       </ul>
                     </div>
                   </div>
-                  <div className="bg-gray-50 px-4 py-6 sm:px-6">
-                    <div className="flex space-x-3">
-                      <div className="flex-shrink-0">
-                        <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <form action="#">
-                          <div>
-                            <label htmlFor="comment" className="sr-only">
-                              About
-                            </label>
-                            <textarea
-                              id="comment"
-                              name="comment"
-                              rows={3}
-                              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                              placeholder="Add a note"
-                              defaultValue={''}
-                            />
-                          </div>
-                          <div className="mt-3 flex items-center justify-between">
-                            <a
-                              href="#"
-                              className="group inline-flex items-start space-x-2 text-sm text-gray-500 hover:text-gray-900"
-                            >
-                              <QuestionMarkCircleIcon
-                                className="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-                                aria-hidden="true"
-                              />
-                              <span>Some HTML is okay.</span>
-                            </a>
-                            <button
-                              type="submit"
-                              className="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                            >
-                              Comment
-                            </button>
-                          </div>
-                        </form>
-                      </div>
+                </div>
+              </section>
+
+              {/* Talks */}
+              <section aria-labelledby="notes-title">
+                <div className="sm:overflow-hidden sm:rounded-lg">
+                  <div className="divide-y divide-gray-200">
+                    <div className="px-3 py-5 sm:px-3">
+                      <h2 id="notes-title" className="text-lg font-medium ">
+                        Pitches
+                      </h2>
+                    </div>
+                    <div className="px-4 py-6 sm:px-6">
+                      <ul role="list" className="space-y-8">
+                        {talks.map((item) => (
+                          <li key={item.id}>
+                            <div className="flex space-x-3">
+                              <div className="flex-shrink-0">
+                                <img className="w-24" src={`${item.confImageUrl}`} alt="" />
+                              </div>
+                              <div>
+                                <div className="text-lg">
+                                  <span className="text-sm mb-1 mr-1 inline-flex items-center rounded-md bg-green-100 px-2.5 py-0.5 text-sm font-medium text-blue-800">
+                                    {item.year}
+                                  </span>
+                                  {item.title}
+                                </div>
+                                <div className="mb-2 space-x-2 text-sm">
+                                  {item.videoUrl && (
+                                    <span className="font-medium">
+                                      <a href={item.videoUrl} target="_blank" rel="noreferrer">
+                                        <img
+                                          src="/static/images/youtube.svg"
+                                          className="w-5 h-5 mr-4"
+                                          style={{ display: 'flex', float: 'left' }}
+                                        />
+                                      </a>
+                                    </span>
+                                  )}
+                                  {item.slidesUrl && (
+                                    <span className="font-medium">
+                                      <a href={item.slidesUrl} target="_blank" rel="noreferrer">
+                                        <img
+                                          src="/static/images/slideshare.png"
+                                          className="w-5 h-5 mr-4"
+                                          style={{ display: 'flex', float: 'left' }}
+                                        />
+                                      </a>
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* Courses */}
+              <section aria-labelledby="notes-title">
+                <div className="sm:overflow-hidden sm:rounded-lg">
+                  <div className="divide-y divide-gray-200">
+                    <div className="px-3 py-5 sm:px-3">
+                      <h2 id="notes-title" className="text-lg font-medium ">
+                        Courses taught
+                      </h2>
+                    </div>
+                    <div className="px-4 py-6 sm:px-6">
+                      <ul role="list" className="space-y-8">
+                        {courses.map((item) => (
+                          <li key={item.id}>
+                            <div className="flex space-x-3">
+                              <div className="w-full">
+                                <div className="mt-1 text-sm">
+                                  <nav className="h-full overflow-y-auto" aria-label="Directory">
+                                    <div className="relative">
+                                      <h3>{item.id}</h3>
+
+                                      <ul role="list" className="relative z-0 ">
+                                        {item.items.map((c) => (
+                                          <li key={c}>
+                                            <div className="relative flex items-center space-x-3 px-6 py-3 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+                                              <div className="min-w-0 flex-1">
+                                                <a className="focus:outline-none">
+                                                  <span
+                                                    className="absolute inset-0"
+                                                    aria-hidden="true"
+                                                  ></span>
+                                                  <p className="text-sm font-medium">{c}</p>
+                                                </a>
+                                              </div>
+                                            </div>
+                                          </li>
+                                        ))}
+                                      </ul>
+                                    </div>
+                                  </nav>
+                                </div>
+                                <div className="mt-1 text-sm">
+                                  <p>{item.language}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* Complementary Training */}
+              <section aria-labelledby="notes-title">
+                <div className="sm:overflow-hidden sm:rounded-lg">
+                  <div className="divide-y divide-gray-200">
+                    <div className="px-3 py-5 sm:px-3">
+                      <h2 id="notes-title" className="text-lg font-medium ">
+                        Complementary Training
+                      </h2>
+                    </div>
+                    <div className="px-4 py-6 sm:px-6">
+                      <ul role="list" className="space-y-8">
+                        {training.map((item) => (
+                          <li key={item.id}>
+                            <div className="flex space-x-3">
+                              <div className="w-full">
+                                <div className="mt-1 text-sm">
+                                  <nav className="h-full overflow-y-auto" aria-label="Directory">
+                                    <div className="relative">
+                                      <h3>{item.id}</h3>
+
+                                      <ul role="list" className="relative z-0 ">
+                                        {item.items.map((c) => (
+                                          <li key={c}>
+                                            <div className="relative flex items-center space-x-3 px-6 py-3 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+                                              <div className="min-w-0 flex-1">
+                                                <a className="focus:outline-none">
+                                                  <span
+                                                    className="absolute inset-0"
+                                                    aria-hidden="true"
+                                                  ></span>
+                                                  <p className="text-sm font-medium">{c}</p>
+                                                </a>
+                                              </div>
+                                            </div>
+                                          </li>
+                                        ))}
+                                      </ul>
+                                    </div>
+                                  </nav>
+                                </div>
+                                <div className="mt-1 text-sm">
+                                  <p>{item.language}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
                 </div>
               </section>
             </div>
 
-            <section aria-labelledby="timeline-title" className="lg:col-span-1 lg:col-start-3">
-              <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
-                <h2 id="timeline-title" className="text-lg font-medium text-gray-900">
-                  Timeline
-                </h2>
+            {
+              <section
+                aria-labelledby="timeline-title"
+                className="lg:col-span-1 lg:col-start-3"
+                style={{ display: 'none' }}
+              >
+                <div className="px-4 py-5 sm:rounded-lg sm:px-6">
+                  <h2 id="timeline-title" className="text-lg font-medium ">
+                    English
+                  </h2>
 
-                {/* Activity Feed */}
-                <div className="mt-6 flow-root">
-                  <ul role="list" className="-mb-8">
-                    {timeline.map((item, itemIdx) => (
+                  {/* Activity Feed */}
+                  <div className="mt-6 flow-root">
+                    <ul role="list" className="-mb-8">
+                      {/*timeline.map((item, itemIdx) => (
                       <li key={item.id}>
                         <div className="relative pb-8">
                           {itemIdx !== timeline.length - 1 ? (
@@ -637,33 +769,34 @@ export default function About({ authorDetails }) {
                             </div>
                             <div className="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
                               <div>
-                                <p className="text-sm text-gray-500">
+                                <p className="text-sm ">
                                   {item.content}{' '}
-                                  <a href="#" className="font-medium text-gray-900">
+                                  <a href="#" className="font-medium ">
                                     {item.target}
                                   </a>
                                 </p>
                               </div>
-                              <div className="whitespace-nowrap text-right text-sm text-gray-500">
+                              <div className="whitespace-nowrap text-right text-sm ">
                                 <time dateTime={item.datetime}>{item.date}</time>
                               </div>
                             </div>
                           </div>
                         </div>
                       </li>
-                    ))}
-                  </ul>
+                                ))*/}
+                    </ul>
+                  </div>
+                  <div className="justify-stretch mt-6 flex flex-col">
+                    <button
+                      type="button"
+                      className="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    >
+                      Advance to offer
+                    </button>
+                  </div>
                 </div>
-                <div className="justify-stretch mt-6 flex flex-col">
-                  <button
-                    type="button"
-                    className="inline-flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                  >
-                    Advance to offer
-                  </button>
-                </div>
-              </div>
-            </section>
+              </section>
+            }
           </div>
         </main>
       </div>
