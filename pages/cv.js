@@ -9,9 +9,33 @@ const eventTypes = {
 
 const talks = [
   {
+    id: 99993,
+    year: 2023,
+    title: 'API Security & Testing - A pragmatic guide',
+    slidesUrl: null,
+    videoUrl: null,
+    confImageUrl: '/static/images/companies/codemotion.png',
+  },
+  {
+    id: 99992,
+    year: 2022,
+    title: 'Speaker at a round table about API Security',
+    slidesUrl: null,
+    videoUrl: null,
+    confImageUrl: '/static/images/companies/apiaddicts.png',
+  },
+  {
+    id: 99991,
+    year: 2022,
+    title: 'API Security & Testing - A pragmatic guide',
+    slidesUrl: null,
+    videoUrl: null,
+    confImageUrl: '/static/images/companies/apiaddicts.png',
+  },
+  {
     id: 1,
     year: 2022,
-    title: 'API Security: Workshop to harden your API 🇪🇸',
+    title: 'API Security: Workshop to harden your API',
     slidesUrl: 'https://www.slideshare.net/fjbarrena/codemotion-2022-api-security-workshoppdf',
     videoUrl: null,
     confImageUrl: '/static/images/companies/codemotion.png',
@@ -19,7 +43,7 @@ const talks = [
   {
     id: 2,
     year: 2021,
-    title: 'Hard as a pod. How to secure your Kubernetes Deployments 🇪🇸',
+    title: 'Hard as a pod. How to secure your Kubernetes Deployments',
     slidesUrl:
       'https://es.slideshare.net/fjbarrena/vlcsofting-2021-hard-as-a-pod-hardening-de-despliegues-en-kubernetes-con-mucho-flow',
     videoUrl: 'https://www.youtube.com/watch?v=QJU3FR9v9Bs',
@@ -28,7 +52,7 @@ const talks = [
   {
     id: 3,
     year: 2021,
-    title: 'Welcome to Gotham. New and terrifying ways of cyberattacks 🇪🇸',
+    title: 'Welcome to Gotham. New and terrifying ways of cyberattacks',
     slidesUrl:
       'https://es.slideshare.net/fjbarrena/welcome-to-gotham-nuevas-formas-ingeniosas-y-terrorficas-de-ciberataques',
     videoUrl: 'https://www.youtube.com/watch?v=ngrlQeFYlQM&t=3141s',
@@ -37,7 +61,7 @@ const talks = [
   {
     id: 4,
     year: 2021,
-    title: 'The Rustalorian. This is the way 🇪🇸',
+    title: 'The Rustalorian. This is the way',
     slidesUrl:
       'https://es.slideshare.net/fjbarrena/codemotion-2021-the-rustalorian-este-es-el-camino',
     videoUrl: null,
@@ -46,7 +70,7 @@ const talks = [
   {
     id: 5,
     year: 2020,
-    title: 'Stop being the weakest rival with DevSecOps 🇪🇸',
+    title: 'Stop being the weakest rival with DevSecOps',
     slidesUrl: 'https://www.slideshare.net/fjbarrena/deja-de-ser-el-rival-ms-dbil-con-devsecops',
     videoUrl: 'https://www.youtube.com/watch?v=Uhx9VQYWSCE',
     confImageUrl: '/static/images/companies/vlctesting.png',
@@ -54,7 +78,7 @@ const talks = [
   {
     id: 6,
     year: 2020,
-    title: 'Big Data in Cybersecurity: Better to die on your feet than to live on your knees 🇪🇸',
+    title: 'Big Data in Cybersecurity: Better to die on your feet than to live on your knees',
     slidesUrl:
       'https://es.slideshare.net/fjbarrena/codemotion-2020-big-data-en-ciberseguridad-mejor-morir-de-pie-que-vivir-arrodillado',
     videoUrl:
@@ -64,7 +88,7 @@ const talks = [
   {
     id: 7,
     year: 2020,
-    title: 'Speaker at a round table about API Security 🇪🇸',
+    title: 'Speaker at a round table about API Security',
     slidesUrl: null,
     videoUrl: 'https://www.youtube.com/watch?v=HjqXgDzxS10',
     confImageUrl: '/static/images/companies/apiaddicts.png',
@@ -72,7 +96,7 @@ const talks = [
   {
     id: 8,
     year: 2020,
-    title: 'Pirates of the Cloud: whose responsibility is it? 🇪🇸',
+    title: 'Pirates of the Cloud: whose responsibility is it?',
     slidesUrl: 'https://es.slideshare.net/fjbarrena/webinar-codemotion-2020-piratas-del-cloud',
     videoUrl: 'https://www.youtube.com/watch?v=N3pf08xcWtE',
     confImageUrl: '/static/images/companies/codemotion.png',
@@ -80,16 +104,16 @@ const talks = [
   {
     id: 9,
     year: 2020,
-    title: 'OSINT Techniques that will leave you with a crooked ass 🇪🇸',
+    title: 'OSINT Techniques that will leave you with a crooked ass',
     slidesUrl:
       'https://es.slideshare.net/fjbarrena/totoconf2020-tcnicas-osint-que-te-dejarn-con-el-papo-torcido',
     videoUrl: 'https://www.youtube.com/watch?v=W4PTlwDJgZI',
-    confImageUrl: '/static/images/companies/totoconf.png',
+    confImageUrl: '/static/images/companies/codemotion.png',
   },
   {
     id: 10,
     year: 2020,
-    title: 'Speaker at a round table of cybersecurity experts 🇪🇸',
+    title: 'Speaker at a round table of cybersecurity experts',
     slidesUrl: null,
     videoUrl: 'https://www.youtube.com/watch?v=daxXWmmbgLQ',
     confImageUrl: '/static/images/companies/codemotion.png',
@@ -97,15 +121,15 @@ const talks = [
   {
     id: 11,
     year: 2019,
-    title: 'Machine Learning at full throttle with GraalVM 🇪🇸',
+    title: 'Machine Learning at full throttle with GraalVM',
     slidesUrl: 'https://es.slideshare.net/fjbarrena/machine-learning-a-todo-gas-con-graalvm',
     videoUrl: 'https://www.youtube.com/watch?v=XAHRPlse62w',
-    confImageUrl: '/static/images/companies/commitconf.jpg',
+    confImageUrl: '/static/images/companies/codemotion.jpg',
   },
   {
     id: 12,
     year: 2019,
-    title: 'Insanely fast apps with Quarkus 🇪🇸',
+    title: 'Insanely fast apps with Quarkus',
     slidesUrl: 'https://es.slideshare.net/fjbarrena/aplicaciones-absurdamente-rpidas-con-quarkusio',
     videoUrl: null,
     confImageUrl: '/static/images/companies/vlcsofting.png',
@@ -113,7 +137,7 @@ const talks = [
   {
     id: 13,
     year: 2019,
-    title: 'Kubernetes: The Cloud King 🇪🇸',
+    title: 'Kubernetes: The Cloud King',
     slidesUrl: 'https://es.slideshare.net/fjbarrena/kubernetes-the-cloud-king',
     videoUrl: null,
     confImageUrl: '/static/images/companies/iti.png',
@@ -121,7 +145,7 @@ const talks = [
   {
     id: 14,
     year: 2018,
-    title: "NestJS: Backends in Node for Javas' & DotNets' 🇪🇸",
+    title: "NestJS: Backends in Node for Javas' & DotNets'",
     slidesUrl:
       'https://es.slideshare.net/fjbarrena/nestjs-backends-en-node-para-javeros-y-puntoneteros',
     videoUrl: 'https://www.youtube.com/watch?v=7oEV4p8IJVM',
@@ -485,9 +509,33 @@ export default function About({ authorDetails }) {
                 </div>
               </div>
               <div>
-                <h1 className="text-2xl font-bold ">Francisco Javier Barrena 🇪🇸 🇬🇧 </h1>
+                <h1 className="text-2xl font-bold ">Francisco Javier Barrena 🇬🇧 🇪🇸</h1>
                 <p className="text-sm font-medium ">
                   Senior Software Architect & Application Security
+                </p>
+                <p className="text-sm mt-2">
+                  <div className="mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
+                    <div>
+                      <a href="mailto: fjbarrena@gmail.com">fjbarrena@gmail.com</a>
+                    </div>
+                    <div>{` • `}</div>
+                    <div>+34 660 27 4444</div>
+                    <div>{` • `}</div>
+                    <div>Valencia, Spain</div>
+                  </div>
+                </p>
+                <p className="text-sm mt-2">
+                  <div className="mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
+                    <div>
+                      <a href="https://www.linkedin.com/in/fjbarrena/">
+                        https://www.linkedin.com/in/fjbarrena/
+                      </a>
+                    </div>
+                    <div>{` • `}</div>
+                    <div>
+                      <a href="https://fjbarrena.dev">https://fjbarrena.dev/</a>
+                    </div>
+                  </div>
                 </p>
               </div>
             </div>
@@ -592,7 +640,7 @@ export default function About({ authorDetails }) {
                                   </span>
                                   {item.title}
                                 </div>
-                                <div className="mb-2 space-x-2 text-sm">
+                                <div className="no-print mb-2 space-x-2 text-sm">
                                   {item.videoUrl && (
                                     <span className="font-medium">
                                       <a href={item.videoUrl} target="_blank" rel="noreferrer">
