@@ -2,7 +2,7 @@ const siteMetadata = {
   title: 'Francisco Javier Barrena Blog',
   author: 'Francisco Javier Barrena',
   headerTitle: 'fjbarrena.dev',
-  description: 'Just another techy personal blog',
+  description: '',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://fjbarrena.dev',
