@@ -10,7 +10,7 @@ const projectsData = [
     title: 'ZDMP: The Zero Defects platform powered by AI',
     description: `ZDMP offers an open Industry 4.0 environment where a new generation of developed zero-defect service applications will be available in a marketplace contributing to create an ecosystem where ZDMP stakeholders would be able to interact with each other.`,
     imgSrc: '/static/images/zdmp.png',
-    href: 'https://www.zdmp.eu',
+    href: 'https://software.zdmp.eu/docs/overview/',
   },
   {
     title: 'Nexica: The CloudManager to rule them all',
