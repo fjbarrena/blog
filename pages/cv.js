@@ -495,7 +495,7 @@ export default function About({ authorDetails }) {
             <div className="flex items-center space-x-5">
               <div className="flex-shrink-0">
                 <div className="relative">
-                  <Image
+                  <img
                     className="h-16 w-16 rounded-full"
                     src="/static/images/fjbarrena-portrait.png"
                     alt=""
@@ -522,13 +522,35 @@ export default function About({ authorDetails }) {
                 <p className="mt-2 text-sm">
                   <div className="mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
                     <div>
-                      <a href="https://www.linkedin.com/in/fjbarrena/">
-                        https://www.linkedin.com/in/fjbarrena/
+                      <a href="https://fjbarrena.dev" target="_blank" rel="noreferrer">
+                        <img
+                          src="/static/images/social-icons/google-chrome-logo.svg"
+                          alt="Personal website"
+                          className="h-6"
+                        />
                       </a>
                     </div>
-                    <div>{` • `}</div>
                     <div>
-                      <a href="https://fjbarrena.dev">https://fjbarrena.dev/</a>
+                      <a
+                        href="https://www.linkedin.com/in/fjbarrena/"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <img
+                          src="/static/images/social-icons/linkedin.png"
+                          alt="Linkedin profile"
+                          className="h-6"
+                        />
+                      </a>
+                    </div>
+                    <div>
+                      <a href="https://twitter.com/DogDeveloper" target="_blank" rel="noreferrer">
+                        <img
+                          src="/static/images/social-icons/twitter.png"
+                          alt="Twitter profile"
+                          className="h-6"
+                        />
+                      </a>
                     </div>
                   </div>
                 </p>
@@ -536,13 +558,13 @@ export default function About({ authorDetails }) {
             </div>
           </div>
 
-          <div className="mx-auto mt-2 grid max-w-3xl grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
+          <div className="mx-auto mt-2 grid max-w-3xl grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-1">
             <div className="space-y-1 lg:col-span-2 lg:col-start-1">
               {/* Description list*/}
               <section aria-labelledby="applicant-information-title">
                 <div className="sm:rounded-lg">
                   <div className="px-2 py-2 sm:px-2">
-                    <p className="mt-1 max-w-2xl text-sm">
+                    <p className="mt-1 text-sm">
                       Software architect and developer specialized in scalable systems based on
                       decoupled architectures, microservices and cloud environments. Proactive in
                       learning new technologies and software development paradigms, as well as
@@ -567,7 +589,7 @@ export default function About({ authorDetails }) {
                           <li key={item.id}>
                             <div className="flex space-x-3">
                               <div className="flex-shrink-0">
-                                <Image className="w-28" src={`${item.image}`} alt="" />
+                                <img className="w-28" src={`${item.image}`} alt="" />
                               </div>
                               <div>
                                 <div className="text-lg">{item.position}</div>
@@ -626,7 +648,7 @@ export default function About({ authorDetails }) {
                           <li key={item.id}>
                             <div className="flex space-x-3">
                               <div className="flex-shrink-0">
-                                <Image className="w-24" src={`${item.confImageUrl}`} alt="" />
+                                <img className="w-24" src={`${item.confImageUrl}`} alt="" />
                               </div>
                               <div>
                                 <div className="text-lg">
@@ -639,7 +661,7 @@ export default function About({ authorDetails }) {
                                   {item.videoUrl && (
                                     <span className="font-medium">
                                       <a href={item.videoUrl} target="_blank" rel="noreferrer">
-                                        <Image
+                                        <img
                                           src="/static/images/youtube.svg"
                                           className="mr-4 h-5 w-5"
                                           alt="Youtube"
@@ -651,7 +673,7 @@ export default function About({ authorDetails }) {
                                   {item.slidesUrl && (
                                     <span className="font-medium">
                                       <a href={item.slidesUrl} target="_blank" rel="noreferrer">
-                                        <Image
+                                        <img
                                           src="/static/images/slideshare.png"
                                           className="mr-4 h-5 w-5"
                                           alt="Slideshare"
@@ -778,7 +800,7 @@ export default function About({ authorDetails }) {
               </section>
             </div>
 
-            {
+            {/*
               <section
                 aria-labelledby="timeline-title"
                 className="lg:col-span-1 lg:col-start-3"
@@ -789,7 +811,7 @@ export default function About({ authorDetails }) {
                     English
                   </h2>
 
-                  {/* Activity Feed */}
+                  {/* Activity Feed 
                   <div className="mt-6 flow-root">
                     <ul role="list" className="-mb-8">
                       {/*timeline.map((item, itemIdx) => (
@@ -828,7 +850,7 @@ export default function About({ authorDetails }) {
                           </div>
                         </div>
                       </li>
-                                ))*/}
+                                ))
                     </ul>
                   </div>
                   <div className="justify-stretch mt-6 flex flex-col">
@@ -841,7 +863,7 @@ export default function About({ authorDetails }) {
                   </div>
                 </div>
               </section>
-            }
+                                */}
           </div>
         </main>
       </div>
