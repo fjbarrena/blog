@@ -1,11 +1,6 @@
 import { getFileBySlug } from '@/lib/mdx'
 import { CheckIcon, HandThumbUpIcon, UserIcon } from '@heroicons/react/20/solid'
-
-const eventTypes = {
-  applied: { icon: UserIcon, bgColorClass: 'bg-gray-400' },
-  advanced: { icon: HandThumbUpIcon, bgColorClass: 'bg-blue-500' },
-  completed: { icon: CheckIcon, bgColorClass: 'bg-green-500' },
-}
+import { Image } from '@/components/Image'
 
 const talks = [
   {
@@ -500,7 +495,7 @@ export default function About({ authorDetails }) {
             <div className="flex items-center space-x-5">
               <div className="flex-shrink-0">
                 <div className="relative">
-                  <img
+                  <Image
                     className="h-16 w-16 rounded-full"
                     src="/static/images/fjbarrena-portrait.png"
                     alt=""
@@ -513,7 +508,7 @@ export default function About({ authorDetails }) {
                 <p className="text-sm font-medium ">
                   Senior Software Architect & Application Security
                 </p>
-                <p className="text-sm mt-2">
+                <p className="mt-2 text-sm">
                   <div className="mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
                     <div>
                       <a href="mailto: fjbarrena@gmail.com">fjbarrena@gmail.com</a>
@@ -524,7 +519,7 @@ export default function About({ authorDetails }) {
                     <div>Valencia, Spain</div>
                   </div>
                 </p>
-                <p className="text-sm mt-2">
+                <p className="mt-2 text-sm">
                   <div className="mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
                     <div>
                       <a href="https://www.linkedin.com/in/fjbarrena/">
@@ -572,7 +567,7 @@ export default function About({ authorDetails }) {
                           <li key={item.id}>
                             <div className="flex space-x-3">
                               <div className="flex-shrink-0">
-                                <img className="w-28" src={`${item.image}`} alt="" />
+                                <Image className="w-28" src={`${item.image}`} alt="" />
                               </div>
                               <div>
                                 <div className="text-lg">{item.position}</div>
@@ -631,11 +626,11 @@ export default function About({ authorDetails }) {
                           <li key={item.id}>
                             <div className="flex space-x-3">
                               <div className="flex-shrink-0">
-                                <img className="w-24" src={`${item.confImageUrl}`} alt="" />
+                                <Image className="w-24" src={`${item.confImageUrl}`} alt="" />
                               </div>
                               <div>
                                 <div className="text-lg">
-                                  <span className="text-sm mb-1 mr-1 inline-flex items-center rounded-md bg-green-100 px-2.5 py-0.5 text-sm font-medium text-blue-800">
+                                  <span className="mb-1 mr-1 inline-flex items-center rounded-md bg-green-100 px-2.5 py-0.5 text-sm">
                                     {item.year}
                                   </span>
                                   {item.title}
@@ -644,9 +639,10 @@ export default function About({ authorDetails }) {
                                   {item.videoUrl && (
                                     <span className="font-medium">
                                       <a href={item.videoUrl} target="_blank" rel="noreferrer">
-                                        <img
+                                        <Image
                                           src="/static/images/youtube.svg"
-                                          className="w-5 h-5 mr-4"
+                                          className="mr-4 h-5 w-5"
+                                          alt="Youtube"
                                           style={{ display: 'flex', float: 'left' }}
                                         />
                                       </a>
@@ -655,9 +651,10 @@ export default function About({ authorDetails }) {
                                   {item.slidesUrl && (
                                     <span className="font-medium">
                                       <a href={item.slidesUrl} target="_blank" rel="noreferrer">
-                                        <img
+                                        <Image
                                           src="/static/images/slideshare.png"
-                                          className="w-5 h-5 mr-4"
+                                          className="mr-4 h-5 w-5"
+                                          alt="Slideshare"
                                           style={{ display: 'flex', float: 'left' }}
                                         />
                                       </a>
