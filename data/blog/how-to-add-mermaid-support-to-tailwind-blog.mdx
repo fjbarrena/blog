@@ -1,0 +1,214 @@
+---
+title: 'How to add Mermaid support to MDX in Tailwind NextJS Starter Blog'
+date: '2023-03-05'
+tags: ['NextJS', 'Mermaid.js']
+draft: false
+summary: 'Recently I wanted to add some Mermaid charts into a new article, using MDX, and this is how I achieve it.'
+---
+
+To write my blog I'm using [Tailwind NextJS Starter Blog](https://github.com/timlrx/tailwind-nextjs-starter-blog).
+It's pretty easy, basically you write in **markdown** or in **mdx** and everything just _works_.
+
+Althought [Tailwind NextJS Starter Blog](https://github.com/timlrx/tailwind-nextjs-starter-blog) is really **AWESOME**,
+does not cover everything that is in my mind nor my whims. And one of my whims is to use [Mermaid.js](https://mermaid.js.org/intro/)
+to make diagrams. I use it every day, it's perfect to document processes, and as is **text**, can be versioned
+in Git, so fits perfectly for me.
+
+These are the steps I did to add support for [Mermaid.js](https://mermaid.js.org/intro/) in [Tailwind NextJS Starter Blog](https://github.com/timlrx/tailwind-nextjs-starter-blog)
+
+## Install Mermaid
+
+That's the neat part, because it's pretty brainless. Just execute:
+
+```shell
+npm install --save mermaid
+```
+
+## Create a component to render Mermaid
+
+This is the _complex_ part. Just create a new file `/components/Mermaid.js` and paste the following code
+
+```typescript
+import React from 'react'
+import mermaid from 'mermaid'
+
+mermaid.initialize({
+  startOnLoad: true,
+  theme: 'default',
+})
+
+export default class Mermaid extends React.Component {
+  componentDidMount() {
+    mermaid.contentLoaded()
+  }
+  render() {
+    return <div className="mermaid">{this.props.chart}</div>
+  }
+}
+```
+
+Mermaid just process everything that it's under a CSS class `mermaid`, so basically this component just
+initialize mermaid and creates a div with a CSS class `mermaid`, in which the mermaid syntax is placed. Easy.
+
+## Allow MDX to use the new Mermaid component
+
+Before using the component directly, we must configure the MDX Component to allow it. That's pretty simple
+too, just open `components/MDXComponents.js` and add the new **Mermaid** component to the `MDXComponents` array:
+
+```typescript
+...
+import Mermaid from './Mermaid'
+...
+
+export const MDXComponents = {
+  Mermaid,
+  Image,
+  TOCInline,
+  a: CustomLink,
+  ...
+}
+```
+
+## How to use it!
+
+Now you are able to render Mermaid charts in your MDX! Is as easy as this:
+
+```typescript
+<Mermaid
+  chart={`
+    flowchart LR
+      UserService --> |depends on|OrganizationService
+      OrganizationService --> |depends on|UserService
+  `}
+/>
+```
+
+That code will render this
+
+<Mermaid
+  chart={`
+    flowchart LR
+      UserService --> |depends on|OrganizationService
+      OrganizationService --> |depends on|UserService
+  `}
+/>
+
+You can create really complex charts with Mermaid, like [this](https://codesandbox.io/s/react-with-mermaid-ex9f7?file=/src/example.js:17-979):
+
+<Mermaid
+  chart={`
+classDiagram
+  class GeoPointType {
+  <<enumeration>>
+    BROWNFIELD
+    OGWELL
+    CELL_TOWER
+    NUCLEAR_REACTOR
+    SUPERFUND
+  }
+  class GeoPoint {
+    -UUID id
+    +GeoPointType type
+    +GeographyPoint location
+    -UUID metadata references metadata(id)
+    +Datetime createdAt
+  }
+  class GeographyPoint {
+    <<interface>>
+    +GeoJSON geojson
+    +Int srid
+    +Float longitude
+    +Float latitude
+  }
+  class NearbyPoint {
+  <<Interface>>
+    -UUID id references GeoPoint(id)
+    +GeoPointType GeoPoint::type
+    +GeographyPoint GeoPoint::location
+    +UUID GeoPoint::metadata
+    +Float distance
+  }
+  class NearbyPoints {
+  <<Service>>
+    +GeoJSON origin
+    +Float radiusMi
+    +Int first
+    +Int last
+    +Int offset
+    +Cursor before
+    +Cursor after
+  }
+  class Hotel {
+  -UUID id
+  +String name
+  -Int objectid 
+  }
+  GeoPoint *-- GeoPointType: Composition
+  GeoPoint *-- GeographyPoint: Composition
+  GeoPoint "1" <|-- "1" NearbyPoint: Implements
+  NearbyPoints "1" -- "0..n"NearbyPoint: Contains
+  Hotel "1" -- "1" GeoPoint: May Contain
+`}
+></Mermaid>
+
+Which corresponds to the following code:
+
+```typescript
+<Mermaid
+  chart={`
+classDiagram
+  class GeoPointType {
+  <<enumeration>>
+    BROWNFIELD
+    OGWELL
+    CELL_TOWER
+    NUCLEAR_REACTOR
+    SUPERFUND
+  }
+  class GeoPoint {
+    -UUID id
+    +GeoPointType type
+    +GeographyPoint location
+    -UUID metadata references metadata(id)
+    +Datetime createdAt
+  }
+  class GeographyPoint {
+    <<interface>>
+    +GeoJSON geojson
+    +Int srid
+    +Float longitude
+    +Float latitude
+  }
+  class NearbyPoint {
+  <<Interface>>
+    -UUID id references GeoPoint(id)
+    +GeoPointType GeoPoint::type
+    +GeographyPoint GeoPoint::location
+    +UUID GeoPoint::metadata
+    +Float distance
+  }
+  class NearbyPoints {
+  <<Service>>
+    +GeoJSON origin
+    +Float radiusMi
+    +Int first
+    +Int last
+    +Int offset
+    +Cursor before
+    +Cursor after
+  }
+  class Hotel {
+  -UUID id
+  +String name
+  -Int objectid 
+  }
+  GeoPoint *-- GeoPointType: Composition
+  GeoPoint *-- GeographyPoint: Composition
+  GeoPoint "1" <|-- "1" NearbyPoint: Implements
+  NearbyPoints "1" -- "0..n"NearbyPoint: Contains
+  Hotel "1" -- "1" GeoPoint: May Contain
+`}
+></Mermaid>
+```
+
+Cheers!!
