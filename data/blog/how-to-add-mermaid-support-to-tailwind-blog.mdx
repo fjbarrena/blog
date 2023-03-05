@@ -18,7 +18,7 @@ These are the steps I did to add support for [Mermaid.js](https://mermaid.js.org
 
 ## Install Mermaid
 
-That's the neat part, because it's pretty brainless. Just execute:
+That's the easiest part, just run:
 
 ```shell
 npm install --save mermaid
@@ -47,8 +47,8 @@ export default class Mermaid extends React.Component {
 }
 ```
 
-Mermaid just process everything that it's under a CSS class `mermaid`, so basically this component just
-initialize mermaid and creates a div with a CSS class `mermaid`, in which the mermaid syntax is placed. Easy.
+Mermaid process everything that it's under a CSS class `mermaid`, so basically this component just
+initialize mermaid and creates a div with a CSS class `mermaid`, in which the mermaid syntax will be finally placed.
 
 ## Allow MDX to use the new Mermaid component
 
@@ -69,9 +69,9 @@ export const MDXComponents = {
 }
 ```
 
-## How to use it!
+## How to use it
 
-Now you are able to render Mermaid charts in your MDX! Is as easy as this:
+Now you should be able to render Mermaid charts in your MDX! It's as easy as this:
 
 ```typescript
 <Mermaid
