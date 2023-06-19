@@ -238,10 +238,14 @@ const experience = [
     companyUrl: 'https://about.kyso.io',
     date: 'nov 2021 - act',
     image: '/static/images/companies/kyso.svg',
-    body: 'Kyso is an early stage b2b data science startup with a fast growing team backed by some great investors like Techstars, Lunar Ventures, Tribal Ventures and more. Responsible for the engineering side of the company and member of the executive. I wore many hats, from product owner, security, architecture, development and management. I was in charge of technical customer relations. We implemented from scratch the technical culture of the company with very good results',
+    body: `Kyso is an early stage b2b data science startup with a fast growing team backed by some great investors like Techstars, Lunar Ventures, 
+    Tribal Ventures and more. Responsible for the engineering side of the company and member of the executive. I wore many hats, from product owner, security, 
+    architecture, development and management. I was in charge of technical customer relations. We implemented from scratch the technical culture of the 
+    company with very good results.`,
     tags: [
-      'leadership',
-      'docker',
+      'product',
+      'technical leadership',
+      '🐋 docker',
       'kubernetes',
       'security',
       'customer relationships',
@@ -260,26 +264,27 @@ const experience = [
     position: 'Software Architect',
     company: 'Nexica Econocom',
     companyUrl: 'https://www.nexica.com/',
-    date: 'oct 2019 - nov 2021',
+    date: 'oct 2019 - nov 2021 (2 years and 1 month)',
     image: '/static/images/companies/nexica.png',
     body: `Responsible for the refactoring of the CloudManager
           (website and public documentation), a tool to manage
           Cloud infrastructure that works on top of VCloud and
           VCenter (VMWare). Starting from a legacy code base, we
-          are refactoring module by module to a new modern and
-          scalable architecture. The technologies we are using are
-          Java and Golang for the backend part, Angular for the
+          refactored module by module to a new modern and
+          scalable architecture. The technologies we used were
+          Java and Golang for the backend, Angular for the
           frontend and Docker and Kubernetes for packaging and
           deployment. The integration with the Cloud infrastructure
-          is done directly through the VCenter and VCloud API,
+          was done directly through VCenter and VCloud API,
           together with an event broker that triggers serverless
           functions based on OpenFaaS.`,
     tags: [
+      'product',
       'kubernetes',
-      'docker',
+      '🐋 docker',
       'management',
       'security',
-      'java',
+      '☕ java',
       'angular',
       'vmware',
       'nodejs',
@@ -293,34 +298,34 @@ const experience = [
     position: 'Head of Cybersecurity Research Group',
     company: 'Instituto Tecnológico de Informática',
     companyUrl: 'https://www.iti.es/',
-    date: 'feb 2020 - nov 2021',
+    date: 'feb 2020 - nov 2021 (1 year and 9 months)',
     image: '/static/images/companies/iti.png',
     body: `Technical Leader, responsible for opening a new line of
     work on cybersecurity, focusing on application security
-    and Cloud environments using new security paradigms,
+    and Cloud environments and using new security paradigms,
     based on Machine Learning, Big Data, DevSecOps and
-    Security as a Code. These works are part of different
+    Security as a Code. Those works were part of different
     research projects, in which the European's project ZDMP
-    highlights. My role in ZDMP is Technical Manager,
+    highlights. My role at ZDMP was Global Technical Manager,
     coordinating the technical efforts of more than 15
     European partners. It also highlights the OPOSSUM
-    project, in which I coordinate a technical team to develop
+    project, in which I coordinated a technical team to develop
     technology based on Machine Learning to improve the
     security of the applications, through a next-generation
     Web Application & API Protection (WAAP) prototype,
-    using the following technologies: Rust, Java, Angular,
-    Kubernetes, NodeJS and Docker`,
+    using Rust, Java, Angular, Kubernetes, NodeJS and Docker as technologies`,
     tags: [
-      'leadership',
-      'cybersecurity',
-      'cloud security',
+      'R&D',
+      'product',
       'management',
-      'rust',
-      'java',
+      'technical leadership',
+      'cybersecurity',
+      '🦀 rust',
+      '☕ java',
       'angular',
       'kubernetes',
       'nodejs',
-      'docker',
+      '🐋 docker',
     ],
     language: '🇬🇧 english & 🇪🇸 spanish',
   },
@@ -353,16 +358,16 @@ const experience = [
     position: 'Software Architect',
     company: 'GFT',
     companyUrl: 'https://www.gft.com/int/en/',
-    date: 'jun 2019 - feb 2020',
+    date: 'jun 2019 - aug 2019 (3 months)',
     image: '/static/images/companies/gft.png',
-    body: `Software architect for projects related to the banking
+    body: `Software architect for projects related to banking
     sector. I worked with a team of international and offshored
     technicians and managers, using agile methodologies.
     Our technology stack was based on Java for the backend
-    part, and React for the frontend part. Participated in
+    , and React for the frontend. I participated in
     integration projects with other banking platforms using
     REST APIs.`,
-    tags: ['banking', 'java', 'react', 'agile'],
+    tags: ['consultancy', 'banking', '☕ java', 'react', 'agile', '🐋 docker'],
     language: '🇬🇧 english',
   },
   {
@@ -370,20 +375,20 @@ const experience = [
     position: 'Head of Engineering',
     company: 'Instituto Tecnológico de Informática',
     companyUrl: 'https://www.iti.es/',
-    date: 'ene 2018 - jun 2019',
+    date: 'ene 2018 - jun 2019 (1 year and 6 months)',
     image: '/static/images/companies/iti.png',
     body: `Responsible for the technical execution and software
     engineering of all ITI R&D projects. Management of a
-    technical team of 26 people. Big Data, Machine Learning,
+    technical team of 26 engineers. Big Data, Machine Learning,
     IoT, Cloud Computing, choice of technologies and
     DevOps. Promoter of Open Source initiatives. Relevant
     projects: Radiatus, Kancerbero, SaaSDK`,
     tags: [
+      'R&D',
       'leadership',
       'big data',
       'AI',
       'management',
-      'R&D',
       'nestjs',
       'nodejs',
       'angular',
@@ -391,6 +396,8 @@ const experience = [
       'python',
       'spark',
       'cloud',
+      '☕ java',
+      '🐋 docker',
     ],
     language: '🇬🇧 english & 🇪🇸 spanish',
   },
@@ -399,19 +406,21 @@ const experience = [
     position: 'CTO & Co-Founder',
     company: 'Bioscore Sustainability',
     companyUrl: 'https://bioscore.info/',
-    date: 'feb 2017 - mar 2018',
+    date: 'feb 2017 - mar 2018 (1 year and 1 month)',
     image: '/static/images/companies/bioscore.png',
     body: `Architecture, design and head of implementation of a
     travel portal specialized in ecological destinations`,
     tags: [
       'startup',
+      'product',
       'leadership',
       'management',
       'security',
       'nestjs',
       'angular',
       'typescript',
-      'java',
+      '☕ java',
+      '🐋 docker',
     ],
     language: '🇺🇸 english & 🇪🇸 spanish',
   },
@@ -420,7 +429,7 @@ const experience = [
     position: 'Software Architect & Team Leader',
     company: 'Instituto Tecnológico de Informática',
     companyUrl: 'https://www.iti.es/',
-    date: '2015 - ene 2018',
+    date: '2015 - ene 2018 (4 years)',
     image: '/static/images/companies/iti.png',
     body: `Architect and manager of a team of seven engineers.
     Driver of the change to architectures based on
@@ -431,7 +440,8 @@ const experience = [
     BoxPlus, Java applications optimization for Orizon`,
     tags: [
       'team management',
-      'java',
+      '☕ java',
+      '🐋 docker',
       'enterprise',
       'spring',
       'performance',
@@ -445,14 +455,14 @@ const experience = [
     position: 'Software Engineer',
     company: 'Instituto Tecnológico de Informática',
     companyUrl: 'https://www.iti.es/',
-    date: '2011 - 2015',
+    date: '2011 - 2015 (3 years)',
     image: '/static/images/companies/iti.png',
     body: `Java FullStack Developer for end customers and R&D
     projects. Technological stack: Spring, JPA, Hibernate,
     JAX-WS, JSF, JSP, Maven. Deployment on Tomcat and
     JBoss servers. Relevant projects: Episteme, Fet-Eye.eu,
     PangeaMT, Consum Energía`,
-    tags: ['java', 'enterprise', 'spring', 'liferay', 'sharepoint'],
+    tags: ['☕ java', 'enterprise', 'spring', 'liferay', 'sharepoint'],
     language: '🇪🇸 spanish',
   },
   {
@@ -460,14 +470,14 @@ const experience = [
     position: 'Software Engineer',
     company: 'iSOCO',
     companyUrl: 'https://www.linkedin.com/company/isoco-clever/?originalSubdomain=es',
-    date: '2008 - 2011',
+    date: '2008 - 2011 (3 years)',
     image: '/static/images/companies/isoco.png',
     body: `Development of applications in .NET on SharePoint. Java
     application development with Liferay. Direct deal with the
     client, capture of requirements, change and time
     management. Relevant projects: CHGUV, Repsol, Mapfre
     and La Caixa`,
-    tags: ['java', 'enterprise', 'spring', 'liferay', 'sharepoint'],
+    tags: ['☕ java', 'enterprise', 'spring', 'liferay', 'sharepoint'],
     language: '🇪🇸 spanish',
   },
 ]
@@ -489,7 +499,7 @@ export default function About({ authorDetails }) {
   return (
     <>
       <div className="min-h-full">
-        <main className="py-10">
+        <main className="py-5">
           {/* Page header */}
           <div className="mx-auto max-w-3xl px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
             <div className="flex items-center space-x-5">
@@ -566,9 +576,12 @@ export default function About({ authorDetails }) {
                   <div className="px-2 py-2 sm:px-2">
                     <p className="mt-1 text-sm">
                       Software architect and developer specialized in scalable systems based on
-                      decoupled architectures, microservices and cloud environments. Proactive in
-                      learning new technologies and software development paradigms, as well as
-                      quality and security in code and infrastructures. Speaker and trainer.
+                      decoupled architectures, microservices and cloud environments. I wore multiple
+                      hats in my career, from individual contributor roles, passing through
+                      technical leadership of small and big teams, and performing management
+                      positions as well as head of engineering and CTO. Proactive in learning new
+                      technologies and software development paradigms, as well as quality and
+                      security in code and infrastructures. Speaker and trainer.
                     </p>
                   </div>
                 </div>
@@ -639,7 +652,7 @@ export default function About({ authorDetails }) {
                   <div className="divide-y divide-gray-200">
                     <div className="px-3 py-5 sm:px-3">
                       <h2 id="notes-title" className="text-lg font-medium ">
-                        Pitches
+                        Speaker at events
                       </h2>
                     </div>
                     <div className="px-4 py-6 sm:px-6">
