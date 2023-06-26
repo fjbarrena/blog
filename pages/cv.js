@@ -238,10 +238,15 @@ const experience = [
     companyUrl: 'https://about.kyso.io',
     date: 'nov 2021 - act',
     image: '/static/images/companies/kyso.svg',
-    body: `Kyso is an early stage b2b data science startup with a fast growing team backed by some great investors like Techstars, Lunar Ventures, 
+    body: `<a href="https://about.kyso.io" class="underline font-bold">Kyso</a> is an early stage b2b data science startup with a fast growing team backed by some great investors like Techstars, Lunar Ventures, 
     Tribal Ventures and more. Responsible for the engineering side of the company and member of the executive. I wore many hats, from product owner, security, 
-    architecture, development and management. I was in charge of technical customer relations. We implemented from scratch the technical culture of the 
-    company with very good results.`,
+    architecture, development, management and hiring. Also, I was in charge of technical customer relations. We implemented from scratch the technical culture of the 
+    company with very good results, building a great product with best engineering practices, focusing especially in maintainability and <b>security</b>.<br><br>
+    
+    With a small team, we were able to build a production ready product quickly, thanks to the great team we were able to hire. The product was designed to be installed
+    on-premises in customer's infrastructure. That was a challenge, because every customer has its own cloud provider, and Kyso must work in all of them. In order to keep the 
+    product maintainable and extensible, we designed the architecture to be driven by events, using NATS as an event broker and developing a set of consumers which extends the
+    core features of the product (notifications with slack and teams, analytics, etc.). The API was built using NestJS and Typescript, and the frontend was built using NextJS and Typescript as well.`,
     tags: [
       'product',
       'technical leadership',
@@ -579,9 +584,10 @@ export default function About({ authorDetails }) {
                       decoupled architectures, microservices and cloud environments. I wore multiple
                       hats in my career, from individual contributor roles, passing through
                       technical leadership of small and big teams, and performing management
-                      positions as well as head of engineering and CTO. Proactive in learning new
-                      technologies and software development paradigms, as well as quality and
-                      security in code and infrastructures. Speaker and trainer.
+                      positions as well as head of engineering and CTO. I love to apply the adequate
+                      solution to the current problem, trying to avoid overkilling solutions. I'm
+                      also proactive in learning new technologies and paradigms. Pretty obsessed
+                      with quality and security in code and infrastructures. Speaker and trainer.
                     </p>
                   </div>
                 </div>
@@ -620,7 +626,7 @@ export default function About({ authorDetails }) {
                                   <span className="font-medium ">{item.date}</span>
                                 </div>
                                 <div className="mt-1 text-sm">
-                                  <p>{item.body}</p>
+                                  <div dangerouslySetInnerHTML={{ __html: item.body }} />
                                 </div>
 
                                 <div className="mt-1 text-sm">

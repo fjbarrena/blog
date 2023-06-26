@@ -5,6 +5,7 @@ mermaid.initialize({
   startOnLoad: true,
   theme: 'dark',
   securityLevel: 'loose',
+  deterministicIds: false,
 })
 
 export default class Mermaid extends React.Component {

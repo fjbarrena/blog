@@ -1,0 +1,206 @@
+---
+title: 'Permissions in a distributed architecture'
+date: '2023-06-26'
+tags: ['security', 'backend', 'nestjs', 'permission system', 'zero-trust']
+draft: false
+summary: 'Just a quick summary about how we manage different types of renderers at Kyso'
+---
+
+Access control and security is a must. If access control and security is hard in a monolith,
+**Authorization** is specially hard and a hot topic in distributed systems. A common approach followed (even to this day) for many
+companies is the classical [castle-and-moat technique](https://www.cloudflare.com/en-gb/learning/access-management/castle-and-moat-network-security/)
+
+<div className="">
+  <Mermaid
+    chart={`
+graph LR
+    A[Request] --> B[FRONTLINE - exposed to Internet - Authorized]
+    B -->|Redirect| int1[Internal System 1 - Unauthorized]
+    B -->|Redirect| int2[Internal System 2 - Unauthorized]
+    B -->|Redirect| int3[... - Unauthorized]
+    B -->|Redirect| int4[Internal System n - Unauthorized]
+`}
+  ></Mermaid>
+</div>
+
+This architecture controls the East - West communications pretty well. From the outside someone make a Request to a
+**unique exposed point** (usually a reverse proxy, or an API Gateway), which validates the permissions of the request and, if all
+is correct, redirects the petition to the internal system which is in charge of solving it. That's all well & good, but has a
+major handicap; **there is no control of the North-South traffic**, meaning it **allows any communication between internal systems**
+without autentication nor authorization, due to the architecture **TRUST**. Let's assume that someone, using an exploit, gains access to
+an internal system, this would mean **they automatically gain access to every single internal system on your architecture**.
+
+So, if you want to **harden** your infrastructure to be **resilient**, you need to change this simple approach.
+
+There are a lot of articles talking about **[Zero Trust](https://www.crowdstrike.com/cybersecurity-101/zero-trust-security/)**, and at
+Kyso we have been heavily inspired by that. The idea behind this paradigm is that **there is no castle and no moat**,
+so we **can't trust by default any communication**, even if this communication comes from a well known system.
+
+<div className="">
+  <Mermaid
+    chart={`
+graph RL
+    USR[User] -->|Request| API1[API - Authorized]
+    API1 -->|Have I permission?| CEN[Central Security System] 
+    CEN --> |Yes| API1
+    API1 --> |Data| USR
+    Indexer -->|Request| SCS[SCS - Authorized]
+    SCS --> |Have I permission?| CEN 
+    CEN --> |No| SCS
+    SCS --> |403| Indexer[Indexer - Authorized]
+`}
+  ></Mermaid>
+</div>
+
+As you can see in the diagram above, every single request is evaluated by a centralized security system, which applies the authorization
+consistently in every piece of the architecture. In practice, that means that
+**every request must be authenticated (<strong>who is requesting</strong>) and authorized (<strong>can I perform operation X on resource Y?</strong>)**
+
+But how does the permission system work on Kyso?
+
+## Foundations
+
+Before we dive any deeper, let me introduce you the architecture of Kyso at high level.
+
+<div className="">
+  <Mermaid
+    chart={`
+flowchart LR
+    B(kyso-api + auth-server):::kysoItem <--> C(kyso-scs):::kysoItem
+    F <--> E
+    B <--> E[(ElasticSearch)]:::kysoItem
+    B <--> F(kyso-indexer):::kysoItem
+    F <--> C
+    G[kyso-cli]:::kysoItem <--> B
+    B --> I[NATS]:::kysoItem
+    I --> J[Notification Consumer]:::kysoItem
+    I --> K[Slack Consumer]:::kysoItem
+    I --> L[Teams Consumer]:::kysoItem
+    L <--> D
+    M[kyso-front]:::kysoItem <--> B
+    B <--> D[(MongoDB)]:::kysoItem
+    N[OnlyOffice]:::kysoItem <--> B
+    N[OnlyOffice]:::kysoItem <--> M
+    classDef notImplementedYet fill:#bbf,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5;
+    classDef kysoItem fill:#112f49,color:#fff,stroke:#fff
+`}
+  ></Mermaid>
+</div>
+
+The central piece in the architecture, the **kyso-api + auth-server**, is the responsible for authenticating and authorizing every
+operation at Kyso. If you pay attention to the chart, you can see that **every component has a direct communication with kyso-api**,
+but specifically, with the authentication server. That means, no matter how you access Kyso, either through the UI, or the CLI,
+or directly to the service... **any request needs to pass the authentication and authorization process**.
+
+But how does it work?
+
+We use JWT Tokens, a standard, to know which user is making the request. We don't rely on JWT Tokens for authorization,
+but we can trust in JWT for authentication, because the JWT tokens are **signed by us**. We can be sure that if the signature is correct,
+the user is legitimate. JWT tokens are secure if:
+
+- Every communication is encrypted (HTTPS, SSL)
+  - At Kyso, everything uses HTTPs
+- The key used to sign the tokens is strong and changes overtime
+  - The signing token is refreshed automatically every 10 hours at Kyso
+
+But, if the token is issued by the auth-server, how can internal system know if the token is valid?Because every time a system
+(internal or external) receives the token, **before executing any action**, it queries the auth-server to check if the token is valid
+or not. If it's valid, it queries the auth-server again and to determine if the user, which it now knows is legitimate,
+**has the adequate rights to perform the action**. This process is explained in the following sequence diagram:
+
+<Mermaid
+  chart={`
+sequenceDiagram
+    User->>+SCS: I want to see this report (+JWT)
+    SCS->>+Auth Server: The user is legitimate? (JWT)
+    Auth Server->>-SCS: Yes
+    SCS->>+Auth Server: The user has permissions? (JWT)
+    Auth Server->>-SCS: Yes
+    SCS->>-User: Here is the report
+    User->>+SCS: I want to see this report (+Hacked JWT)
+    SCS->>+Auth Server: The user is legitimate? (Hacked JWT)
+    Auth Server->>-SCS: No
+    SCS->>-User: 403`}
+></Mermaid>
+
+Following this architecture, we can ensure that any communication inside Kyso is authenticated and authorized.
+And having a **centralized auth-server** has a lot of benefits:
+
+- We can apply **global authorization policies**
+- The signing key is **only stored in one place**, significantly reducing the attack surface
+
+## Authorization
+
+For a more detailed explanation on Kyso's permission system you can read the [docs](https://docs.kyso.io/settings-and-administration/permissions-system). But to understand how we manage authorization, here are the highlights:
+
+- A Kyso deployment is segmented at the top-level by organizations
+- Every organization can have multiple channels
+- Every channel has a specific visibility setting
+
+  - public: everyone can see the contents inside a public channel. Note that "public" refers to anyone with access to your deployment. So if you're using our public cloud version then that means the world, but if you're self-hosting Kyso, that refers only to those users with access to the network.
+  - protected: only members of an organization can see the content inside a protected channel
+  - private: only members of that specific channel (not the organization) can see the contents inside a private channel
+
+- Users can be a member of an organization with an assigned role (admin, contributor, commenter)
+- Users can be a member of a channel with a specific role as well (admin, contributor, commenter)
+- Channel membership takes precedence over Organization membership
+  - In other words, channel membership breaks the authorization inheritance from an organization
+
+These rules make Kyso extremely configurable, and more important, allows you to segment both research content and user groups as much as you need. You can have:
+
+- Public channels to share content with everyone
+- Protected channels, to share content within certain groups
+- Private channels, to share content only with specific users
+- You can also use organizations to segment user groups too. For example, at Kyso we have two organizations; kyso, for public content, and kyso internal for protected and private content to be shared only within the company.
+
+**But how this is managed technically?**
+
+Every request (that requires authorization) to any API must contain:
+
+- The JWT Token (who is making the request?)
+- Two request headers:
+  - **x-kyso-organization**. Organization's identifier to which the request is going
+  - **x-kyso-team**. Channel's identifier to which the request is going
+
+> Channels were named "teams" in a previous version of Kyso! 😛
+
+With this information we can check if the user has the required permissions in the provided organization and channel. Let's see a small example. This is the definition of the _delete comment_ endpoint.
+
+```typescript
+@Delete('/:commentId')
+// 1
+@UseGuards(EmailVerifiedGuard, SolvedCaptchaGuard, PermissionsGuard)
+// 2
+@Permission([CommentPermissionsEnum.DELETE, CommentPermissionsEnum.DELETE_ONLY_MINE])
+async deleteComment(
+      @CurrentToken() token: Token,
+      @Param('commentId') commentId: string
+) : Promise<NormalizedResponseDTO<Comment>> {
+  // 3 - Implementation
+}
+```
+
+(1) These safeguards are executed **before** the method is executed, and validates that:
+
+- The requesting user is verified
+- The requesting user has solved the captcha (to avoid bots)
+- The requesting users has the expected permissions in the organization and channel provided in the request headers
+
+Even if only one of these safeguards is not passed, a 403 error is returned.
+
+(2) These are the **expected permissions** that are required to execute the action. Every **resource** in Kyso (Report, Channel, Organization, User, etc...) has a **set of permissions**, which shape their behavior in Kyso. The **PermissionGuard** takes the jwt + organization + channel + these permissions and checks if the current request fullfills all the requirements.
+
+(1) and (2) gives us a **coarse-grained authorization**, which in fact solves 85% of use cases for an API. The remaining 15% is managed directly in the implementation of the endpoint. For example, determining the `DELETE_ONLY_MINE` comment can be managed only by the `deleteComment(...)` method, and can't be _generalized_ in a shared Guard.
+
+Having the ability to define the authorization in your controllers using a simple annotation, it's a big win.
+
+## Conclusions
+
+Security is a hard, global, holistic problem that requires a hard, global and holistic solution. This article aimed to describe
+globally how we manage the authorization in a distributed architecture, inspired by
+the _[zero trust](https://www.crowdstrike.com/cybersecurity-101/zero-trust-security/)_ paradigm.
+
+Of course, regarding security, there are other interesting topics as how to manage vulnerabilities in our code, dependencies and infrastructure, but having
+a good permission system is a good starting point!
+
+Happy coding!

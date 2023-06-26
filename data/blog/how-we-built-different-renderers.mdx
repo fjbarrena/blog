@@ -1,0 +1,165 @@
+---
+title: 'How we built different renderers'
+date: '2022-11-07'
+tags: ['Product', 'Kyso', 'Renderers']
+draft: false
+summary: 'Just a quick summary about how we manage different types of renderers at Kyso'
+---
+
+We have a requisite at Kyso... being able to render **everything**. In order to do so, and being able to render many file types as
+**Jupyter Notebooks**, **static and dynamic websites**, **Markdown**, **code**, **PDFs**. the Microsoft's Office suite (**PowerPoint, Word, Excel**),
+**CSV and TSV** and even **microscopic images like SVS**!!. These visualizations are possible thanks to the **Renderers**.
+
+> A Renderer is a piece of code which takes the responsibility of read a specific file type, interpret it, decode it and print it in
+> the user's screen
+
+This is a high level diagram about what kind of renderers Kyso have implemented.
+
+<div className="">
+  <Mermaid
+    chart={`
+graph TD
+    A[Access to a file] --> B{The file is...}
+    B -->|md, mdx| MARKDOWN[User Markdown Renderer]
+    B -->|ipynb| JUP[Use Jupyter Renderer]
+    B -->|pptx, docx, xlsx| OFFICE[Use Office Renderer]
+    B -->|pdf| OFFICE[Use Office Renderer]
+    B -->|html| HTML[Use Website Renderer]
+    B -->|svs| SVS[Use SVS renderer]
+    B -->|other| ETC[...]
+`}
+  ></Mermaid>
+</div>
+
+In the following sections, we will explain how every renderer works.
+
+## Markdown renderer
+
+The _Markdown renderer_ is used to display Markdown files (.md), but also plain text based files.
+
+It works in a simple way, just downloads the file from Kyso's servers into your browser, executes a small pre-process to improve it, interprets the Markdown file using the [standard syntax](https://www.markdownguide.org/basic-syntax/), converting the Markdown into HTML, and rendering it into the user's browser.
+
+The pre-process consists basically in translate and sanitize the Markdown inputs (images, etc.) to make it compatible with the internal structure at Kyso. Let's see a simple example. If an user writes **\!\[An image](./img/my_image.png)**, will work locally. But in Kyso, your content is segmented in organizations, channels and reports. That means, the path **./img/my_image.png** will no longer be a valid path. Kyso's pre-process retrieve all these cases and transforms automatically the paths to be accesible in the platform.
+
+Kyso's Markdown Renderer adds **extensions to the standard Markdown specs**, allowing the users to enrich their Markdown. This is the case of the **Mermaid extension**, which allows you to create **[mermaid charts](https://mermaid.live/edit#pako:eNqVkk2PgjAQQP_KpGd172RjgqK7uosYhXgQD4UOQgRK2iGLEf_78qFZTyTbQ9OZeW-atHNjoRTIDHZWvIjBtfwcmmUezTBErYEkcIiSFE8wHk9hdnNj7GJI9GQyuff4rC3WLlYEAdcoarDN3ZflHDZHTyPYXF2E_MnhPVBvU9hhLlChOr3KT-ZPfa2uMn7GGla2-bHoWnaJoX7rsrgSKthIwkDKSw1rb9upz8qAPG_epIa5Y_WXteEQXhRUjUDIsNmrVFc1OMvlat7LThQl4bAuon8aMWVpDZ-u_d0JBwx0QoOGl-uyKKSi9nO8zd7bbo-WhFwSqI5_0GzEMlQZT0QzE7c25zOKMUOfGc1RYMTLlHzm5_cGLQvBCRciIamYEfFU44jxkuT-mofMIFXiE7IS3oxY1ifvv-nBywM)** defined using text, which is very useful. In fact, the previous chart was built with Mermaid.
+
+Another example is the **[Remark Math](https://github.com/remarkjs/remark-math) extension**, which allows you to specify mathematical expressions using text as well. For example:
+
+$$
+\sigma_U \sim \mathrm{Normal}(0, \Theta_U^2)
+$$
+
+## Jupyter renderer
+
+Jupyter Notebook's renderer is the jewel in the crown for Kyso. To understand how works this renderer, we must know how it's structured internally a Jupyter Notebook. Without entering in too much details, a Jupyter Notebook file is composed by a bunch of cells, in JSON format:
+
+```json
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "# Euler equations: exact solutions\n",
+        "\n",
+        "This notebook illustrates some features of the exact solution to the 1-dimensional Euler equations of compressible gas dynamics.\n",
+      ],
+      "id": "a0de8bfd"
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "collapsed": false
+      },
+      "outputs": [],
+      "source": [
+        "%matplotlib inline\n",
+        "import matplotlib.pyplot as plt\n",
+        "import numpy as np\n",
+        "from IPython.display import FileLink\n"
+      ],
+      "id": "f71e1e24"
+    },
+	...
+}
+```
+
+Every cell has a type, and every type is managed by it's own **renderer**. For example, the previous JSON has two cells, one of type **markdown** and another with the type **code**.
+
+Kyso's Jupyter Renderer retrieves every cell of a Jupyter Notebook, and applies the adequate renderer. In Markdown's case, we are applying the same renderer than we described before, so we can add **mermaid** charts and **mathjax** formulas as well.
+
+Kyso integrates as well with [Plotly](https://plotly.com/) and [Bokeh](https://docs.bokeh.org/) charts, as they are wide spreaded in the Jupyter's community. So to work with those two libraries is straightforward for the users.
+
+Permit me to become a bit _techy_ now, because I want to explain how we manage the rendering of Plotly and Bokeh charts. And that is closely related to how Jupyter saves these cells. In the case of Plotly, when the Jupyter is processed (that it, when the "code" section is executed), then a new cell is added with the result of that execution. That cell is tagged as `text/html`, and has the following structure
+
+```html
+"text/html": [ "
+<div>
+  \n", " \n", " \n", " <div id=\"26d1a40c-a04e-4698-bb4b-93f9100d0699\" class=\"plotly-graph-div\"
+  style=\"height:600px; width:800px;\">
+</div>
+\n", " <script type=\"text/javascript\">\n", " require([\"plotly\"], function(Plotly) {\n", "
+window.PLOTLYENV=window.PLOTLYENV || {};\n", " \n", " if
+(document.getElementById(\"26d1a40c-a04e-4698-bb4b-93f9100d0699\")) {\n", " Plotly.newPlot(\n", "
+'26d1a40c-a04e-4698-bb4b-93f9100d0699',
+```
+
+Look that any library is included in that piece of code, and note that the code we are looking at it's, in fact, the chart.
+
+So what do Kyso to render it? First of all, when we detect that there are Plotly charts we **load dynamically the adequate libraries**. With that, we take the code generated by Jupyter and send it to the HTML Renderer, which is able to print it securely. Bokeh charts follows a similar approach.
+
+As Kyso is **the presentation layer**, we don't execute the Jupyter Notebooks, we just render them in a fancy way, adding **collaborative features** like the **inline comments**, **report's comments**, **share a cell**, etc.
+
+![Inline comments example](/static/images/inline_comments.png)
+
+## Office renderer
+
+Most companies continue relying in Microsoft Office to share information. That's normal, because Microsoft Office provides a general platform that can be consumed by anyone easily.
+
+As Kyso is a centralized knowledge hub, of course is able to render Microsoft Office documents properly.
+
+The most important detail here is that we **don't rely in external services to render Microsoft Office documents**. In other words, we render your documents (PowerPoint, Word and Excel) internally, without sending them to Microsoft.
+
+For that, we use a powerful and secure Open Source tool named [OnlyOffice](https://www.onlyoffice.com/), which works **completely on premises**, that means, **under your infrastructure**. This is specially important for companies that don't want, o directly can't, send that information over the internet to a 3rd party company (Microsoft in this case).
+
+How it works is pretty simple. We deploy an instance of OnlyOffice's Document Server, and every time an user requests a file to render, we call to that server who do basically all the job.
+
+As a result, the users are able to render any Microsoft Office file, under the company's infrastructure, without sending the files over the internet, and without any size restriction (for example, official Microsoft Renderer has a limit of 15Mb).
+
+![Office Renderer Example](/static/images/onlyoffice.png)
+
+We use the same strategy, and the same technology stack, to render **PDF files**
+
+## Website renderer
+
+It's a fact that HTML is eating the world. Every single format can be exported as HTML (PowerPoint, Word, Jupyter Notebooks using [Jupyter Book](https://jupyterbook.org/en/stable/intro.html)...), and continuosly new products appear that allows us to create nice and useful insights using HTML, like [MultiQC](https://multiqc.info/) or [Revealjs](https://revealjs.com/).
+
+For that reason, Kyso is able to **render any static website based on HTML and Javascript**.
+
+When a new report is uploaded to Kyso, we store it in a way that is accesible as a static website, using our internal storage system
+named **Kyso SCS**.
+
+The access to that reports are controlled, as the rest of the renderers, by **Kyso's Permission System**, guaranteeing that
+**only the people with the adequate rights can access to that content**, even if they try to bypass it accessing directly.
+As security is a **key aspect** for Kyso, we take all the steps required to ban any non-desired access, and that includes
+automatic bots as well.
+
+One limitation of the website renderer is that we only support **static** websites. That means, we can't render at this moment sites
+based on SPA technology, or sites based on Docker for example. Nevertheless, Kyso's engineering team is working on the implementation of
+a new type of renderer, named **Data Apps**, which will be able to render **dynamic** content, and complex reports based on
+**Docker**.
+
+## SVS renderer
+
+I know the use case of this renderer is small, if we compare it to other formats like Powerpoint, but this has a special place in my heart.
+
+One of our customers asks us so politely if we can consider to add a new renderer for **microscopic images**. That's something they already
+wanted, but as the niche of that is reduced, no one considered to develop it unfortunately. That format (SVS) is basically a collection of
+TIFFs that allows you to zoom-in and zoom-out a microscopic image.
+
+As the engineers at Kyso are pretty freak, we were playing around with the idea and we built this renderer:
+
+![SVS renderer example](/static/images/svs-renderer.gif)
+
+Happy coding!

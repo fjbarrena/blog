@@ -1,0 +1,214 @@
+---
+title: 'My SecDevOps ABC'
+date: '2023-05-24'
+tags: ['Security', 'SecDevOps']
+draft: true
+summary: "Have you had circular dependency problems? Of course there is a 'canonical' solution for circular dependency problems, but as I come from Java and Spring, in which circular dependencies were not an issue, I wrote solution that could be interesting for other fellas. Do you want to forget about circular dependencies issues? Continue reading!"
+---
+
+Start affording security is hard, specially if you work with highly sensitive data.
+Doesn't matter if you work in product, consultancy or services... you have a customer. And for
+your customer it's important to ensure a high security level.
+
+Below we divide the topic of security into: **Application Security**, **DevSecOps** and **Deployment Security**. The following chart shows the **measures _already_ implemented** in Kyso.
+
+<Mermaid
+  chart={`
+graph TD
+    A[Security Challenge] --> APP(Application)
+    A --> DEVSECOPS(DevSecOps)
+    A --> DEPLOY(Deployment)
+    APP --> AUTH(Authorization)
+    APP --> DATA(Data)
+    APP --> EXT(External Access)
+    APP --> ROLL(Rolling Secrets)
+    DEVSECOPS --> SECCODE(Code)
+    DEVSECOPS --> SECDEPS(Dependencies)
+    DEVSECOPS --> DOCKER(Containers)
+    DEVSECOPS --> AUTO(Automated Security Testing)
+    DEPLOY --> NODEF(No defaults)
+    DEPLOY --> SECDEPLOY(K8s Secure Deployment)
+    DEPLOY --> TRACE(Encryption)
+`}
+></Mermaid>
+
+## Application-level Security
+
+### Authorization
+
+For a more detailed explanation on Kyso's permission system you can read the [docs](https://docs.kyso.io/settings-and-administration/permissions-system). But to understand how we manage authorization, here are the highlights:
+
+- A Kyso deployment is segmented at the top-level by **organizations**
+- Every organization can have multiple **channels**
+- Every channel has a specific **visibility** setting
+  - **public**: everyone can see the contents inside a public channel. Note that "public" refers to anyone with access to your deployment. So if you're using our public cloud version then that means the world, but if you're self-hosting Kyso, that refers only to those users with access to the network.
+  - **protected**: only members of an organization can see the content inside a protected channel
+  - **private**: only members of that specific **channel** (not the organization) can see the contents inside a private channel
+- Users can be a member of an **organization** with an assigned role (admin, contributor, commenter)
+- Users can be a member of a **channel** with a specific role as well (admin, contributor, commenter)
+- Channel membership takes precedence over Organization membership
+  - In other words, channel membership breaks the authorization inheritance from an organization
+
+These rules make Kyso extremely configurable, and more important, allows you **to segment both research content and user groups as much as you need**. You can have:
+
+- Public channels to share content with everyone
+- Protected channels, to share content within certain groups
+- Private channels, to share content only with specific users
+- You can also use organizations to segment user groups too. For example, at Kyso we have two organizations; **kyso**, for public content, and **kyso internal** for protected and private content to be shared only within the company.
+
+**Everything at Kyso requires authorization**. It doesn't matter if you are calling the API through the [frontend](https://kyso.io/login), the [kyso CLI](https://cli.kyso.io) or directly using [CURL](https://curl.se/). Even if you try to break the rules, and call the _Kyso Static Content Server_ directly, or the _Kyso Indexer_. **Everything**, **always**, is authorized following a **[Zero Trust](https://www.crowdstrike.com/cybersecurity-101/zero-trust-security/)** paradigm.
+
+### Data Security
+
+Before diving into how we manage Data Security, we need to know **how** the data is stored at Kyso. The component in charge of this is the **Kyso Static Content Server (SCS)**, which relies on the authorization, following the _aforementioned authorization rules_, in the **auth server**.
+
+The SCS is built on top of well-proven industry standards: NGINX and SFTP, configured with care and to which only the administrators of the infrastructure have direct access (for an on-premise/self-hosted installation, that is your internal DevOps/IT team). The process to retrieve content follows the steps below:
+
+<Mermaid
+  chart={`
+graph LR
+    USER -->|1-request content| NGINX
+    NGINX -->|2-has permission?| AUTH
+    AUTH -->|3-yes| NGINX
+    NGINX -->|4-give me content| SCS
+    SCS -->|5-content| NGINX
+    NGINX -->|6-content| USER
+`}
+></Mermaid>
+
+**Every request to retrieve content**, regardless of how it's made, will pass **necessarily**, through the authorization server, thus preventing users without the required permissions from accessing content to which they do not have access.
+
+We recommend to **encrypt all the SCS data** in the event that someone somehow gained access to the SCS (e.g. stealing admin credentials to the infrastucture). In this way, attackers could download all the data, **but be unable to decrypt it**. On our public deployment at [kyso.io](https://kyso.io), we do it using **AWS capabilities**, but this can be done in several different ways.
+
+### External Access
+
+Ok, so how do we manage access to the application from external users (i.e. when it's exposed to the public Internet)?
+
+Our API, as we described in the authorization section, is protected. You'll find more details over the coming days and weeks in the [Series on Security](#Annex-Security-Series-Post). In addition, every API is using [Run-time Application Self Protection (RASP)](https://www.imperva.com/products/runtime-application-self-protection-rasp/) capabilities that protects the application even if a network's perimeter defenses are breached.
+
+Depending on your company's specific use case and requirements, there are other approaches than can be taken. For example, let's imagine that our company works with highly confidential data, but has the need to share results with external providers or customers as well. On Kyso you can just create a specific organization to share content with a specific provider/customer, and then only the content uploaded to that organization will be shared with the provider/customer.
+
+We can go a step further in this regard (to avoid accidental sharing of senstive data across organizations) by instead **having two separate instances of Kyso**, one for **internal use** in which only **the company's users will have access**, and another for **external use**, which only stores data that the company wants to share externally or within certain user groups.
+
+### Rolling Secrets
+
+Every component that uses a secret at the application level, automatically regenerates that secret periodically. This ensures that Kyso is strong against brute force attacks.
+
+## DevSecOps
+
+### Kyso's Code Security
+
+To optimize code security, we follow a **[DevSecOps](https://www.devsecops.org/)** approach, which includes **[Static Application Security Testing (SAST)](https://owasp.org/www-community/Source_Code_Analysis_Tools)** to analyze the source code to find security flaws, in our case using **[Sonarqube](https://www.sonarqube.org/features/security/)**
+
+Every time a new code change is pushed to our Git repository, a CI/CD pipeline is executed and analyzes all the source code, looking for security flaws, and pushes the results into a website to be reviewed by our engineers. The next image is a simple example <strong>(although not related to Kyso)</strong>.
+
+![Sonarqube example not related to Kyso](./images/sonarqube_example.png)
+
+### Dependency Security
+
+Using [Sonarqube](https://www.sonarqube.org/features/security/) we can find security flaws **in the code written by Kyso's engineers**, but that is not the only code put into production. Every project has a series of dependencies that are used internally, and this is also code that runs on our servers, so it's imperative to **assess the security of the dependencies**, to know if they are introducing security issues. That is, in fact, another **[SAST](https://owasp.org/www-community/Source_Code_Analysis_Tools)** technique.
+
+To analyze the dependencies we use at Kyso, we are using [Dependency Track](https://dependencytrack.org/), an Open Source project hosted by the [OWASP Foundation](https://owasp.org/).
+
+The approach is identical as the Code Security, every time new code is pushed into Git, a CI/CD pipeline is executed and analyzes all the **dependencies** in the project, looking for known vulnerabilities, pushing the results into **Dependency Track website**. The next image is another example <strong>(although not related to Kyso)</strong>.
+
+![Dependency Track example not related to Kyso](./images/dtrack_example.png)
+
+### Container Security
+
+Kyso is built on top of Docker, and is deployed using Kubernetes. Similar to the dependency security, the containers in which Kyso is running all have their own dependencies, so we need to analyze them too.
+
+For that we follow a similar approach as described in _Code Security_ and _Dependencies Security_; every time a change is committed to Git, a CI/CD pipeline is executed, analyzing the security of the Docker Image. We use [Grype](https://github.com/anchore/grype).
+
+### Automated Security Testing
+
+So far, we have discussed the authorization, the permissions system and all the components and processes that are in place to help Kyso's engineering team deliver software securely. On top of all this, we have interal QA processes to also reduce the chances of human error in the code.
+
+Using [Behavior-Driven Development (BDD)](https://en.wikipedia.org/wiki/Behavior-driven_development) our QA Team defines test cases that covers all the use cases of an API call, using [Gherkin](https://cucumber.io/docs/gherkin/) and [Cucumber](https://cucumber.io/). This definition scaffolds a testing code suite, which is implemented by the engineering team, and executed every time a new change is pushed into Kyso, to assess if that change breaks (or not) the security model.
+
+For example, this is a simple real scenario defined in [Gherkin](https://cucumber.io/docs/gherkin/) and [Cucumber](https://cucumber.io/)
+
+```gherkin
+Feature:  Report - Delete report
+    Scenario: Delete a public report being an unauthorized user
+        Given An unauthorized user
+        And calls DELETE .api.v1.reports."63596fd9b3388dc3de683ead"
+        Then Returns 403
+
+    /* THERE ARE 23 MORE SCENARIOS TO TEST THE DELETION OF A REPORT!! */
+```
+
+And this is the scaffold generated, and the code implemented by the engineering team, to fulfill the Gherkin specifications:
+
+```javascript
+let api: Api;
+let resultInUse: any;
+let userInUse: string | null;
+let tokenInUse: string | null;
+let organizationSlugInUse: string | null;
+let channelSlugInUse: string | null;
+
+
+Given('An unauthorized user', function () {
+  userInUse = null;
+  tokenInUse = null;
+  organizationSlugInUse = null;
+  channelSlugInUse = null;
+  api = new Api();
+});
+
+
+When('calls DELETE .api.v1.reports.{string}', async function (reportId) {
+  try {
+    const deletionResult: NormalizedResponseDTO<Report> = await api.deleteReport(reportId);
+
+    if (deletionResult.data.id === reportId) {
+      // That means has been deleted
+      resultInUse = 200;
+    } else {
+      // In other case put the result as null to force breaking the tests
+      resultInUse = null;
+    }
+
+    resultInUse = 200;
+  } catch (ex: any) {
+    resultInUse = ex.response.status;
+  }
+});
+
+
+Then('Returns {int}', function (int) {
+  const resultCopy = resultInUse;
+
+  // Clear for next executions
+  resultInUse = null;
+
+  assert.equal(int, resultCopy);
+});
+```
+
+The execution of these tests generates a report, which is uploaded (internally) to [kyso.io](https://kyso.io), as shown in the following screenshot:
+
+![Automatic Testing example](./images/automatic_testing_example.png)
+
+## Conclusions
+
+These are just a few examples of how we manage security at Kyso. Of course, there are more processes involved, related to **deployment** and other configurations related to **security**.
+
+Kyso is committed to the **safety** of its **product** and the security of our **customers**. Heading into 2023 we will continue improving overall security, which will include **SOC2 Type II certification**.
+
+Thanks for reading, and remember that the upcoming [Series on Security](#Annex-Security-Series-Post) will take the reader through a lot more detail on each topic. Stay tuned!
+
+## Annex: Security Series Post
+
+0. [Kyso's Security Overview](https://kyso.io/blog/engineering/kysos-security-overview/)
+1. [Security model: Permissions in a distributed architecture](https://kyso.io/blog/engineering/permissions-in-a-distributed-architecture/)
+2. DevSecOps - Part 1: Security of the code
+3. DevSecOps - Part 2: Security of the dependencies
+4. DevSecOps - Part 3: Security of the containers
+5. DevSecOps - Part 4: Testing security automatically
+6. Deployment - Part 1: Secure deployment in Kubernetes
+7. Deployment - Part 2: Secrets management
+8. Deployment - Part 3: No defaults and local encryption using SOPS
+9. Deployment - Part 4: Traceability
+10. Next steps in Security at Kyso
