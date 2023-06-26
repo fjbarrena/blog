@@ -238,15 +238,17 @@ const experience = [
     companyUrl: 'https://about.kyso.io',
     date: 'nov 2021 - act',
     image: '/static/images/companies/kyso.svg',
-    body: `<a href="https://about.kyso.io" class="underline font-bold">Kyso</a> is an early stage b2b data science startup with a fast growing team backed by some great investors like Techstars, Lunar Ventures, 
-    Tribal Ventures and more. Responsible for the engineering side of the company and member of the executive. I wore many hats, from product owner, security, 
-    architecture, development, management and hiring. Also, I was in charge of technical customer relations. We implemented from scratch the technical culture of the 
-    company with very good results, building a great product with best engineering practices, focusing especially in maintainability and <b>security</b>.<br><br>
+    body: `<a href="https://about.kyso.io" target="_blank" class="underline font-bold">Kyso</a> is an early stage b2b data science startup with a fast growing team backed by some 
+    great investors like Techstars, Lunar Ventures, Tribal Ventures and more. Responsible for the engineering side of the company and member of the executive. 
+    I wore many hats, from product owner, security, architecture, development, management and hiring. Also, I was in charge of technical customer relations. 
+    We implemented from scratch the technical culture of the company with very good results, building a great product with best engineering practices, 
+    focusing especially in maintainability and <b><a href="https://fjbarrena.dev/blog/permissions-in-a-distributed-architecture" target="_blank" class="underline">security<a></b>.<br><br>
     
     With a small team, we were able to build a production ready product quickly, thanks to the great team we were able to hire. The product was designed to be installed
-    on-premises in customer's infrastructure. That was a challenge, because every customer has its own cloud provider, and Kyso must work in all of them. In order to keep the 
-    product maintainable and extensible, we designed the architecture to be driven by events, using NATS as an event broker and developing a set of consumers which extends the
-    core features of the product (notifications with slack and teams, analytics, etc.). The API was built using NestJS and Typescript, and the frontend was built using NextJS and Typescript as well.`,
+    on-premises in customer's infrastructure. That was a challenge, because every customer has its own cloud provider, and Kyso must work in all of them. The deployment
+    was prepared using Docker and Kubernetes, and we added support for Helm and Terraform later. In order to keep the product maintainable and extensible, we designed 
+    the architecture to be driven by events, using NATS as an event broker and developing a set of consumers which extends the core features of the product 
+    (notifications with slack and teams, analytics, etc.). The API was built using NestJS and Typescript, and the frontend was built using NextJS and Typescript as well.`,
     tags: [
       'product',
       'technical leadership',
@@ -273,14 +275,14 @@ const experience = [
     image: '/static/images/companies/nexica.png',
     body: `Responsible for the refactoring of the CloudManager
           (website and public documentation), a tool to manage
-          Cloud infrastructure that works on top of VCloud and
-          VCenter (VMWare). Starting from a legacy code base, we
+          Hybrid Cloud infrastructure that works on top of VCloud and
+          VCenter (VMWare), AWS, Azure and Veeam. Starting from a legacy code base, we
           refactored module by module to a new modern and
-          scalable architecture. The technologies we used were
+          scalable architecture. I was responsible for recruiting staff too. The technologies we used were
           Java and Golang for the backend, Angular for the
           frontend and Docker and Kubernetes for packaging and
           deployment. The integration with the Cloud infrastructure
-          was done directly through VCenter and VCloud API,
+          was done directly through VCenter and VCloud API (an other vendors),
           together with an event broker that triggers serverless
           functions based on OpenFaaS.`,
     tags: [
@@ -313,7 +315,7 @@ const experience = [
     research projects, in which the European's project ZDMP
     highlights. My role at ZDMP was Global Technical Manager,
     coordinating the technical efforts of more than 15
-    European partners. It also highlights the OPOSSUM
+    European partners (Ford, Software AG, Mondragon Assembly, Continental, and others). It also highlights the OPOSSUM
     project, in which I coordinated a technical team to develop
     technology based on Machine Learning to improve the
     security of the applications, through a next-generation
