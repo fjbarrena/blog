@@ -10,9 +10,9 @@ Access control and security is a must. If access control and security is hard in
 **Authorization** is specially hard and a hot topic in distributed systems. A common approach followed (even to this day) for many
 companies is the classical [castle-and-moat technique](https://www.cloudflare.com/en-gb/learning/access-management/castle-and-moat-network-security/)
 
-<div className="">
-  <Mermaid
-    chart={`
+{' '}
+<Mermaid
+  chart={`
 graph LR
     A[Request] --> B[FRONTLINE - exposed to Internet - Authorized]
     B -->|Redirect| int1[Internal System 1 - Unauthorized]
@@ -20,8 +20,7 @@ graph LR
     B -->|Redirect| int3[... - Unauthorized]
     B -->|Redirect| int4[Internal System n - Unauthorized]
 `}
-  ></Mermaid>
-</div>
+></Mermaid>
 
 This architecture controls the East - West communications pretty well. From the outside someone make a Request to a
 **unique exposed point** (usually a reverse proxy, or an API Gateway), which validates the permissions of the request and, if all
