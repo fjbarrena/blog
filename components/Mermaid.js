@@ -6,6 +6,7 @@ mermaid.initialize({
   theme: 'dark',
   securityLevel: 'loose',
   deterministicIds: false,
+  deterministicIDSeed: new Date().getMilliseconds(),
 })
 
 export default class Mermaid extends React.Component {
