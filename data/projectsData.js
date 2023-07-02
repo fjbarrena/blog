@@ -1,5 +1,12 @@
 const projectsData = [
   {
+    title: 'KysoGPT, your personal LLM which respects your privacy based on Open Source LLMs',
+    description: `Privacy is key. To explore the potential of private data, I built a PoC of a LLM which is trained automatically when new data arrives, and it's only
+    consumable by users that have specific access to. We called it KysoGPT, and uses PrivateGPT and Hugging Face Open Source models under the hood`,
+    imgSrc: '/static/images/kysogpt.jpg',
+    href: 'https://fjbarrena.dev/cv',
+  },
+  {
     title: 'Kyso: The universal aggregator for all research formats',
     description: `Your organisation's knowledge is scattered across too many tools because no one solution allows everyone to share everything in the same place.
     Until now.`,
