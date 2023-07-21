@@ -233,7 +233,7 @@ const courses = [
 const experience = [
   {
     id: 1,
-    position: 'CTO',
+    position: 'Principal Engineer & CTO',
     company: 'Kyso Inc.',
     companyUrl: 'https://about.kyso.io',
     date: 'nov 2021 - act',
@@ -302,7 +302,7 @@ const experience = [
   },
   {
     id: 3,
-    position: 'Head of Cybersecurity Research Group',
+    position: 'Principal Engineer & Head of Cybersecurity Research Group',
     company: 'Instituto Tecnológico de Informática',
     companyUrl: 'https://www.iti.es/',
     date: 'feb 2020 - nov 2021 (1 year and 9 months)',
