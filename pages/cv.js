@@ -242,13 +242,19 @@ const experience = [
     great investors like Techstars, Lunar Ventures, Tribal Ventures and more. Responsible for the engineering side of the company and member of the executive. 
     I wore many hats, from product owner, security, architecture, development, management and hiring. Also, I was in charge of technical customer relations. 
     We implemented from scratch the technical culture of the company with very good results, building a great product with best engineering practices, 
-    focusing especially in maintainability and <b><a href="https://fjbarrena.dev/blog/permissions-in-a-distributed-architecture" target="_blank" class="underline">security<a></b>.<br><br>
+    focusing especially in maintainability and <b><a href="https://fjbarrena.dev/blog/permissions-in-a-distributed-architecture" target="_blank">security<a></b>.<br><br>
     
     With a small team, we were able to build a production ready product quickly, thanks to the great team we were able to hire. The product was designed to be installed
     on-premises in customer's infrastructure. That was a challenge, because every customer has its own cloud provider, and Kyso must work in all of them. The deployment
     was prepared using Docker and Kubernetes, and we added support for Helm and Terraform later. In order to keep the product maintainable and extensible, we designed 
     the architecture to be driven by events, using NATS as an event broker and developing a set of consumers which extends the core features of the product 
-    (notifications with slack and teams, analytics, etc.). The API was built using NestJS and Typescript, and the frontend was built using NextJS and Typescript as well.`,
+    (notifications with slack and teams, analytics, etc.). The API was built using NestJS and Typescript, and the frontend was built using NextJS and Typescript as well. <br/><br/>
+    
+    Also, I was in charge of developing a proof of concept about a LLM (Large Language Model) using Open Source resources like
+    <b><a href="https://github.com/imartinez/privateGPT" target="_blank" class="underline">PrivateGPT</a></b> and <b><a href="https://huggingface.co/models" target="_blank" class="underline">HuggingFace Open Source Models</a></b>. This LLM
+    is trained on top of an Open Source model, for example Open Llama, with <b>your data</b>, generating a new LLM that can answer questions related to your data. As this
+    model is trained with your data, and deployed in your infrastructure, your <b>privacy is guaranteed</b>. This model was integrated as well with Kyso's permission system, 
+    giving the users the power to decide who can use it.`,
     tags: [
       'product',
       'technical leadership',
@@ -263,6 +269,8 @@ const experience = [
       'nestjs',
       'elasticsearch',
       'jupyter',
+      'LLM',
+      '🤖 AI',
     ],
     language: '🇺🇸 english',
   },
@@ -333,6 +341,7 @@ const experience = [
       'kubernetes',
       'nodejs',
       '🐋 docker',
+      '🤖 AI',
     ],
     language: '🇬🇧 english & 🇪🇸 spanish',
   },
@@ -345,7 +354,7 @@ const experience = [
     image: '/static/images/companies/upv.jpg',
     body: `Professor of the subject "Machine Learning applied to
     Cybersecurity" at Big Data Analytics Master`,
-    tags: ['python', 'data analytics', 'AI', 'cybersecurity', 'jupyter'],
+    tags: ['python', 'data analytics', '🤖 AI', 'cybersecurity', 'jupyter'],
     language: '🇪🇸 spanish',
   },
   {
@@ -394,7 +403,7 @@ const experience = [
       'R&D',
       'leadership',
       'big data',
-      'AI',
+      '🤖 AI',
       'management',
       'nestjs',
       'nodejs',
