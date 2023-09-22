@@ -314,6 +314,7 @@ const experience = [
       'security',
       '☕ java',
       'angular',
+      'react',
       'vmware',
       'nodejs',
       'MySQL',
@@ -330,22 +331,18 @@ const experience = [
     companyUrl: 'https://www.iti.es/',
     date: 'feb 2020 - nov 2021 (1 year and 9 months)',
     image: '/static/images/companies/iti.png',
-    body: `Technical Leader, responsible for opening a new line of
-    work on cybersecurity, focusing on application security
-    and Cloud environments and using new security paradigms,
-    based on Machine Learning, Big Data, DevSecOps and
-    Security as a Code. Those works were part of different
-    research projects, in which the European's project ZDMP
-    highlights. My role at ZDMP was Global Technical Manager,
-    coordinating the technical efforts of more than 15
-    European partners (Ford, Software AG, Mondragon Assembly, Continental, and others). It also highlights the OPOSSUM
-    project, in which I coordinated a technical team to develop
-    technology based on Machine Learning to improve the
-    security of the applications, through a next-generation
-    Web Application & API Protection (WAAP) prototype,
-    using Rust, Java, Angular, Kubernetes, NodeJS and Docker as technologies<br/><br/>
+    body: `Technical Leader, responsible for opening a new line of work on cybersecurity, focusing on application security and Cloud environments and using new security paradigms,
+    based on Machine Learning, Big Data, SecDevOps and Security as a Code. Those works were part of different research projects, in which the OPOSSUM
+    project highlights, as I coordinated a technical team to develop technology based on Machine Learning to improve the security of the applications, through a next-generation
+    Web Application & API Protection (WAAP) prototype, using Rust, Java, Angular, Kubernetes, NodeJS and Docker as technologies<br/><br/>
     
-    I was responsible as well of SecDevOps implementation, defining CI/CD pipelines for: building software components, build docker images, assess quality code, assess security of the code, dependencies and Docker images. I built pipelines for automatic deployment 
+    Also, I was working on projects related to data and AI on the following sectors: energy, manufacturing, automotive and software. <a href="_blank" class="underline">Specially interesting was the ZDMP project</a>, an european
+    R&D project aimed to achieve a Zero Defect Manufacturing Processes. I was the technical manager of a <a href="_blank" href="https://software.zdmp.eu/docs/overview/" class="underline">consortium of 35 partners</a> 
+    like FORD Spain, Software AG, Mondragon Assembly, Continental, among others. Also, I was the principal engineer of the AI Analytics Runtime, a core component in the ZDMP architecture
+    responsible of the training and versioning of models. ZDMP architecture was heavily inspired on <b>Kubeflow</b>. As technical manager, I drove the technical culture of the project, 
+    laying the foundation of the architecture, the pipelines and the collaboration rules between the consortium.
+
+    Finaly, I was responsible as well of SecDevOps implementation, defining CI/CD pipelines for: building software components, build docker images, assess quality code, assess security of the code, dependencies and Docker images. I built pipelines for automatic deployment 
     in different environments (staging, production and testing), using Gitlab CI/CD. As the project had data science and AI implications, we used Kubeflow to configure and define 
     the pipelines related to data science and AI, covering the following phases of the AI pipeline: data acquisition and cleaning, data processing, data enrichment, training,
     packaging and deployment into production.`,
@@ -360,6 +357,7 @@ const experience = [
       '🦀 rust',
       '☕ java',
       'angular',
+      'react',
       'kubernetes',
       'nodejs',
       '🐋 docker',
@@ -404,14 +402,8 @@ const experience = [
     date: 'ene 2018 - jun 2019 (1 year and 6 months)',
     image: '/static/images/companies/iti.png',
     body: `Responsible for the technical execution and software engineering of all ITI R&D projects. Management of a technical team of 26 engineers. Big Data, Machine Learning,
-    IoT, Cloud Computing, choice of technologies and SecDevOps. Promoter of Open Source initiatives. Relevant projects: ZDMP, Radiatus, Kancerbero, SaaSDK.
-    
-    I was working on projects related to data and AI on the following sectors: energy, manufacturing, automotive and software. <a href="_blank" class="underline">Specially interesting was the ZDMP project</a>, an european
-    R&D project aimed to achieve a Zero Defect Manufacturing Processes. I was the technical manager of a <a href="_blank" href="https://software.zdmp.eu/docs/overview/" class="underline">consortium of 35 partners</a> 
-    like FORD Spain, Software AG, Mondragon Assembly, Continental, among others. Also, I was the principal engineer of the AI Analytics Runtime, a core component in the ZDMP architecture
-    responsible of the training and versioning of models. ZDMP architecture was heavily inspired on <b>Kubeflow</b>. As technical manager, I drove the technical culture of the project, 
-    laying the foundation of the architecture, the pipelines and the collaboration rules between the consortium.
-
+    IoT, Cloud Computing, choice of technologies and SecDevOps. Promoter of Open Source initiatives.<br/><br/>
+       
     I was responsible as well of SecDevOps implementation, defining CI/CD pipelines for: building software components, build docker images, assess quality code, assess security of the code, dependencies and Docker images. I built pipelines for automatic deployment 
     in different environments (staging, production and testing), using Gitlab CI/CD. As many projects project had data science and AI implications, we used Kubeflow to configure and define 
     the pipelines related to data science and AI, covering the following phases of the pipeline: data acquisition and cleaning, data processing, data enrichment, training,
