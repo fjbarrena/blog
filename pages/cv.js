@@ -372,30 +372,6 @@ const experience = [
   },
   {
     id: 4,
-    position: 'Professor',
-    company: 'Univesitat Politécnica de València',
-    companyUrl: 'https://www.upv.es/en',
-    date: '2021 - 2022',
-    image: '/static/images/companies/upv.jpg',
-    body: `Professor of the subject "Machine Learning applied to
-    Cybersecurity" at Big Data Analytics Master`,
-    tags: ['python', 'data analytics', '🤖 AI', 'cybersecurity', 'jupyter'],
-    language: '🇪🇸 spanish',
-  },
-  {
-    id: 5,
-    position: 'Professor',
-    company: 'Univesidad de Mondragón',
-    companyUrl: 'https://www.mondragon.edu/en/home',
-    date: '2021 - 2022',
-    image: '/static/images/companies/mondragon.png',
-    body: `Professor of the subject "Cybersecurity in the Cloud" at
-    University Expert Course in the National Security Scheme (ENS)`,
-    tags: ['cloud cybersecurity', 'ens', 'nist'],
-    language: '🇪🇸 spanish',
-  },
-  {
-    id: 7,
     position: 'Head of Engineering',
     company: 'Instituto Tecnológico de Informática',
     companyUrl: 'https://www.iti.es/',
@@ -407,7 +383,10 @@ const experience = [
     I was responsible as well of SecDevOps implementation, defining CI/CD pipelines for: building software components, build docker images, assess quality code, assess security of the code, dependencies and Docker images. I built pipelines for automatic deployment 
     in different environments (staging, production and testing), using Gitlab CI/CD. As many projects project had data science and AI implications, we used Kubeflow to configure and define 
     the pipelines related to data science and AI, covering the following phases of the pipeline: data acquisition and cleaning, data processing, data enrichment, training,
-    packaging and deployment into production.`,
+    packaging and deployment into production.<br/><br/>
+    
+    Finally, I was a proactive agent in the company's internal training, teaching more than 15 courses (many of them, with multiple editions), and thus training all the company's engineers in topics such as frontend (react, angular), backend (java , hibernate, node, nestjs), 
+    infrastructure (docker, kubernetes) and security (ENS, SecDevOps). These courses were offered as well for external companies.`,
     tags: [
       'CI/CD',
       'Kubeflow',
@@ -432,6 +411,30 @@ const experience = [
       'MySQL',
     ],
     language: '🇬🇧 english & 🇪🇸 spanish',
+  },
+  {
+    id: 5,
+    position: 'Professor',
+    company: 'Univesitat Politécnica de València',
+    companyUrl: 'https://www.upv.es/en',
+    date: '2021 - 2022',
+    image: '/static/images/companies/upv.jpg',
+    body: `Professor of the subject "Machine Learning applied to
+    Cybersecurity" at Big Data Analytics Master`,
+    tags: ['python', 'data analytics', '🤖 AI', 'cybersecurity', 'jupyter'],
+    language: '🇪🇸 spanish',
+  },
+  {
+    id: 6,
+    position: 'Professor',
+    company: 'Univesidad de Mondragón',
+    companyUrl: 'https://www.mondragon.edu/en/home',
+    date: '2021 - 2022',
+    image: '/static/images/companies/mondragon.png',
+    body: `Professor of the subject "Cybersecurity in the Cloud" at
+    University Expert Course in the National Security Scheme (ENS)`,
+    tags: ['cloud cybersecurity', 'ens', 'nist'],
+    language: '🇪🇸 spanish',
   },
   {
     id: 8,
