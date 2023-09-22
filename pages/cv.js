@@ -249,6 +249,9 @@ const experience = [
     was prepared using Docker and Kubernetes, and we added support for Helm and Terraform later. In order to keep the product maintainable and extensible, we designed 
     the architecture to be driven by events, using NATS as an event broker and developing a set of consumers which extends the core features of the product 
     (notifications with slack and teams, analytics, etc.). The API was built using NestJS and Typescript, and the frontend was built using NextJS and Typescript as well. <br/><br/>
+
+    Responsible of SecDevOps implementation, defining CI/CD pipelines for: building software components, build docker images, assess quality code, assess security of the code, dependencies and Docker images. I built pipelines for automatic deployment 
+    in different environments (staging, production and testing), using Gitlab CI/CD and Github actions.
     
     Also, I was in charge of developing a proof of concept about a LLM (Large Language Model) using Open Source resources like
     <b><a href="https://github.com/imartinez/privateGPT" target="_blank" class="underline">PrivateGPT</a></b> and <b><a href="https://huggingface.co/models" target="_blank" class="underline">HuggingFace Open Source Models</a></b>. This LLM
@@ -256,6 +259,9 @@ const experience = [
     model is trained with your data, and deployed in your infrastructure, your <b>privacy is guaranteed</b>. This model was integrated as well with Kyso's permission system, 
     giving the users the power to decide who can use it.`,
     tags: [
+      'CI/CD',
+      'DevOps',
+      'Terraform',
       'product',
       'technical leadership',
       '🐋 docker',
@@ -294,8 +300,13 @@ const experience = [
           deployment. The integration with the Cloud infrastructure
           was done directly through VCenter and VCloud API (an other vendors),
           together with an event broker that triggers serverless
-          functions based on OpenFaaS.`,
+          functions based on OpenFaaS.<br /><br />
+          
+          I was as well responsible of SecDevOps implementation, defining CI/CD pipelines for: building software components, build docker images, assess quality code, assess security of the code, dependencies and Docker images. I built pipelines for automatic deployment 
+          in different environments (staging, production and testing), using Gitlab CI/CD.`,
     tags: [
+      'CI/CD',
+      'DevOps',
       'product',
       'kubernetes',
       '🐋 docker',
@@ -332,8 +343,15 @@ const experience = [
     technology based on Machine Learning to improve the
     security of the applications, through a next-generation
     Web Application & API Protection (WAAP) prototype,
-    using Rust, Java, Angular, Kubernetes, NodeJS and Docker as technologies`,
+    using Rust, Java, Angular, Kubernetes, NodeJS and Docker as technologies<br/><br/>
+    
+    I was responsible as well of SecDevOps implementation, defining CI/CD pipelines for: building software components, build docker images, assess quality code, assess security of the code, dependencies and Docker images. I built pipelines for automatic deployment 
+    in different environments (staging, production and testing), using Gitlab CI/CD. As the project had data science and AI implications, we used Kubeflow to configure and define 
+    the pipelines related to data science and AI, covering the following phases of the AI pipeline: data acquisition and cleaning, data processing, data enrichment, training,
+    packaging and deployment into production.`,
     tags: [
+      'CI/CD',
+      'Kubeflow',
       'R&D',
       'product',
       'management',
@@ -379,36 +397,28 @@ const experience = [
     language: '🇪🇸 spanish',
   },
   {
-    id: 6,
-    position: 'Software Architect',
-    company: 'GFT',
-    companyUrl: 'https://www.gft.com/int/en/',
-    date: 'jun 2019 - aug 2019 (3 months)',
-    image: '/static/images/companies/gft.png',
-    body: `Software architect for projects related to banking
-    sector. I worked with a team of international and offshored
-    technicians and managers, using agile methodologies.
-    Our technology stack was based on Java for the backend
-    , and React for the frontend. I participated in
-    integration projects with other banking platforms using
-    REST APIs.`,
-    tags: ['consultancy', 'banking', '☕ java', 'react', 'agile', '🐋 docker'],
-    language: '🇬🇧 english',
-  },
-  {
     id: 7,
     position: 'Head of Engineering',
     company: 'Instituto Tecnológico de Informática',
     companyUrl: 'https://www.iti.es/',
     date: 'ene 2018 - jun 2019 (1 year and 6 months)',
     image: '/static/images/companies/iti.png',
-    body: `Responsible for the technical execution and software
-    engineering of all ITI R&D projects. Management of a
-    technical team of 26 engineers. Big Data, Machine Learning,
-    IoT, Cloud Computing, choice of technologies and
-    DevOps. Promoter of Open Source initiatives. Relevant
-    projects: Radiatus, Kancerbero, SaaSDK`,
+    body: `Responsible for the technical execution and software engineering of all ITI R&D projects. Management of a technical team of 26 engineers. Big Data, Machine Learning,
+    IoT, Cloud Computing, choice of technologies and SecDevOps. Promoter of Open Source initiatives. Relevant projects: ZDMP, Radiatus, Kancerbero, SaaSDK.
+    
+    I was working on projects related to data and AI on the following sectors: energy, manufacturing, automotive and software. <a href="_blank" class="underline">Specially interesting was the ZDMP project</a>, an european
+    R&D project aimed to achieve a Zero Defect Manufacturing Processes. I was the technical manager of a <a href="_blank" href="https://software.zdmp.eu/docs/overview/" class="underline">consortium of 35 partners</a> 
+    like FORD Spain, Software AG, Mondragon Assembly, Continental, among others. Also, I was the principal engineer of the AI Analytics Runtime, a core component in the ZDMP architecture
+    responsible of the training and versioning of models. ZDMP architecture was heavily inspired on <b>Kubeflow</b>. As technical manager, I drove the technical culture of the project, 
+    laying the foundation of the architecture, the pipelines and the collaboration rules between the consortium.
+
+    I was responsible as well of SecDevOps implementation, defining CI/CD pipelines for: building software components, build docker images, assess quality code, assess security of the code, dependencies and Docker images. I built pipelines for automatic deployment 
+    in different environments (staging, production and testing), using Gitlab CI/CD. As many projects project had data science and AI implications, we used Kubeflow to configure and define 
+    the pipelines related to data science and AI, covering the following phases of the pipeline: data acquisition and cleaning, data processing, data enrichment, training,
+    packaging and deployment into production.`,
     tags: [
+      'CI/CD',
+      'Kubeflow',
       'R&D',
       'leadership',
       'big data',
@@ -473,6 +483,7 @@ const experience = [
     Angular. Relevant projects: Consum Asset Management,
     BoxPlus, Java applications optimization for Orizon`,
     tags: [
+      'CI/CD',
       'team management',
       '☕ java',
       '🐋 docker',
@@ -500,6 +511,7 @@ const experience = [
     JBoss servers. Relevant projects: Episteme, Fet-Eye.eu,
     PangeaMT, Consum Energía`,
     tags: [
+      'CI/CD',
       '☕ java',
       'enterprise',
       'spring',
