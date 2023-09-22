@@ -251,7 +251,7 @@ const experience = [
     (notifications with slack and teams, analytics, etc.). The API was built using NestJS and Typescript, and the frontend was built using NextJS and Typescript as well. <br/><br/>
 
     Responsible of SecDevOps implementation, defining CI/CD pipelines for: building software components, build docker images, assess quality code, assess security of the code, dependencies and Docker images. I built pipelines for automatic deployment 
-    in different environments (staging, production and testing), using Gitlab CI/CD and Github actions.
+    in different environments (staging, production and testing), using Gitlab CI/CD and Github actions.<br/><br/>
     
     Also, I was in charge of developing a proof of concept about a LLM (Large Language Model) using Open Source resources like
     <b><a href="https://github.com/imartinez/privateGPT" target="_blank" class="underline">PrivateGPT</a></b> and <b><a href="https://huggingface.co/models" target="_blank" class="underline">HuggingFace Open Source Models</a></b>. This LLM
@@ -340,9 +340,9 @@ const experience = [
     R&D project aimed to achieve a Zero Defect Manufacturing Processes. I was the technical manager of a <a href="_blank" href="https://software.zdmp.eu/docs/overview/" class="underline">consortium of 35 partners</a> 
     like FORD Spain, Software AG, Mondragon Assembly, Continental, among others. Also, I was the principal engineer of the AI Analytics Runtime, a core component in the ZDMP architecture
     responsible of the training and versioning of models. ZDMP architecture was heavily inspired on <b>Kubeflow</b>. As technical manager, I drove the technical culture of the project, 
-    laying the foundation of the architecture, the pipelines and the collaboration rules between the consortium.
+    laying the foundation of the architecture, the pipelines and the collaboration rules between the consortium.<br/><br/>
 
-    Finaly, I was responsible as well of SecDevOps implementation, defining CI/CD pipelines for: building software components, build docker images, assess quality code, assess security of the code, dependencies and Docker images. I built pipelines for automatic deployment 
+    Finally, I was responsible as well of SecDevOps implementation, defining CI/CD pipelines for: building software components, build docker images, assess quality code, assess security of the code, dependencies and Docker images. I built pipelines for automatic deployment 
     in different environments (staging, production and testing), using Gitlab CI/CD. As the project had data science and AI implications, we used Kubeflow to configure and define 
     the pipelines related to data science and AI, covering the following phases of the AI pipeline: data acquisition and cleaning, data processing, data enrichment, training,
     packaging and deployment into production.`,
