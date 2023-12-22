@@ -232,11 +232,38 @@ const courses = [
 
 const experience = [
   {
+    id: 0,
+    position: 'Principal Engineer',
+    company: 'Labster',
+    companyUrl: 'https://www.labster.com',
+    date: 'oct 2023 - act',
+    image: '/static/images/companies/labster.svg',
+    body: ``,
+    tags: [
+      'EdTech',
+      'product',
+      '🐋 docker',
+      'kubernetes',
+      'security',
+      'microservices',
+      'vuejs',
+      'typescript',
+      'nodejs',
+      'nestjs',
+      'MongoDB',
+      'Redis',
+      'testing',
+      'scrum',
+      'BDD',
+    ],
+    language: '🇺🇸 english • remote',
+  },
+  {
     id: 1,
     position: 'Principal Engineer & CTO',
     company: 'Kyso Inc.',
     companyUrl: 'https://about.kyso.io',
-    date: 'nov 2021 - act',
+    date: 'nov 2021 - nov 2023 (2 years)',
     image: '/static/images/companies/kyso.svg',
     body: `<a href="https://about.kyso.io" target="_blank" class="underline font-bold">Kyso</a> is an early stage b2b data science startup with a fast growing team backed by some 
     great investors like Techstars, Lunar Ventures, Tribal Ventures and more. Responsible for the engineering side of the company and member of the executive. 
@@ -280,7 +307,7 @@ const experience = [
       'MongoDB',
       'Elasticsearch',
     ],
-    language: '🇺🇸 english',
+    language: '🇺🇸 english • remote',
   },
   {
     id: 2,
@@ -322,14 +349,14 @@ const experience = [
       'openfaas',
       'InfluxDB',
     ],
-    language: '🇪🇸 spanish',
+    language: '🇪🇸 spanish • remote',
   },
   {
     id: 3,
     position: 'Principal Engineer & Head of Cybersecurity Research Group',
     company: 'Instituto Tecnológico de Informática',
     companyUrl: 'https://www.iti.es/',
-    date: 'feb 2020 - nov 2021 (1 year and 9 months)',
+    date: 'oct 2019 - nov 2021 (2 years and 1 month)',
     image: '/static/images/companies/iti.png',
     body: `Technical Leader, responsible for opening a new line of work on cybersecurity, focusing on application security and Cloud environments and using new security paradigms,
     based on Machine Learning, Big Data, SecDevOps and Security as a Code. Those works were part of different research projects, in which the OPOSSUM
@@ -368,7 +395,7 @@ const experience = [
       'Elasticsearch',
       'MySQL',
     ],
-    language: '🇬🇧 english & 🇪🇸 spanish',
+    language: '🇬🇧 english • 🇪🇸 spanish • hybrid remote',
   },
   {
     id: 4,
@@ -410,7 +437,7 @@ const experience = [
       'Elasticsearch',
       'MySQL',
     ],
-    language: '🇬🇧 english & 🇪🇸 spanish',
+    language: '🇬🇧 english • 🇪🇸 spanish • on-site',
   },
   {
     id: 5,
@@ -422,7 +449,7 @@ const experience = [
     body: `Professor of the subject "Machine Learning applied to
     Cybersecurity" at Big Data Analytics Master`,
     tags: ['python', 'data analytics', '🤖 AI', 'cybersecurity', 'jupyter'],
-    language: '🇪🇸 spanish',
+    language: '🇪🇸 spanish • on-site',
   },
   {
     id: 6,
@@ -434,7 +461,7 @@ const experience = [
     body: `Professor of the subject "Cybersecurity in the Cloud" at
     University Expert Course in the National Security Scheme (ENS)`,
     tags: ['cloud cybersecurity', 'ens', 'nist'],
-    language: '🇪🇸 spanish',
+    language: '🇪🇸 spanish • remote',
   },
   {
     id: 8,
@@ -461,7 +488,7 @@ const experience = [
       'MySQL',
       'DB2',
     ],
-    language: '🇺🇸 english & 🇪🇸 spanish',
+    language: '🇺🇸 english • 🇪🇸 spanish • on-site',
   },
   {
     id: 9,
@@ -491,7 +518,7 @@ const experience = [
       'SQL Server',
       'MySQL',
     ],
-    language: '🇪🇸 spanish',
+    language: '🇪🇸 spanish • on-site',
   },
   {
     id: 10,
@@ -516,7 +543,7 @@ const experience = [
       'SQL Server',
       'MySQL',
     ],
-    language: '🇪🇸 spanish',
+    language: '🇪🇸 spanish • on-site',
   },
   {
     id: 11,
@@ -531,7 +558,7 @@ const experience = [
     management. Relevant projects: CHGUV, Repsol, Mapfre
     and La Caixa`,
     tags: ['☕ java', 'enterprise', 'spring', 'liferay', 'sharepoint', 'SQL Server', 'MySQL'],
-    language: '🇪🇸 spanish',
+    language: '🇪🇸 spanish • on-site',
   },
 ]
 

@@ -1,0 +1,292 @@
+---
+title: '🧳 Dynamic database migrations using Node, NestJS and Typescript'
+date: '2023-07-27'
+tags: ['typescript', 'database', 'nestjs', 'migrations', 'node']
+draft: false
+summary: 'Is there something more disgusting than updating a database table or collection? Managing the migrations from one model to another can be challenging, and sometimes is even not managed, leading to failures at production. In this post I will explain how are we managing the migrations caused by updates and changes in the model.'
+---
+
+Databases are great. So am I.
+
+I really **love [NestJS](https://nestjs.com) to build APIs using Node and Typescript**. I introduced this
+technology at ITI in 2018, when I was the Head of Engineering of R&D, and since then, I always use
+NestJS for new projects based on NodeJS.
+
+NestJS is like Angular, but for the backend. And as Angular, NestJS really hates **circular dependencies**.
+But circular dependencies are **natural if we think in the domain of the problem**. It's _natural_ for us
+(the humans) to understand that a user belongs to an organization, and to understand that an organization
+is formed by a bunch of users.
+
+<Mermaid
+  chart={`
+flowchart LR
+    UserService --> |depends on|OrganizationService
+    OrganizationService --> |depends on|UserService
+`}
+></Mermaid>
+
+However, these kind of relations are **problematic** in NestJS, but also in Angular and other modern
+frameworks.
+
+The [solution](https://docs.nestjs.com/fundamentals/circular-dependency) offered by NestJS consists in
+use a `forwardRef` method, which will **resolve later on the lifecycle of the service the involved dependency**.
+
+```typescript
+@Injectable()
+export class CommonService {
+  constructor(
+    @Inject(forwardRef(() => CatsService))
+    private catsService: CatsService
+  ) {}
+}
+```
+
+This **works if you are testing the technology, but is VERY problematic if your domain is complex or
+is deeply interconnected**. And, let me be clear, the reality is always complex and deeply interconnected.
+
+If you apply this solution, you will rapidly found yourself using `forwardRef` frequently, and there will
+come a point where you **get into a dependency injection error loop that you can't get out of**.
+
+And what is the answer you are going to find in the Internet from folks that took only 1 minute to
+read your question at StackOverflow without understanding the globality of your domain or your problem?
+
+> Your architecture is wrong. Change it.
+
+![Robert Downey Junior Really Meme](/static/images/ironman-really.jpg)
+
+<br /># The approach
+
+For better or worse, I coded in lots of languages and frameworks, and when I face that problem I thought...
+
+> Why this wasn't happening to me in Java and Spring?
+
+The exact answer to that exceeds my capacity, but I know how the dependency injector works in Spring and
+Java, summarizing it excesively:
+
+- When the server is **starting**, creates all the services and store the **reference** of that service in
+  a global map in memory
+- Every time a service wants to use another service (at **runtime**), looks for that service in the map and returns
+  the reference
+
+The **keywords** here are **starting** and **runtime**. The issue with the circular dependencies and NestJS comes
+because **NestJS tries to resolve everything before the server is completely started (at start time)**.
+For that reason, you can fall into a dependency injection loop. What would happen if we create all the
+services at start time, and delay the injection **after** the server is up and running, **returning
+the reference of the service at runtime**? Would that solve the circular dependency problem?
+The answer is **yes**.
+
+In fact it's the **same strategy as `forwardRef`**, but taken to the extreme, delaying the moment of
+the dependency injection as much as possible, that means, **injecting the dependency just before the code is going to use it**.
+
+Talk is cheap. Show me the code.
+
+# The implementation
+
+As a former Java developer I love two above all things: **annotations** and **simplicity** (joking about simplicity 🤪). So my goal is:
+
+> To have an annotation that allows me to inject a service at runtime, just before
+> the use, in the simplest way I can achieve
+
+First of all, I need a **global map in which save the references of the services**. And methods to
+securely register, or retrieve, these services:
+
+The singletons will be stored by name (dependency injection resolved by name). As I am not a big fan of
+`interfaces` (yes, I'm weird, I love Java but I hate interfaces), I decided to use the `name` of the class
+as unique key.
+
+I decided to use an annotation named **Autowired**, _in honor of the classical ultra-powerful and beloved
+Spring `@Autowired` annotation_. This is the code of the `autowired.ts` decorator:
+
+```typescript
+import { Logger, Type } from '@nestjs/common'
+
+const singletonMap = new Map<string, any>()
+
+/**
+ * Register a service using a unique name
+ *
+ * @param name    Unique name. For example, the final implementation class would be a good choice
+ * @param object  The instance of the service
+ */
+export const registerSingleton = (name: any, object: any) => {
+  singletonMap.set(name, object)
+}
+
+export const getSingletons = () => {
+  return Array.from(singletonMap.keys())
+}
+
+export const getSingletonValue = (key) => {
+  return singletonMap.get(key)
+}
+
+type TModel = Type<any>
+
+export class AutowiredConfiguration {
+  type?: TModel
+  typeName?: string
+}
+
+export const Autowired = (config: AutowiredConfiguration) => {
+  return (target: any, memberName: string) => {
+    Object.defineProperty(target, memberName, {
+      get: () => {
+        if (config && config.type && config.type.name) {
+          return singletonMap.get(config.type.name)
+        } else if (config && config.typeName) {
+          if (singletonMap.has(config.typeName)) {
+            return singletonMap.get(config.typeName)
+          } else {
+            Logger.warn(
+              `[AUTOWIRED] typeName ${config.typeName} does not exist in Autowired services`
+            )
+            return undefined
+          }
+        } else {
+          Logger.warn(
+            `[AUTOWIRED] Received type and typeName undefined for target ${target.constructor.name}. Returning undefined`
+          )
+          return undefined
+        }
+      },
+    })
+  }
+}
+```
+
+This annotation basically **looks for the service in the singleton and returns it if exists**.
+
+The usage of the annotation is pretty direct:
+
+```typescript
+export class ActivityFeedController extends GenericController<ActivityFeed> {
+  @Autowired({ typeName: 'ActivityFeedService' })
+  private activityFeedService: ActivityFeedService;
+
+  ...
+```
+
+My **initial intention** was to **automatically get the name of the service based on the declaration**, I mean,
+if I am declaring a `private activityFeedService: ActivityFeedService`, why I need to specify the
+`@Autowired({typeName: 'ActivityFeedService'})`? Couldn't take the `ActivityFeedService` directly from the
+declaration?. The answer is **no, because Typescript at runtime has no real types**, and basically **I couldn't
+determine at RUNTIME the NAME of the service**, so I'm forced to writedown it manually 😖.
+
+To register automatically the services in our global singleton, a new abstract class was created as follows:
+
+```typescript
+import { OnApplicationBootstrap } from '@nestjs/common'
+import { registerSingleton } from '../decorators/autowired'
+
+export abstract class AutowiredService implements OnApplicationBootstrap {
+  onApplicationBootstrap() {
+    registerSingleton(this.constructor.name, this)
+  }
+}
+```
+
+So a service can be declared as follows:
+
+```typescript
+function factory(service: ActivityFeedService) {
+  return service;
+}
+
+export function createProvider(): Provider<ActivityFeedService> {
+  return {
+    provide: `${ActivityFeedService.name}`,
+    useFactory: (service) => factory(service),
+    inject: [ActivityFeedService],
+  };
+}
+
+@Injectable()
+export class ActivityFeedService extends AutowiredService {
+  constructor() {
+    super();
+  }
+  ...
+}
+```
+
+Probably you will ask yourself... what the hell is that `factory` and `createProvider` functions?
+That's the **the ugly part**. All this can't work as a static provider (using NestJS terminology).
+We must use the `DynamicModule` interface, which is almost equal to a static module, but not exactly
+equal...
+
+```typescript
+import { DynamicModule } from '@nestjs/common'
+import { ActivityFeedController } from './activity-feed.controller'
+import { ActivityFeedService, createProvider } from './activity-feed.service'
+
+export class ActivityFeedModule {
+  static async forRoot(): Promise<DynamicModule> {
+    const activityFeedServiceDynamicProvider = createProvider()
+    return {
+      controllers: [ActivityFeedController],
+      exports: [activityFeedServiceDynamicProvider],
+      module: ActivityFeedModule,
+      providers: [ActivityFeedService, activityFeedServiceDynamicProvider],
+    }
+  }
+}
+```
+
+I know this is a kind of magic, but if you are familiar with NestJS and Angular, makes sense. In practice,
+instead of declaring the controllers, exports, modules and providers directly in the module, you just do it
+inside the forRoot() method, so not a big deal.
+
+Then, you must import these modules in the main module of the application:
+
+```typescript
+@Module({
+  imports: [
+    ActivityFeedModule.forRoot(),
+    ...,
+  ],
+  providers: [...],
+})
+export class AppModule implements NestModule { ... }
+```
+
+Finally, in the `main.ts` file of your NestJS project you must add the following lines, to register
+all the singletons. This piece of code must be placed **after the creation of the application**, similar
+to this `const app = await NestFactory.create<NestExpressApplication>(AppModule);`. I prefer to put it
+at the end of the `bootstrap` function.
+
+```typescript
+// Autowired extension to allow injection outside the constructor and avoid circular dependencies
+const singletons: string[] = getSingletons()
+
+singletons.forEach((x: any) => {
+  const instance = app.get(x)
+  registerSingleton(x, instance)
+})
+```
+
+And that's all!
+
+# Handicaps and considerations
+
+As every opinionated solution, it have it's own drawbacks.
+
+- What about testing?
+  - I'm pretty sure the model can be extended to allow to inject **mocks** of services
+  - For example, we can reach a consensus in which the name of the service + "Mock" would be injected
+    if the environment variable `ENVIRONMENT` is set to `test`
+- What about interfaces and injection of specific implementations of that interface?
+  - No problem at all, you can define the type of your service with the interface and inject the
+    desired implementation of that interface by name. The model allows it.
+
+```typescript
+export class ActivityFeedController extends GenericController<ActivityFeed> {
+  @Autowired({ typeName: 'EmailNotificationService' })
+  private notificationService: INotificationService;
+```
+
+For sure there are more things to have into consideration, but for us in this project, at this moment,
+is a very good solution that solves our problems.
+
+If in the future we find something ugly... well, another post will come explaining it :)
+
+Happy coding!!
