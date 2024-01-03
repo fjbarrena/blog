@@ -642,6 +642,19 @@ export default function About({ authorDetails }) {
                       </a>
                     </div>
                     <div>
+                      <a
+                        href="https://es.slideshare.net/fjbarrena"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <img
+                          src="/static/images/social-icons/slideshare.png"
+                          alt="My slides at Slideshare"
+                          className="h-6"
+                        />
+                      </a>
+                    </div>
+                    <div>
                       <a href="https://twitter.com/DogDeveloper" target="_blank" rel="noreferrer">
                         <img
                           src="/static/images/social-icons/twitter.png"
