@@ -238,7 +238,15 @@ const experience = [
     companyUrl: 'https://www.labster.com',
     date: 'oct 2023 - act',
     image: '/static/images/companies/labster.svg',
-    body: ``,
+    body: `Labster is a company that develops virtual laboratory simulations for science education. 
+    These simulations are designed to enhance traditional science education by providing students with 
+    interactive and immersive virtual experiments<br/><br/>
+    As Principal Engineer at Labster, my role covers different aspects of the software development landscape, from
+    problem solving, system design, architecture and technical leadership to mentorship, innovation and
+    collaboration with other teams within the company.<br/><br/>
+    Technically, we use different tools and languages at Labster, always following a microservice mindset
+    with a strong focus on decoupling, security and performance. Particularly noteworthy is the use of <b>Docker</b>,
+    <b>NestJS and NodeJS</b>, <b>Typescript</b>, <b>MongoDB</b>, <b>Redis</b>, <b>VueJS</b> and <b>Kubernetes</b>`,
     tags: [
       'EdTech',
       'product',
