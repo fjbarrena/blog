@@ -419,6 +419,10 @@ const experience = [
     in different environments (staging, production and testing), using Gitlab CI/CD. As many projects project had data science and AI implications, we used Kubeflow to configure and define 
     the pipelines related to data science and AI, covering the following phases of the pipeline: data acquisition and cleaning, data processing, data enrichment, training,
     packaging and deployment into production.<br/><br/>
+
+    Also, combining it with my management tasks, I participated in research projects in different sectors such as the <b>industrial sector</b> and the <b>health sector</b>. Regarding the latter, the BigSalud and Helpsalud projects stand out, 
+    in which I designed, configured and deployed Big Data processing infrastructure to support the processing of different information, such as medical imaging and genomic streams, with the aim of training Machine Learning models for early detection of 
+    certain diseases such as breast cancer, using technologies as Spark, Hadoop, HDFS, Kafka, ActiveMQ or Kibana, among others.
     
     Finally, I was a proactive agent in the company's internal training, teaching more than 15 courses (many of them, with multiple editions), and thus training all the company's engineers in topics such as frontend (react, angular), backend (java , hibernate, node, nestjs), 
     infrastructure (docker, kubernetes) and security (ENS, SecDevOps). These courses were offered as well for external companies.`,
