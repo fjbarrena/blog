@@ -294,6 +294,7 @@ const experience = [
     model is trained with your data, and deployed in your infrastructure, your <b>privacy is guaranteed</b>. This model was integrated as well with Kyso's permission system, 
     giving the users the power to decide who can use it.`,
     tags: [
+      'AWS',
       'CI/CD',
       'DevOps',
       'Terraform',
@@ -356,6 +357,7 @@ const experience = [
       'Elasticsearch',
       'openfaas',
       'InfluxDB',
+      'Azure',
     ],
     language: '🇪🇸 spanish • remote',
   },
