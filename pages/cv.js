@@ -277,7 +277,7 @@ const experience = [
     great investors like Techstars, Lunar Ventures, Tribal Ventures and more. Responsible for the engineering side of the company and member of the executive. 
     I wore many hats, from product owner, security, architecture, development, management and hiring. Also, I was in charge of technical customer relations. 
     We implemented from scratch the technical culture of the company with very good results, building a great product with best engineering practices, 
-    focusing especially in maintainability and <b><a href="https://fjbarrena.dev/blog/permissions-in-a-distributed-architecture" target="_blank">security<a></b>.<br><br>
+    focusing especially in maintainability and <b><a class="underline font-bold" href="https://fjbarrena.dev/blog/permissions-in-a-distributed-architecture" target="_blank">security<a></b>.<br><br>
     
     With a small team, we were able to build a production ready product quickly, thanks to the great team we were able to hire. The product was designed to be installed
     on-premises in customer's infrastructure. That was a challenge, because every customer has its own cloud provider, and Kyso must work in all of them. The deployment
@@ -759,9 +759,11 @@ export default function About({ authorDetails }) {
                 <div className="sm:overflow-hidden sm:rounded-lg">
                   <div className="divide-y divide-gray-200">
                     <div className="px-3 py-5 sm:px-3">
-                      <h2 id="notes-title" className="text-lg font-medium ">
-                        Speaker at events
-                      </h2>
+                      <a href="#talks">
+                        <h2 id="notes-title" className="text-lg font-medium ">
+                          Speaker at events
+                        </h2>
+                      </a>
                     </div>
                     <div className="px-4 py-6 sm:px-6">
                       <ul role="list" className="space-y-8">
@@ -783,8 +785,8 @@ export default function About({ authorDetails }) {
                                     <span className="font-medium">
                                       <a href={item.videoUrl} target="_blank" rel="noreferrer">
                                         <img
-                                          src="/static/images/youtube.svg"
-                                          className="mr-4 h-5 w-5"
+                                          src="/static/images/youtube.png"
+                                          className="mr-4 h-5"
                                           alt="Youtube"
                                           style={{ display: 'flex', float: 'left' }}
                                         />
@@ -795,8 +797,8 @@ export default function About({ authorDetails }) {
                                     <span className="font-medium">
                                       <a href={item.slidesUrl} target="_blank" rel="noreferrer">
                                         <img
-                                          src="/static/images/slideshare.png"
-                                          className="mr-4 h-5 w-5"
+                                          src="/static/images/slideshare_with_text.png"
+                                          className="mr-4 h-5"
                                           alt="Slideshare"
                                           style={{ display: 'flex', float: 'left' }}
                                         />
