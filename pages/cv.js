@@ -17,7 +17,7 @@ const talks = [
     title: 'Cookieggeddon! Bye to 3rd Party Cookies and how that will affect your software',
     slidesUrl: null,
     videoUrl: null,
-    confImageUrl: '/static/images/companies/commitconf.jpg',
+    confImageUrl: '/static/images/companies/commit-white.png',
   },
   {
     id: 99993,
@@ -135,7 +135,7 @@ const talks = [
     title: 'Machine Learning at full throttle with GraalVM',
     slidesUrl: 'https://es.slideshare.net/fjbarrena/machine-learning-a-todo-gas-con-graalvm',
     videoUrl: 'https://www.youtube.com/watch?v=XAHRPlse62w',
-    confImageUrl: '/static/images/companies/commitconf.jpg',
+    confImageUrl: '/static/images/companies/commit-white.png',
   },
   {
     id: 12,
@@ -786,7 +786,11 @@ export default function About({ authorDetails }) {
                         {talks.map((item) => (
                           <li key={item.id}>
                             <div className="flex space-x-3">
-                              <div className="flex-shrink-0">
+                              <div
+                                className={`${
+                                  item.confImageUrl.includes('commit-white') ? 'mb-3 bg-black' : ''
+                                } flex-shrink-0`}
+                              >
                                 <img className="w-24" src={`${item.confImageUrl}`} alt="" />
                               </div>
                               <div>
