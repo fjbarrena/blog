@@ -786,12 +786,16 @@ export default function About({ authorDetails }) {
                         {talks.map((item) => (
                           <li key={item.id}>
                             <div className="flex space-x-3">
-                              <div
-                                className={`${
-                                  item.confImageUrl.includes('commit-white') ? 'mb-3 bg-black' : ''
-                                } flex-shrink-0`}
-                              >
-                                <img className="w-24" src={`${item.confImageUrl}`} alt="" />
+                              <div className={`flex-shrink-0`}>
+                                <img
+                                  className={`${
+                                    item.confImageUrl.includes('commit-white')
+                                      ? 'bg-black pb-1'
+                                      : ''
+                                  } w-24`}
+                                  src={`${item.confImageUrl}`}
+                                  alt=""
+                                />
                               </div>
                               <div>
                                 <div className="text-lg">
