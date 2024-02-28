@@ -698,14 +698,20 @@ export default function About({ authorDetails }) {
                 <div className="sm:rounded-lg">
                   <div className="px-2 py-2 sm:px-2">
                     <p className="mt-1 text-sm">
-                      Software architect and developer specialized in scalable systems based on
-                      decoupled architectures, microservices and cloud environments. I wore multiple
-                      hats in my career, from individual contributor roles, passing through
-                      technical leadership of small and big teams, and performing management
-                      positions as well as head of engineering and CTO. I love to apply the adequate
-                      solution to the current problem, trying to avoid overkilling solutions. I'm
-                      also proactive in learning new technologies and paradigms. Pretty obsessed
-                      with quality and security in code and infrastructures. Speaker and trainer.
+                      As a software architect and developer, I've spent my career mastering the art
+                      of building scalable systems. My expertise lies in decoupled architectures,
+                      microservices, and cloud environments. I've honed my skills in React and
+                      Typescript, creating robust and efficient applications. My proficiency in Java
+                      and Spring, but also in NodeJS and NestJS, has allowed me to develop secure
+                      and high-performing back-end systems. I'm also adept at CI/CD and DevOps,
+                      ensuring seamless deployment and maintenance of software products. My
+                      experience with Docker and Kubernetes has been instrumental in managing
+                      containerized applications in various environments. I'm not just a builder,
+                      but also a teacher and speaker, sharing my knowledge and insights with others.
+                      I'm always proactive in learning new technologies, ensuring the quality and
+                      security of code and infrastructures. My journey in software development is
+                      one of continuous growth and innovation, and I look forward to bringing this
+                      passion to your team.
                     </p>
                   </div>
                 </div>
