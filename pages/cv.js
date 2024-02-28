@@ -4,6 +4,22 @@ import { Image } from '@/components/Image'
 
 const talks = [
   {
+    id: 202401,
+    year: 2024,
+    title: 'Cookieggeddon! Bye to 3rd Party Cookies and how that will affect your software',
+    slidesUrl: null,
+    videoUrl: null,
+    confImageUrl: '/static/images/companies/t3chfest.png',
+  },
+  {
+    id: 202402,
+    year: 2024,
+    title: 'Cookieggeddon! Bye to 3rd Party Cookies and how that will affect your software',
+    slidesUrl: null,
+    videoUrl: null,
+    confImageUrl: '/static/images/companies/commitconf.jpg',
+  },
+  {
     id: 99993,
     year: 2023,
     title: 'API Security & Testing - A pragmatic guide',
@@ -119,7 +135,7 @@ const talks = [
     title: 'Machine Learning at full throttle with GraalVM',
     slidesUrl: 'https://es.slideshare.net/fjbarrena/machine-learning-a-todo-gas-con-graalvm',
     videoUrl: 'https://www.youtube.com/watch?v=XAHRPlse62w',
-    confImageUrl: '/static/images/companies/codemotion.jpg',
+    confImageUrl: '/static/images/companies/commitconf.jpg',
   },
   {
     id: 12,
