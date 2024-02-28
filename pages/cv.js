@@ -697,21 +697,24 @@ export default function About({ authorDetails }) {
               <section aria-labelledby="applicant-information-title">
                 <div className="sm:rounded-lg">
                   <div className="px-2 py-2 sm:px-2">
-                    <p className="mt-1 text-sm">
+                    <p className="mt-1 text-justify text-sm">
                       As a software architect and developer, I've spent my career mastering the art
-                      of building scalable systems. My expertise lies in decoupled architectures,
-                      microservices, and cloud environments. I've honed my skills in React and
-                      Typescript, creating robust and efficient applications. My proficiency in Java
-                      and Spring, but also in NodeJS and NestJS, has allowed me to develop secure
-                      and high-performing back-end systems. I'm also adept at CI/CD and DevOps,
-                      ensuring seamless deployment and maintenance of software products. My
-                      experience with Docker and Kubernetes has been instrumental in managing
-                      containerized applications in various environments. I'm not just a builder,
-                      but also a teacher and speaker, sharing my knowledge and insights with others.
-                      I'm always proactive in learning new technologies, ensuring the quality and
-                      security of code and infrastructures. My journey in software development is
-                      one of continuous growth and innovation, and I look forward to bringing this
-                      passion to your team.
+                      of building <b>scalable systems</b>. My expertise lies in{' '}
+                      <b>decoupled architectures</b>,<b> microservices</b>, and{' '}
+                      <b>cloud environments</b>. I've honed my skills in <b>React</b> and
+                      <b>Typescript</b>, creating robust and efficient applications. My proficiency
+                      in <b>Java </b>
+                      and <b>Spring</b>, but also in <b>NodeJS</b> and <b>NestJS</b>, has allowed me
+                      to develop secure and high-performing back-end systems. I'm also adept at{' '}
+                      <b>CI/CD</b> and <b>DevOps</b>, ensuring seamless deployment and maintenance
+                      of software products. My experience with <b>Docker</b> and <b>Kubernetes</b>{' '}
+                      has been instrumental in managing containerized applications in various
+                      environments. I'm not just a builder, but also a <b>teacher and speaker</b>,
+                      sharing my knowledge and insights with others. I'm always <b>proactive</b> in
+                      learning new technologies, ensuring the <b>quality</b> and
+                      <b> security</b> of code and infrastructures. My journey in software
+                      development is one of continuous growth and innovation, and I look forward to
+                      bringing this passion to your team.
                     </p>
                   </div>
                 </div>
