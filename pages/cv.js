@@ -4,6 +4,22 @@ import { Image } from '@/components/Image'
 
 const talks = [
   {
+    id: 202401,
+    year: 2024,
+    title: 'Cookieggeddon! Bye to 3rd Party Cookies and how that will affect your software',
+    slidesUrl: null,
+    videoUrl: null,
+    confImageUrl: '/static/images/companies/t3chfest.png',
+  },
+  {
+    id: 202402,
+    year: 2024,
+    title: 'Cookieggeddon! Bye to 3rd Party Cookies and how that will affect your software',
+    slidesUrl: null,
+    videoUrl: null,
+    confImageUrl: '/static/images/companies/commit-white.png',
+  },
+  {
     id: 99993,
     year: 2023,
     title: 'API Security & Testing - A pragmatic guide',
@@ -119,7 +135,7 @@ const talks = [
     title: 'Machine Learning at full throttle with GraalVM',
     slidesUrl: 'https://es.slideshare.net/fjbarrena/machine-learning-a-todo-gas-con-graalvm',
     videoUrl: 'https://www.youtube.com/watch?v=XAHRPlse62w',
-    confImageUrl: '/static/images/companies/codemotion.jpg',
+    confImageUrl: '/static/images/companies/commit-white.png',
   },
   {
     id: 12,
@@ -232,23 +248,61 @@ const courses = [
 
 const experience = [
   {
+    id: 0,
+    position: 'Principal Engineer',
+    company: 'Labster',
+    companyUrl: 'https://www.labster.com',
+    date: 'oct 2023 - act',
+    image: '/static/images/companies/labster.svg',
+    body: `Labster is a company that develops virtual laboratory simulations for science education. 
+    These simulations are designed to enhance traditional science education by providing students with 
+    interactive and immersive virtual experiments<br/><br/>
+    As Principal Engineer at Labster, my role covers different aspects of the software development landscape, from
+    problem solving, system design, architecture and technical leadership to mentorship, innovation and
+    collaboration with other teams within the company.<br/><br/>
+    Technically, we use different tools and languages at Labster, always following a microservice mindset
+    with a strong focus on decoupling, security and performance. Particularly noteworthy is the use of <b>Docker</b>,
+    <b>NestJS and NodeJS</b>, <b>Typescript</b>, <b>MongoDB</b>, <b>Redis</b>, <b>VueJS</b> and <b>Kubernetes</b>`,
+    tags: [
+      'EdTech',
+      'product',
+      '🐋 docker',
+      'kubernetes',
+      'security',
+      'microservices',
+      'vuejs',
+      'typescript',
+      'nodejs',
+      'nestjs',
+      'MongoDB',
+      'Redis',
+      'testing',
+      'scrum',
+      'BDD',
+    ],
+    language: '🇺🇸 english • remote',
+  },
+  {
     id: 1,
-    position: 'CTO',
+    position: 'Principal Engineer & CTO',
     company: 'Kyso Inc.',
     companyUrl: 'https://about.kyso.io',
-    date: 'nov 2021 - act',
+    date: 'nov 2021 - nov 2023 (2 years)',
     image: '/static/images/companies/kyso.svg',
     body: `<a href="https://about.kyso.io" target="_blank" class="underline font-bold">Kyso</a> is an early stage b2b data science startup with a fast growing team backed by some 
     great investors like Techstars, Lunar Ventures, Tribal Ventures and more. Responsible for the engineering side of the company and member of the executive. 
     I wore many hats, from product owner, security, architecture, development, management and hiring. Also, I was in charge of technical customer relations. 
     We implemented from scratch the technical culture of the company with very good results, building a great product with best engineering practices, 
-    focusing especially in maintainability and <b><a href="https://fjbarrena.dev/blog/permissions-in-a-distributed-architecture" target="_blank">security<a></b>.<br><br>
+    focusing especially in maintainability and <b><a class="underline font-bold" href="https://fjbarrena.dev/blog/permissions-in-a-distributed-architecture" target="_blank">security<a></b>.<br><br>
     
     With a small team, we were able to build a production ready product quickly, thanks to the great team we were able to hire. The product was designed to be installed
     on-premises in customer's infrastructure. That was a challenge, because every customer has its own cloud provider, and Kyso must work in all of them. The deployment
     was prepared using Docker and Kubernetes, and we added support for Helm and Terraform later. In order to keep the product maintainable and extensible, we designed 
     the architecture to be driven by events, using NATS as an event broker and developing a set of consumers which extends the core features of the product 
     (notifications with slack and teams, analytics, etc.). The API was built using NestJS and Typescript, and the frontend was built using NextJS and Typescript as well. <br/><br/>
+
+    Responsible of SecDevOps implementation, defining CI/CD pipelines for: building software components, build docker images, assess quality code, assess security of the code, dependencies and Docker images. I built pipelines for automatic deployment 
+    in different environments (staging, production and testing), using Gitlab CI/CD and Github actions.<br/><br/>
     
     Also, I was in charge of developing a proof of concept about a LLM (Large Language Model) using Open Source resources like
     <b><a href="https://github.com/imartinez/privateGPT" target="_blank" class="underline">PrivateGPT</a></b> and <b><a href="https://huggingface.co/models" target="_blank" class="underline">HuggingFace Open Source Models</a></b>. This LLM
@@ -256,6 +310,10 @@ const experience = [
     model is trained with your data, and deployed in your infrastructure, your <b>privacy is guaranteed</b>. This model was integrated as well with Kyso's permission system, 
     giving the users the power to decide who can use it.`,
     tags: [
+      'AWS',
+      'CI/CD',
+      'DevOps',
+      'Terraform',
       'product',
       'technical leadership',
       '🐋 docker',
@@ -271,8 +329,10 @@ const experience = [
       'jupyter',
       'LLM',
       '🤖 AI',
+      'MongoDB',
+      'Elasticsearch',
     ],
-    language: '🇺🇸 english',
+    language: '🇺🇸 english • remote',
   },
   {
     id: 2,
@@ -292,8 +352,13 @@ const experience = [
           deployment. The integration with the Cloud infrastructure
           was done directly through VCenter and VCloud API (an other vendors),
           together with an event broker that triggers serverless
-          functions based on OpenFaaS.`,
+          functions based on OpenFaaS.<br /><br />
+          
+          I was as well responsible of SecDevOps implementation, defining CI/CD pipelines for: building software components, build docker images, assess quality code, assess security of the code, dependencies and Docker images. I built pipelines for automatic deployment 
+          in different environments (staging, production and testing), using Gitlab CI/CD.`,
     tags: [
+      'CI/CD',
+      'DevOps',
       'product',
       'kubernetes',
       '🐋 docker',
@@ -301,35 +366,42 @@ const experience = [
       'security',
       '☕ java',
       'angular',
+      'react',
       'vmware',
       'nodejs',
-      'elasticsearch',
+      'MySQL',
+      'Elasticsearch',
       'openfaas',
+      'InfluxDB',
+      'Azure',
     ],
-    language: '🇪🇸 spanish',
+    language: '🇪🇸 spanish • remote',
   },
   {
     id: 3,
-    position: 'Head of Cybersecurity Research Group',
+    position: 'Principal Engineer & Head of Cybersecurity Research Group',
     company: 'Instituto Tecnológico de Informática',
     companyUrl: 'https://www.iti.es/',
-    date: 'feb 2020 - nov 2021 (1 year and 9 months)',
+    date: 'oct 2019 - nov 2021 (2 years and 1 month)',
     image: '/static/images/companies/iti.png',
-    body: `Technical Leader, responsible for opening a new line of
-    work on cybersecurity, focusing on application security
-    and Cloud environments and using new security paradigms,
-    based on Machine Learning, Big Data, DevSecOps and
-    Security as a Code. Those works were part of different
-    research projects, in which the European's project ZDMP
-    highlights. My role at ZDMP was Global Technical Manager,
-    coordinating the technical efforts of more than 15
-    European partners (Ford, Software AG, Mondragon Assembly, Continental, and others). It also highlights the OPOSSUM
-    project, in which I coordinated a technical team to develop
-    technology based on Machine Learning to improve the
-    security of the applications, through a next-generation
-    Web Application & API Protection (WAAP) prototype,
-    using Rust, Java, Angular, Kubernetes, NodeJS and Docker as technologies`,
+    body: `Technical Leader, responsible for opening a new line of work on cybersecurity, focusing on application security and Cloud environments and using new security paradigms,
+    based on Machine Learning, Big Data, SecDevOps and Security as a Code. Those works were part of different research projects, in which the OPOSSUM
+    project highlights, as I coordinated a technical team to develop technology based on Machine Learning to improve the security of the applications, through a next-generation
+    Web Application & API Protection (WAAP) prototype, using Rust, Java, Angular, Kubernetes, NodeJS and Docker as technologies<br/><br/>
+    
+    Also, I was working on projects related to data and AI on the following sectors: energy, manufacturing, automotive and software. <a href="_blank" class="underline">Specially interesting was the ZDMP project</a>, an european
+    R&D project aimed to achieve a Zero Defect Manufacturing Processes. I was the technical manager of a <a href="_blank" href="https://software.zdmp.eu/docs/overview/" class="underline">consortium of 35 partners</a> 
+    like FORD Spain, Software AG, Mondragon Assembly, Continental, among others. Also, I was the principal engineer of the AI Analytics Runtime, a core component in the ZDMP architecture
+    responsible of the training and versioning of models. ZDMP architecture was heavily inspired on <b>Kubeflow</b>. As technical manager, I drove the technical culture of the project, 
+    laying the foundation of the architecture, the pipelines and the collaboration rules between the consortium.<br/><br/>
+
+    Finally, I was responsible as well of SecDevOps implementation, defining CI/CD pipelines for: building software components, build docker images, assess quality code, assess security of the code, dependencies and Docker images. I built pipelines for automatic deployment 
+    in different environments (staging, production and testing), using Gitlab CI/CD. As the project had data science and AI implications, we used Kubeflow to configure and define 
+    the pipelines related to data science and AI, covering the following phases of the AI pipeline: data acquisition and cleaning, data processing, data enrichment, training,
+    packaging and deployment into production.`,
     tags: [
+      'CI/CD',
+      'Kubeflow',
       'R&D',
       'product',
       'management',
@@ -338,68 +410,43 @@ const experience = [
       '🦀 rust',
       '☕ java',
       'angular',
+      'react',
       'kubernetes',
       'nodejs',
       '🐋 docker',
       '🤖 AI',
+      'PostgreSQL',
+      'Cassandra',
+      'MongoDB',
+      'Elasticsearch',
+      'MySQL',
     ],
-    language: '🇬🇧 english & 🇪🇸 spanish',
+    language: '🇬🇧 english • 🇪🇸 spanish • hybrid remote',
   },
   {
     id: 4,
-    position: 'Professor',
-    company: 'Univesitat Politécnica de València',
-    companyUrl: 'https://www.upv.es/en',
-    date: '2021 - 2022',
-    image: '/static/images/companies/upv.jpg',
-    body: `Professor of the subject "Machine Learning applied to
-    Cybersecurity" at Big Data Analytics Master`,
-    tags: ['python', 'data analytics', '🤖 AI', 'cybersecurity', 'jupyter'],
-    language: '🇪🇸 spanish',
-  },
-  {
-    id: 5,
-    position: 'Professor',
-    company: 'Univesidad de Mondragón',
-    companyUrl: 'https://www.mondragon.edu/en/home',
-    date: '2021 - 2022',
-    image: '/static/images/companies/mondragon.png',
-    body: `Professor of the subject "Cybersecurity in the Cloud" at
-    University Expert Course in the National Security Scheme (ENS)`,
-    tags: ['cloud cybersecurity', 'ens', 'nist'],
-    language: '🇪🇸 spanish',
-  },
-  {
-    id: 6,
-    position: 'Software Architect',
-    company: 'GFT',
-    companyUrl: 'https://www.gft.com/int/en/',
-    date: 'jun 2019 - aug 2019 (3 months)',
-    image: '/static/images/companies/gft.png',
-    body: `Software architect for projects related to banking
-    sector. I worked with a team of international and offshored
-    technicians and managers, using agile methodologies.
-    Our technology stack was based on Java for the backend
-    , and React for the frontend. I participated in
-    integration projects with other banking platforms using
-    REST APIs.`,
-    tags: ['consultancy', 'banking', '☕ java', 'react', 'agile', '🐋 docker'],
-    language: '🇬🇧 english',
-  },
-  {
-    id: 7,
     position: 'Head of Engineering',
     company: 'Instituto Tecnológico de Informática',
     companyUrl: 'https://www.iti.es/',
     date: 'ene 2018 - jun 2019 (1 year and 6 months)',
     image: '/static/images/companies/iti.png',
-    body: `Responsible for the technical execution and software
-    engineering of all ITI R&D projects. Management of a
-    technical team of 26 engineers. Big Data, Machine Learning,
-    IoT, Cloud Computing, choice of technologies and
-    DevOps. Promoter of Open Source initiatives. Relevant
-    projects: Radiatus, Kancerbero, SaaSDK`,
+    body: `Responsible for the technical execution and software engineering of all ITI R&D projects. Management of a technical team of 26 engineers. Big Data, Machine Learning,
+    IoT, Cloud Computing, choice of technologies and SecDevOps. Promoter of Open Source initiatives.<br/><br/>
+       
+    I was responsible as well of SecDevOps implementation, defining CI/CD pipelines for: building software components, build docker images, assess quality code, assess security of the code, dependencies and Docker images. I built pipelines for automatic deployment 
+    in different environments (staging, production and testing), using Gitlab CI/CD. As many projects project had data science and AI implications, we used Kubeflow to configure and define 
+    the pipelines related to data science and AI, covering the following phases of the pipeline: data acquisition and cleaning, data processing, data enrichment, training,
+    packaging and deployment into production.<br/><br/>
+
+    Also, combining it with my management tasks, I participated in research projects in different sectors such as the <b>industrial sector</b> and the <b>health sector</b>. Regarding the latter, the BigSalud and Helpsalud projects stand out, 
+    in which I designed, configured and deployed Big Data processing infrastructure to support the processing of different information, such as medical imaging and genomic streams, with the aim of training Machine Learning models for early detection of 
+    certain diseases such as breast cancer, using technologies as Spark, Hadoop, HDFS, Kafka, ActiveMQ or Kibana, among others.
+    
+    Finally, I was a proactive agent in the company's internal training, teaching more than 15 courses (many of them, with multiple editions), and thus training all the company's engineers in topics such as frontend (react, angular), backend (java , hibernate, node, nestjs), 
+    infrastructure (docker, kubernetes) and security (ENS, SecDevOps). These courses were offered as well for external companies.`,
     tags: [
+      'CI/CD',
+      'Kubeflow',
       'R&D',
       'leadership',
       'big data',
@@ -414,8 +461,92 @@ const experience = [
       'cloud',
       '☕ java',
       '🐋 docker',
+      'PostgreSQL',
+      'Cassandra',
+      'MongoDB',
+      'Elasticsearch',
+      'MySQL',
     ],
-    language: '🇬🇧 english & 🇪🇸 spanish',
+    language: '🇬🇧 english • 🇪🇸 spanish • on-site',
+  },
+  {
+    id: 9,
+    position: 'Software Architect & Team Leader',
+    company: 'Instituto Tecnológico de Informática',
+    companyUrl: 'https://www.iti.es/',
+    date: '2015 - ene 2018 (4 years)',
+    image: '/static/images/companies/iti.png',
+    body: `Architect and manager of a team of seven engineers.
+    Driver of the change to architectures based on
+    microservices and front-back decoupling, becoming the
+    development standard of the company. Technological
+    stack: Java, JPA, Hibernate, JAX-WS, Maven, Spring,
+    Angular. Relevant projects: Consum Asset Management,
+    BoxPlus, Java applications optimization for Orizon`,
+    tags: [
+      'CI/CD',
+      'team management',
+      '☕ java',
+      '🐋 docker',
+      'enterprise',
+      'spring',
+      'performance',
+      'angular',
+      'typescript',
+      'PostgreSQL',
+      'SQL Server',
+      'MySQL',
+    ],
+    language: '🇪🇸 spanish • on-site',
+  },
+  {
+    id: 10,
+    position: 'Software Engineer',
+    company: 'Instituto Tecnológico de Informática',
+    companyUrl: 'https://www.iti.es/',
+    date: '2011 - 2015 (3 years)',
+    image: '/static/images/companies/iti.png',
+    body: `Java FullStack Developer for end customers and R&D
+    projects. Technological stack: Spring, JPA, Hibernate,
+    JAX-WS, JSF, JSP, Maven. Deployment on Tomcat and
+    JBoss servers. Relevant projects: Episteme, Fet-Eye.eu,
+    PangeaMT, Consum Energía`,
+    tags: [
+      'CI/CD',
+      '☕ java',
+      'enterprise',
+      'spring',
+      'liferay',
+      'sharepoint',
+      'PostgreSQL',
+      'SQL Server',
+      'MySQL',
+    ],
+    language: '🇪🇸 spanish • on-site',
+  },
+  {
+    id: 5,
+    position: 'Professor',
+    company: 'Univesitat Politécnica de València',
+    companyUrl: 'https://www.upv.es/en',
+    date: '2021 - 2022',
+    image: '/static/images/companies/upv.jpg',
+    body: `Professor of the subject "Machine Learning applied to
+    Cybersecurity" at Big Data Analytics Master`,
+    tags: ['python', 'data analytics', '🤖 AI', 'cybersecurity', 'jupyter'],
+    language: '🇪🇸 spanish • on-site',
+  },
+  {
+    id: 6,
+    position: 'Professor',
+    company: 'Univesidad de Mondragón',
+    companyUrl: 'https://www.mondragon.edu/en/home',
+    date: '2021 - 2022',
+    image: '/static/images/companies/mondragon.png',
+    body: `Professor of the subject "Cybersecurity in the Cloud" at
+    University Expert Course in the National Security Scheme (ENS)`,
+    tags: ['cloud cybersecurity', 'ens', 'nist'],
+    language: '🇪🇸 spanish • remote',
   },
   {
     id: 8,
@@ -437,49 +568,12 @@ const experience = [
       'typescript',
       '☕ java',
       '🐋 docker',
+      'PostgreSQL',
+      'Elasticsearch',
+      'MySQL',
+      'DB2',
     ],
-    language: '🇺🇸 english & 🇪🇸 spanish',
-  },
-  {
-    id: 9,
-    position: 'Software Architect & Team Leader',
-    company: 'Instituto Tecnológico de Informática',
-    companyUrl: 'https://www.iti.es/',
-    date: '2015 - ene 2018 (4 years)',
-    image: '/static/images/companies/iti.png',
-    body: `Architect and manager of a team of seven engineers.
-    Driver of the change to architectures based on
-    microservices and front-back decoupling, becoming the
-    development standard of the company. Technological
-    stack: Java, JPA, Hibernate, JAX-WS, Maven, Spring,
-    Angular. Relevant projects: Consum Asset Management,
-    BoxPlus, Java applications optimization for Orizon`,
-    tags: [
-      'team management',
-      '☕ java',
-      '🐋 docker',
-      'enterprise',
-      'spring',
-      'performance',
-      'angular',
-      'typescript',
-    ],
-    language: '🇪🇸 spanish',
-  },
-  {
-    id: 10,
-    position: 'Software Engineer',
-    company: 'Instituto Tecnológico de Informática',
-    companyUrl: 'https://www.iti.es/',
-    date: '2011 - 2015 (3 years)',
-    image: '/static/images/companies/iti.png',
-    body: `Java FullStack Developer for end customers and R&D
-    projects. Technological stack: Spring, JPA, Hibernate,
-    JAX-WS, JSF, JSP, Maven. Deployment on Tomcat and
-    JBoss servers. Relevant projects: Episteme, Fet-Eye.eu,
-    PangeaMT, Consum Energía`,
-    tags: ['☕ java', 'enterprise', 'spring', 'liferay', 'sharepoint'],
-    language: '🇪🇸 spanish',
+    language: '🇺🇸 english • 🇪🇸 spanish • on-site',
   },
   {
     id: 11,
@@ -493,8 +587,8 @@ const experience = [
     client, capture of requirements, change and time
     management. Relevant projects: CHGUV, Repsol, Mapfre
     and La Caixa`,
-    tags: ['☕ java', 'enterprise', 'spring', 'liferay', 'sharepoint'],
-    language: '🇪🇸 spanish',
+    tags: ['☕ java', 'enterprise', 'spring', 'liferay', 'sharepoint', 'SQL Server', 'MySQL'],
+    language: '🇪🇸 spanish • on-site',
   },
 ]
 
@@ -522,7 +616,7 @@ export default function About({ authorDetails }) {
               <div className="flex-shrink-0">
                 <div className="relative">
                   <img
-                    className="h-16 w-16 rounded-full"
+                    className="h-32 w-32 rounded-full"
                     src="/static/images/fjbarrena-portrait.png"
                     alt=""
                   />
@@ -570,6 +664,19 @@ export default function About({ authorDetails }) {
                       </a>
                     </div>
                     <div>
+                      <a
+                        href="https://es.slideshare.net/fjbarrena"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <img
+                          src="/static/images/social-icons/slideshare.png"
+                          alt="My slides at Slideshare"
+                          className="h-6"
+                        />
+                      </a>
+                    </div>
+                    <div>
                       <a href="https://twitter.com/DogDeveloper" target="_blank" rel="noreferrer">
                         <img
                           src="/static/images/social-icons/twitter.png"
@@ -590,15 +697,24 @@ export default function About({ authorDetails }) {
               <section aria-labelledby="applicant-information-title">
                 <div className="sm:rounded-lg">
                   <div className="px-2 py-2 sm:px-2">
-                    <p className="mt-1 text-sm">
-                      Software architect and developer specialized in scalable systems based on
-                      decoupled architectures, microservices and cloud environments. I wore multiple
-                      hats in my career, from individual contributor roles, passing through
-                      technical leadership of small and big teams, and performing management
-                      positions as well as head of engineering and CTO. I love to apply the adequate
-                      solution to the current problem, trying to avoid overkilling solutions. I'm
-                      also proactive in learning new technologies and paradigms. Pretty obsessed
-                      with quality and security in code and infrastructures. Speaker and trainer.
+                    <p className="mt-1 text-justify text-sm">
+                      As a software architect and developer, I've spent my career mastering the art
+                      of building <b>scalable systems</b>. My expertise lies in{' '}
+                      <b>decoupled architectures</b>,<b> microservices</b>, and{' '}
+                      <b>cloud environments</b>. I've honed my skills in <b>React</b> and
+                      <b>Typescript</b>, creating robust and efficient applications. My proficiency
+                      in <b>Java </b>
+                      and <b>Spring</b>, but also in <b>NodeJS</b> and <b>NestJS</b>, has allowed me
+                      to develop secure and high-performing back-end systems. I'm also adept at{' '}
+                      <b>CI/CD</b> and <b>DevOps</b>, ensuring seamless deployment and maintenance
+                      of software products. My experience with <b>Docker</b> and <b>Kubernetes</b>{' '}
+                      has been instrumental in managing containerized applications in various
+                      environments. I'm not just a builder, but also a <b>teacher and speaker</b>,
+                      sharing my knowledge and insights with others. I'm always <b>proactive</b> in
+                      learning new technologies, ensuring the <b>quality</b> and
+                      <b> security</b> of code and infrastructures. My journey in software
+                      development is one of continuous growth and innovation, and I look forward to
+                      bringing this passion to your team.
                     </p>
                   </div>
                 </div>
@@ -668,17 +784,27 @@ export default function About({ authorDetails }) {
                 <div className="sm:overflow-hidden sm:rounded-lg">
                   <div className="divide-y divide-gray-200">
                     <div className="px-3 py-5 sm:px-3">
-                      <h2 id="notes-title" className="text-lg font-medium ">
-                        Speaker at events
-                      </h2>
+                      <a name="speaker" href="#speaker">
+                        <h2 id="notes-title" className="text-lg font-medium ">
+                          Speaker at events
+                        </h2>
+                      </a>
                     </div>
                     <div className="px-4 py-6 sm:px-6">
                       <ul role="list" className="space-y-8">
                         {talks.map((item) => (
                           <li key={item.id}>
                             <div className="flex space-x-3">
-                              <div className="flex-shrink-0">
-                                <img className="w-24" src={`${item.confImageUrl}`} alt="" />
+                              <div className={`flex-shrink-0`}>
+                                <img
+                                  className={`${
+                                    item.confImageUrl.includes('commit-white')
+                                      ? 'bg-black pb-1'
+                                      : ''
+                                  } w-24`}
+                                  src={`${item.confImageUrl}`}
+                                  alt=""
+                                />
                               </div>
                               <div>
                                 <div className="text-lg">
@@ -692,8 +818,8 @@ export default function About({ authorDetails }) {
                                     <span className="font-medium">
                                       <a href={item.videoUrl} target="_blank" rel="noreferrer">
                                         <img
-                                          src="/static/images/youtube.svg"
-                                          className="mr-4 h-5 w-5"
+                                          src="/static/images/youtube.png"
+                                          className="mr-4 h-5"
                                           alt="Youtube"
                                           style={{ display: 'flex', float: 'left' }}
                                         />
@@ -704,8 +830,8 @@ export default function About({ authorDetails }) {
                                     <span className="font-medium">
                                       <a href={item.slidesUrl} target="_blank" rel="noreferrer">
                                         <img
-                                          src="/static/images/slideshare.png"
-                                          className="mr-4 h-5 w-5"
+                                          src="/static/images/slideshare_with_text.png"
+                                          className="mr-4 h-5"
                                           alt="Slideshare"
                                           style={{ display: 'flex', float: 'left' }}
                                         />

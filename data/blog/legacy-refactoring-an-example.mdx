@@ -1,0 +1,390 @@
+---
+title: 'Refactoring a legacy project: an example'
+date: '2023-08-19'
+tags: ['refactoring', 'software engineering', 'example', 'migrations']
+draft: false
+summary: "Recently, I had a very nice conversation in which the other party asked me **can you describe a previous experience refactoring a legacy project into a new architecture?**. That's a very deep question, and I think could be a good exercise to reflect about it, and figure out how that process can be improved, just in case I face the same problem again in the future."
+---
+
+Recently, I had a very nice conversation in which the other party asked me **can you describe a previous
+experience refactoring a legacy project into a new architecture?**. That's a very deep question, and I
+think could be a good exercise to reflect about it, and figure
+out how that process can be improved, just in case I face the same problem again in the future.
+
+First of all, let me describe the problem we want to solve.
+
+# The problem
+
+We have a software project. That project is a **monolith**, but it's already decoupled backend-frontend,
+doesn't matter in fact in which technologies is built. So basically we have an **API** a **frontend** and a **database**.
+
+<Mermaid
+  chart={`
+    flowchart LR
+      FRONT <--> API
+      API <--> DATABASE
+  `}
+/>
+
+The software is **working for around 20 years**, paying bills, being **profitable**. That piece of software can be
+used as a **SaaS**, or **On-Premises**, installed in the customer's infrastructure.
+
+![But it runs](/static/memes/but_it_runs.jpg)
+
+Even paying bills, the software is starting to have several problems related to:
+
+- The **technologies used are pretty old**, and they are starting to don't receive technical **support nor updates**
+- As the software didn't evolve progressively over time, it's barely impossible to update their dependencies
+  in a secure way
+- As the software can be installed On-Premises, **the deployment/installation must be easy for customers**, as several
+  times the person who is installing the software is not technical
+- **Only works on Windows**, and the company is paying lots of money for licenses that, in fact, are not strictly
+  needed because it's a webapp.
+- As is a monolith, and was created without having scalability in mind, the software is having issues in
+  SaaS version. This is **preventing the company to scale up in customers** with confidence.
+
+# The strategy
+
+Having into account the previous data, this is the strategy I would follow:
+
+- **The architecture can't be complex**, because **a complex architecture is a complex deployment**. If we want to
+  deploy 40 microservices, 6 databases and 2 event brokers in at least 3 zones of AWS for High Availability,
+  that's great, but that's complex too. Let's keep the architecture as simple as possible.
+- **Use the same technology stack**, if possible, but in the latest **LTS versions**, so we can reuse pieces
+  of code from the older implementation, and the transition to the new architecture would be easier.
+- **Dockerize everything**, to standardize how it's deployed, and to give us the ability to deploy it in
+  an orchestrator in SaaS to scale-up when necessary. Also, we will be able to run the project in **any operating system**
+- **Extract the model to a separate dependency**, so you can reuse it in different parts of the architecture. Ideally,
+  the frontend can share it too. If that's not the case, because the backend is in C# and the frontend is in Typescript,
+  then you will need to maintain two models (one in C#, and another one in Typescript). To have a shared model
+  between the components in the architecture **is key to ensure the consistency of the data and the changes**.
+
+# The process
+
+## 1. Analyze the current architecture and figure out which components can be splitted
+
+Remember, we don't want to increase the complexity of the architecture if it's not necessary. Having that in
+mind, if our software is working for 20 years we should have an idea about which parts of the software requires
+more care, and which parts of the software are preventing us to scale up properly. Figuring out which parts deserve
+to have their own entity (a docker image, let's say) in the architecture is a good exercise, that can condition
+future decisions.
+
+Try to **don't apply premature optimizations**, remember what [Donald Knuth](https://www.youtube.com/watch?v=74RdET79q40) said
+
+> Premature optimization is the root of all evil
+
+In my opinion, **it's better to invest time modularizing your application well, preparing it to be easily decoupled, instead
+of directly decoupling it**, because probably you will be decoupling the wrong parts. **Decouple it based on your needs and the
+evidence (data), not based in the boxes drawn in a paper**.
+
+## 2. Start small
+
+Once you have a clear vision about how your architecture would look, then it's time to start working on it.
+I suggest you to start with a small use case, if it's possible, something that is not widely used in your application.
+
+For example, let's say that the application has a set of endpoints related to **comments**, but it's a feature that the
+users are not using it so much. That's perfect, if we make a mistake refactoring it, the users probably will not notice it.
+
+Working on it, you will learn different lessons that you would apply later in the most important parts of the software, reducing
+the impact of the customers.
+
+## 3. Be iterative and incremental
+
+Imagine you want to refactor 50 endpoints. As we said previously, you will start with something small, but... when you are
+going to deploy the new changes into production?
+
+I suggest you to do it as soon as possible, and don't wait to have everything refactored to make a totally new installation.
+For example, if I started refactoring 3 endpoints related to comments functionality, I would like to deploy these 3 new
+endpoints fast. So in my SaaS version, I can prepare something like this:
+
+<Mermaid
+  chart={`
+    flowchart TD
+      FRONT --> REVERSE_PROXY
+      REVERSE_PROXY -->|the rest of the endpoints, except comments| OLD_API
+      REVERSE_PROXY -->|comments| NEW_API
+      OLD_API --> id1[(Database)] 
+      NEW_API --> id1 
+  `}
+/>
+
+Iteratively and incrementally, more endpoints will be available in the new API, and less will remain
+in the old API. This will give you as well a quick **rollback strategy** if something goes wrong, just
+configuring properly the reverse proxy you can come back to the old implementation if it's needed.
+
+## 4. Maintain the API contract as much as possible
+
+The API contract, which describes how an API works, must be protected. If in your new, glorious API, everything is
+different than in the old API, you will need to put tons of effort in the frontend as well, because the old
+calls will not work anymore. **If the previous API has a good API design, I suggest you to continue following it**.
+
+I know, sometimes the APIs we want to change are because their API contracts are a mess... in that case, you don't have
+a choice... but if that's not the case, try to don't change irrelevant details just because you think are prettier or fancier.
+For example, if the API is in snake_case, and you prefer a lowerCamelCase because if more readable in your opinion, just let the
+snake_case... you will be grateful with yourself in the near future!
+
+## 5. The two way tests
+
+Don't deliver a thing without tests. Remember, you are refactoring something that it's working, so it's not acceptable
+to deliver a new fancy thing that just don't works. Take advantage of the opportunity and ask to yourself, and involve your team as well,
+in a "how-this-must-work" process.
+
+For example, I love to involve QA teams in this, and prepare a test suite to test the new endpoints.
+Why the QA team? because they are much more exhaustive in their tests than a developer. For example, me as a developer,
+if I want to test the endpoint `DELETE /comment/{id}`, I would test:
+
+- If I try to delete a comment that doesn't exists
+- If I try to delete a comment that exists but I don't have enough permissions to do it so
+- If I try to delete a comment that exists and I have enough permissions
+- And probably some combinations of these
+
+This is the test suite prepared by a QA (Elena Rueda - Kyso) for the same endpoint
+
+```gherkin
+Feature:  Comments - Delete comment
+    Scenario: Delete a comment in a report being an unauthorized user
+        Given An unauthorized user
+        And calls DELETE .api.v1.comments."63763836c4b37ed7ce2c0061"
+        Then Returns 403
+
+    Scenario: Delete a comment in a report being an authorized user who doesn't belong to the org |api-tests|
+        Given As user "lo+gideon@dev.kyso.io"
+        And In "api-tests" organization
+        And In "public-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."63763836c4b37ed7ce2c0061"
+        Then Returns 403
+
+    Scenario: Delete a comment in a report being an authorized user who doesn't belong to the org |api-tests| but is the author of the comment
+        Given As user "lo+gideon@dev.kyso.io"
+        And In "api-tests" organization
+        And In "public-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."63763914dd0dd3a502797172"
+        Then Returns 403
+
+    Scenario: Delete a comment in a report being an authorized user who belongs to the org |api-tests|, is reader and is NOT the author
+        Given As user "lo+chewbacca@dev.kyso.io"
+        And In "api-tests" organization
+        And In "public-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."6376395f291927634fb52f76"
+        Then Returns 403
+
+    Scenario: Delete a comment in a report being an authorized user who belongs to the org |api-tests|, is reader and is the author
+        Given As user "lo+c3po@dev.kyso.io"
+        And In "api-tests" organization
+        And In "public-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."6376395f291927634fb52f76"
+        Then Returns 200
+        And Check if comment is marked as deleted
+
+    Scenario: Delete a comment in a private report being an authorized user who belongs to the org |api-tests|, is reader, is NOT the author and belongs to |private-channel|
+        Given As user "lo+chewbacca@dev.kyso.io"
+        And In "api-tests" organization
+        And In "private-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."63763b6a338ab11639eec6f7"
+        Then Returns 403
+
+    Scenario: Delete a comment in a private report being an authorized user who belongs to the org |api-tests|, is reader, is the author and belongs to |private-channel|
+        Given As user "lo+kylo@dev.kyso.io"
+        And In "api-tests" organization
+        And In "private-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."63763b6a338ab11639eec6f7"
+        Then Returns 200
+        And Check if comment is marked as deleted
+
+    Scenario: Delete a comment in a private report being an authorized user who belongs to the org |api-tests|, is reader, is the author and don't belongs to |private-channel|
+        Given As user "lo+c3po@dev.kyso.io"
+        And In "api-tests" organization
+        And In "private-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."637644f0ab4c89731504672b"
+        Then Returns 403
+
+    Scenario: Delete a comment in a report being an authorized user who belongs to the org |api-tests|, is contributor and is NOT the author
+        Given As user "lo+bb8@dev.kyso.io"
+        And In "api-tests" organization
+        And In "public-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."63764520e9ba2d7b7273dcdf"
+        Then Returns 403
+
+    Scenario: Delete a comment in a report being an authorized user who belongs to the org |api-tests|, is contributor and is the author
+        Given As user "lo+ahsoka@dev.kyso.io"
+        And In "api-tests" organization
+        And In "public-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."63764520e9ba2d7b7273dcdf"
+        Then Returns 200
+        And Check if comment is marked as deleted
+
+    Scenario: Delete a comment in a private report being an authorized user who belongs to the org |api-tests|, is contributor, is NOT the author and belongs to the |private-channel|
+        Given As user "lo+kylo@dev.kyso.io"
+        And In "api-tests" organization
+        And In "private-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."6376458476bcbff63263a18c"
+        Then Returns 403
+
+    Scenario: Delete a comment in a private report being an authorized user who belongs to the org |api-tests|, is contributor, is the author and belongs to the |private-channel|
+        Given As user "lo+kylo@dev.kyso.io"
+        And In "api-tests" organization
+        And In "private-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."637645cddb69a6b680019d35"
+        Then Returns 200
+        And Check if comment is marked as deleted
+
+    Scenario: Delete a comment in a private report being an authorized user who belongs to the org |api-tests|, is contributor, is the author but doesn't belong to the |private-channel|
+        Given As user "lo+ahsoka@dev.kyso.io"
+        And In "api-tests" organization
+        And In "private-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."63764603386e2998d5a22348"
+        Then Returns 403
+
+    Scenario: Delete a comment in a report being an authorized user who belongs to the org |api-tests|, is channel admin and is not the author
+        Given As user "lo+rey@dev.kyso.io"
+        And In "api-tests" organization
+        And In "public-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."63764661a393c514802adaed"
+        Then Returns 200
+        And Check if comment is marked as deleted
+
+    Scenario: Delete a comment in a report being an authorized user who belongs to the org |api-tests|, is channel admin and is the author
+        Given As user "lo+rey@dev.kyso.io"
+        And In "api-tests" organization
+        And In "public-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."6376467d6c4e419eb53b76f5"
+        Then Returns 200
+        And Check if comment is marked as deleted
+
+    Scenario: Delete a comment in a private report being an authorized user who belongs to the org |api-tests|, is channel admin, doesn't belong to the |private-channel| and is the author
+	    Given As user "lo+rey@dev.kyso.io"
+        And In "api-tests" organization
+        And In "private-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."637646cd78e55a49eab84b51"
+        Then Returns 403
+
+    Scenario: Delete a comment in a private report being an authorized user who belongs to the org |api-tests|, is channel admin, doesn't belong to the |private-channel| and is NOT the author
+	    Given As user "lo+r2d2@dev.kyso.io"
+        And In "api-tests" organization
+        And In "private-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."637646cd78e55a49eab84b51"
+        Then Returns 403
+
+    Scenario: Delete a comment in a private report being an authorized user who belongs to the org |api-tests|, is channel admin, belongs to the |private-channel| and is not the author
+	    Given As user "lo+baby_yoda@dev.kyso.io"
+        And In "api-tests" organization
+        And In "private-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."637646cd78e55a49eab84b51"
+        Then Returns 200
+        And Check if comment is marked as deleted
+
+    Scenario: Delete a comment in a private report being an authorized user who belongs to the org |api-tests|, is channel admin, belongs to the |private-channel| and is the author
+	    Given As user "lo+baby_yoda@dev.kyso.io"
+        And In "api-tests" organization
+        And In "private-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."6376471b43ed65102c61aafb"
+        Then Returns 200
+        And Check if comment is marked as deleted
+
+    Scenario: Delete a comment in a private report being an authorized user who belongs to the org |api-tests|, is channel admin, belongs to the |private-channel| and is NOT the author
+	    Given As user "lo+baby_yoda@dev.kyso.io"
+        And In "api-tests" organization
+        And In "private-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."637647470cb8805adced23e4"
+        Then Returns 200
+        And Check if comment is marked as deleted
+
+    Scenario: Delete a comment in a private report being an authorized user who belongs to the org |api-tests|, is org admin, belongs to |private-channel| as reader, and is not the author
+        Given As user "lo+mando@dev.kyso.io"
+        And In "api-tests" organization
+        And In "private-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."6376479348611f2c2791797d"
+        Then Returns 403
+
+    Scenario: Delete a comment in a private report being an authorized user who belongs to the org |api-tests|, is org admin, doesn't belong to |private-channel|, and is NOT the author
+        Given As user "lo+leia@dev.kyso.io"
+        And In "api-tests" organization
+        And In "private-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."6376479348611f2c2791797d"
+        Then Returns 403
+
+    Scenario: Delete a comment in a private report being an authorized user who belongs to the org |api-tests|, is org admin, belongs to |private-channel| as channel admin, and is not the author
+        Given As user "lo+amidala@dev.kyso.io"
+        And In "api-tests" organization
+        And In "private-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."6376479348611f2c2791797d"
+        Then Returns 200
+        And Check if comment is marked as deleted
+
+    Scenario: Delete a comment in a private report being an authorized user who belongs to the org |api-tests|, is org admin, doesn't belong to |private-channel|, and is the author
+        Given As user "lo+leia@dev.kyso.io"
+        And In "api-tests" organization
+        And In "private-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."637648709cc1777e2ab60a8f"
+        Then Returns 403
+
+    Scenario: Delete a comment in a private report being an authorized user who belongs to the org |api-tests|, is org admin, belongs to |private-channel| as reader, and is the author
+        Given As user "lo+mando@dev.kyso.io"
+        And In "api-tests" organization
+        And In "private-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."63764814df4e2e0bfd911588"
+        Then Returns 200
+        And Check if comment is marked as deleted
+
+    Scenario: Delete a comment in a report being an authorized user who belongs to the org |api-tests|, is org admin and is NOT the author
+        Given As user "lo+leia@dev.kyso.io"
+        And In "api-tests" organization
+        And In "public-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."637648ad1c5b4cdc30ead36a"
+        Then Returns 200
+        And Check if comment is marked as deleted
+
+    Scenario: Delete a comment in a report being an authorized user who belongs to the org |api-tests|, is org admin and is the author
+        Given As user "lo+leia@dev.kyso.io"
+        And In "api-tests" organization
+        And In "public-channel" channel
+        When Logs in into the API
+        And calls DELETE .api.v1.comments."637648d8aca006fbd01fded1"
+        Then Returns 200
+        And Check if comment is marked as deleted
+```
+
+![Yes meme](/static/memes/yes-leñador.gif)
+
+The best developer in the world would have come up with at most 10 use cases for this endpoint, but Elena (QA Lead) found 27 of them.
+Really impressive.
+
+Please note that:
+
+- These tests definitions are done in Gherkin in a "top-language-level" that it's understandable for everyone
+- There are test data, so make sure you prepare a way to populate your test environment with the required data
+- If the specs are well done, the code that satifies the tests is pretty simple
+- Make sure you don't let developers to merge into production branch (at least) if the test are failing
+  or missing.
+- Sounds simple, but preparing a good testing environment requires time, don't understimate it.
+
+# Conclusions
+
+We can go deeper and deeper on the topic, because it's exciting, but these are my 5 more important things I
+wanted to highlight. What do you think? Did you miss something on the article? I would love to hear from you
+at Twitter (or X, whatever you want to call that damn thing :P) at [@DogDeveloper](https://twitter.com/DogDeveloper)
