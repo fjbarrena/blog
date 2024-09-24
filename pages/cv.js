@@ -1,23 +1,14 @@
 import { getFileBySlug } from '@/lib/mdx'
-import { CheckIcon, HandThumbUpIcon, UserIcon } from '@heroicons/react/20/solid'
-import { Image } from '@/components/Image'
 
 const talks = [
   {
     id: 202401,
     year: 2024,
     title: 'Cookieggeddon! Bye to 3rd Party Cookies and how that will affect your software',
-    slidesUrl: null,
-    videoUrl: null,
+    slidesUrl:
+      'https://es.slideshare.net/slideshow/cookiegeddon-bye-a-las-cookies-de-terceros-y-cmo-afectar-a-tu-software/266849348',
+    videoUrl: 'https://www.youtube.com/watch?v=-xUMJC8oH5o',
     confImageUrl: '/static/images/companies/t3chfest.png',
-  },
-  {
-    id: 202402,
-    year: 2024,
-    title: 'Cookieggeddon! Bye to 3rd Party Cookies and how that will affect your software',
-    slidesUrl: null,
-    videoUrl: null,
-    confImageUrl: '/static/images/companies/commit-white.png',
   },
   {
     id: 99993,
@@ -280,11 +271,11 @@ const experience = [
       'scrum',
       'BDD',
     ],
-    language: '🇺🇸 english • remote',
+    language: 'english • remote',
   },
   {
     id: 1,
-    position: 'Principal Engineer & CTO',
+    position: 'Chief Technology Officer (Hands on)',
     company: 'Kyso Inc.',
     companyUrl: 'https://about.kyso.io',
     date: 'nov 2021 - nov 2023 (2 years)',
@@ -323,8 +314,8 @@ const experience = [
       'nextjs',
       'react',
       'typescript',
-      'nodejs',
-      'nestjs',
+      'NodeJS',
+      'NestJS',
       'elasticsearch',
       'jupyter',
       'LLM',
@@ -332,7 +323,7 @@ const experience = [
       'MongoDB',
       'Elasticsearch',
     ],
-    language: '🇺🇸 english • remote',
+    language: 'english • remote',
   },
   {
     id: 2,
@@ -375,11 +366,11 @@ const experience = [
       'InfluxDB',
       'Azure',
     ],
-    language: '🇪🇸 spanish • remote',
+    language: 'spanish • remote',
   },
   {
     id: 3,
-    position: 'Principal Engineer & Head of Cybersecurity Research Group',
+    position: 'Head of Cybersecurity Research Group (Hands on)',
     company: 'Instituto Tecnológico de Informática',
     companyUrl: 'https://www.iti.es/',
     date: 'oct 2019 - nov 2021 (2 years and 1 month)',
@@ -421,7 +412,7 @@ const experience = [
       'Elasticsearch',
       'MySQL',
     ],
-    language: '🇬🇧 english • 🇪🇸 spanish • hybrid remote',
+    language: 'english • spanish • hybrid remote',
   },
   {
     id: 4,
@@ -467,7 +458,7 @@ const experience = [
       'Elasticsearch',
       'MySQL',
     ],
-    language: '🇬🇧 english • 🇪🇸 spanish • on-site',
+    language: 'english • spanish • on-site',
   },
   {
     id: 9,
@@ -497,7 +488,7 @@ const experience = [
       'SQL Server',
       'MySQL',
     ],
-    language: '🇪🇸 spanish • on-site',
+    language: 'spanish • on-site',
   },
   {
     id: 10,
@@ -522,7 +513,7 @@ const experience = [
       'SQL Server',
       'MySQL',
     ],
-    language: '🇪🇸 spanish • on-site',
+    language: 'spanish • on-site',
   },
   {
     id: 5,
@@ -534,7 +525,7 @@ const experience = [
     body: `Professor of the subject "Machine Learning applied to
     Cybersecurity" at Big Data Analytics Master`,
     tags: ['python', 'data analytics', '🤖 AI', 'cybersecurity', 'jupyter'],
-    language: '🇪🇸 spanish • on-site',
+    language: 'spanish • on-site',
   },
   {
     id: 6,
@@ -546,7 +537,7 @@ const experience = [
     body: `Professor of the subject "Cybersecurity in the Cloud" at
     University Expert Course in the National Security Scheme (ENS)`,
     tags: ['cloud cybersecurity', 'ens', 'nist'],
-    language: '🇪🇸 spanish • remote',
+    language: 'spanish • remote',
   },
   {
     id: 8,
@@ -573,7 +564,7 @@ const experience = [
       'MySQL',
       'DB2',
     ],
-    language: '🇺🇸 english • 🇪🇸 spanish • on-site',
+    language: 'english • spanish • on-site',
   },
   {
     id: 11,
@@ -588,7 +579,7 @@ const experience = [
     management. Relevant projects: CHGUV, Repsol, Mapfre
     and La Caixa`,
     tags: ['☕ java', 'enterprise', 'spring', 'liferay', 'sharepoint', 'SQL Server', 'MySQL'],
-    language: '🇪🇸 spanish • on-site',
+    language: 'spanish • on-site',
   },
 ]
 
