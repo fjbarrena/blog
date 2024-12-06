@@ -2,7 +2,7 @@
 name: Francisco Javier Barrena
 avatar: /static/images/fjbarrena-portrait.png
 occupation: Senior Software Architect
-company: CTO at Kyso Inc.
+company: Principal Engineer at Labster
 email: fjbarrena@gmail.com
 twitter: https://twitter.com/DogDeveloper
 linkedin: https://www.linkedin.com/in/fjbarrena
