@@ -312,6 +312,8 @@ const experience = [
     model is trained with your data, and deployed in your infrastructure, your <b>privacy is guaranteed</b>. This model was integrated as well with Kyso's permission system, 
     giving the users the power to decide who can use it.`,
     tags: [
+      '☕ java',
+      'spring boot',
       'AWS',
       'CI/CD',
       'DevOps',
@@ -337,6 +339,30 @@ const experience = [
     language: 'english • remote',
   },
   {
+    id: 5,
+    position: 'Professor',
+    company: 'Univesitat Politécnica de València',
+    companyUrl: 'https://www.upv.es/en',
+    date: '2021 - 2022',
+    image: '/static/images/companies/upv.jpg',
+    body: `Professor of the subject "Machine Learning applied to
+    Cybersecurity" at Big Data Analytics Master`,
+    tags: ['python', 'data analytics', '🤖 AI', 'cybersecurity', 'jupyter'],
+    language: 'spanish • on-site',
+  },
+  {
+    id: 6,
+    position: 'Professor',
+    company: 'Univesidad de Mondragón',
+    companyUrl: 'https://www.mondragon.edu/en/home',
+    date: '2021 - 2022',
+    image: '/static/images/companies/mondragon.png',
+    body: `Professor of the subject "Cybersecurity in the Cloud" at
+    University Expert Course in the National Security Scheme (ENS)`,
+    tags: ['cloud cybersecurity', 'ens', 'nist'],
+    language: 'spanish • remote',
+  },
+  {
     id: 2,
     position: 'Software Architect',
     company: 'Nexica Econocom',
@@ -359,6 +385,8 @@ const experience = [
           I was as well responsible of SecDevOps implementation, defining CI/CD pipelines for: building software components, build docker images, assess quality code, assess security of the code, dependencies and Docker images. I built pipelines for automatic deployment 
           in different environments (staging, production and testing), using Gitlab CI/CD.`,
     tags: [
+      '☕ java',
+      'spring boot',
       'CI/CD',
       'DevOps',
       'product',
@@ -366,7 +394,6 @@ const experience = [
       '🐋 docker',
       'management',
       'security',
-      '☕ java',
       'angular',
       'react',
       'vmware',
@@ -402,6 +429,8 @@ const experience = [
     the pipelines related to data science and AI, covering the following phases of the AI pipeline: data acquisition and cleaning, data processing, data enrichment, training,
     packaging and deployment into production.`,
     tags: [
+      '☕ java',
+      'spring boot',
       'CI/CD',
       'Kubeflow',
       'R&D',
@@ -410,7 +439,6 @@ const experience = [
       'technical leadership',
       'cybersecurity',
       '🦀 rust',
-      '☕ java',
       'angular',
       'react',
       'kubernetes',
@@ -447,6 +475,8 @@ const experience = [
     Finally, I was a proactive agent in the company's internal training, teaching more than 15 courses (many of them, with multiple editions), and thus training all the company's engineers in topics such as frontend (react, angular), backend (java , hibernate, node, nestjs), 
     infrastructure (docker, kubernetes) and security (ENS, SecDevOps). These courses were offered as well for external companies.`,
     tags: [
+      '☕ java',
+      'spring boot',
       'CI/CD',
       'Kubeflow',
       'R&D',
@@ -461,13 +491,40 @@ const experience = [
       'python',
       'spark',
       'cloud',
-      '☕ java',
       '🐋 docker',
       'PostgreSQL',
       'Cassandra',
       'MongoDB',
       'Elasticsearch',
       'MySQL',
+    ],
+    language: 'english • spanish • on-site',
+  },
+  {
+    id: 8,
+    position: 'CTO & Co-Founder',
+    company: 'Bioscore Sustainability',
+    companyUrl: 'https://bioscore.info/',
+    date: 'feb 2017 - mar 2018 (1 year and 1 month)',
+    image: '/static/images/companies/bioscore.png',
+    body: `Architecture, design and head of implementation of a
+    travel portal specialized in ecological destinations`,
+    tags: [
+      '☕ java',
+      'spring boot',
+      'startup',
+      'product',
+      'leadership',
+      'management',
+      'security',
+      'nestjs',
+      'angular',
+      'typescript',
+      '🐋 docker',
+      'PostgreSQL',
+      'Elasticsearch',
+      'MySQL',
+      'DB2',
     ],
     language: 'english • spanish • on-site',
   },
@@ -486,12 +543,12 @@ const experience = [
     Angular. Relevant projects: Consum Asset Management,
     BoxPlus, Java applications optimization for Orizon`,
     tags: [
+      '☕ java',
+      'spring boot',
       'CI/CD',
       'team management',
-      '☕ java',
       '🐋 docker',
       'enterprise',
-      'spring',
       'performance',
       'angular',
       'typescript',
@@ -516,8 +573,8 @@ const experience = [
     tags: [
       'CI/CD',
       '☕ java',
-      'enterprise',
       'spring',
+      'enterprise',
       'liferay',
       'sharepoint',
       'PostgreSQL',
@@ -525,57 +582,6 @@ const experience = [
       'MySQL',
     ],
     language: 'spanish • on-site',
-  },
-  {
-    id: 5,
-    position: 'Professor',
-    company: 'Univesitat Politécnica de València',
-    companyUrl: 'https://www.upv.es/en',
-    date: '2021 - 2022',
-    image: '/static/images/companies/upv.jpg',
-    body: `Professor of the subject "Machine Learning applied to
-    Cybersecurity" at Big Data Analytics Master`,
-    tags: ['python', 'data analytics', '🤖 AI', 'cybersecurity', 'jupyter'],
-    language: 'spanish • on-site',
-  },
-  {
-    id: 6,
-    position: 'Professor',
-    company: 'Univesidad de Mondragón',
-    companyUrl: 'https://www.mondragon.edu/en/home',
-    date: '2021 - 2022',
-    image: '/static/images/companies/mondragon.png',
-    body: `Professor of the subject "Cybersecurity in the Cloud" at
-    University Expert Course in the National Security Scheme (ENS)`,
-    tags: ['cloud cybersecurity', 'ens', 'nist'],
-    language: 'spanish • remote',
-  },
-  {
-    id: 8,
-    position: 'CTO & Co-Founder',
-    company: 'Bioscore Sustainability',
-    companyUrl: 'https://bioscore.info/',
-    date: 'feb 2017 - mar 2018 (1 year and 1 month)',
-    image: '/static/images/companies/bioscore.png',
-    body: `Architecture, design and head of implementation of a
-    travel portal specialized in ecological destinations`,
-    tags: [
-      'startup',
-      'product',
-      'leadership',
-      'management',
-      'security',
-      'nestjs',
-      'angular',
-      'typescript',
-      '☕ java',
-      '🐋 docker',
-      'PostgreSQL',
-      'Elasticsearch',
-      'MySQL',
-      'DB2',
-    ],
-    language: 'english • spanish • on-site',
   },
   {
     id: 11,
@@ -703,17 +709,18 @@ export default function About({ authorDetails }) {
                       As a software architect and developer, I've spent my career mastering the art
                       of building <b>scalable systems</b>. My expertise lies in{' '}
                       <b>decoupled architectures</b>,<b> microservices</b>, and{' '}
-                      <b>cloud environments</b>. I've honed my skills in <b>React</b> and
-                      <b>Typescript</b>, creating robust and efficient applications. My proficiency
-                      in <b>Java </b>
-                      and <b>Spring</b>, but also in <b>NodeJS</b> and <b>NestJS</b>, has allowed me
-                      to develop secure and high-performing back-end systems. I'm also adept at{' '}
-                      <b>CI/CD</b> and <b>DevOps</b>, ensuring seamless deployment and maintenance
-                      of software products. My experience with <b>Docker</b> and <b>Kubernetes</b>{' '}
-                      has been instrumental in managing containerized applications in various
-                      environments. I'm not just a builder, but also a <b>teacher and speaker</b>,
-                      sharing my knowledge and insights with others. I'm always <b>proactive</b> in
-                      learning new technologies, ensuring the <b>quality</b> and
+                      <b>cloud environments</b>. I've honed my skills in <b>Java</b> and
+                      <b> Spring Boot</b>, creating robust and efficient applications. My
+                      proficiency in <b>Java </b>
+                      and <b>Spring Boot</b>, but also in <b>NodeJS</b> and <b>NestJS</b>, has
+                      allowed me to develop secure and high-performing back-end systems. I'm also
+                      adept at <b>CI/CD</b> and <b>DevOps</b>, ensuring seamless deployment and
+                      maintenance of software products. My experience with <b>Docker</b> and{' '}
+                      <b>Kubernetes</b> has been instrumental in managing containerized applications
+                      in various environments. I'm not just a builder, but also a{' '}
+                      <b>teacher and speaker</b>, sharing my knowledge and insights with others. I'm
+                      always <b>proactive</b> in learning new technologies, ensuring the{' '}
+                      <b>quality</b> and
                       <b> security</b> of code and infrastructures. My journey in software
                       development is one of continuous growth and innovation, and I look forward to
                       bringing this passion to your team.
