@@ -15,6 +15,10 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      screen: {
+        print: { raw: 'print' },
+        screen: { raw: 'screen' },
+      },
       spacing: {
         '9/16': '56.25%',
       },

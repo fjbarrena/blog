@@ -156,6 +156,17 @@ const talks = [
 ]
 const training = [
   {
+    id: 2025,
+    items: [
+      'Good practices on AI Integration (OpenAI GPT, Ollama and LangChain)',
+      'AI: Embeddings and RAG',
+    ],
+  },
+  {
+    id: 2024,
+    items: ['Hexagonal architecture', 'Domain modeling, exceptions vs errors'],
+  },
+  {
     id: 2020,
     items: [
       'C1b3rWall Academy - Ministerio del Interior, Guardia Civil, Policia Nacional',
@@ -615,9 +626,9 @@ export default function About({ authorDetails }) {
                 </div>
               </div>
               <div>
-                <h1 className="text-2xl font-bold ">Francisco Javier Barrena 🇬🇧 🇪🇸</h1>
+                <h1 className="text-2xl font-bold ">Francisco Javier Barrena</h1>
                 <p className="text-sm font-medium ">
-                  Senior Software Architect & Application Security
+                  CTO {` • `} Senior Tech Lead {` • `} Application Security
                 </p>
                 <p className="mt-2 text-sm">
                   <div className="mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
@@ -688,7 +699,7 @@ export default function About({ authorDetails }) {
               <section aria-labelledby="applicant-information-title">
                 <div className="sm:rounded-lg">
                   <div className="px-2 py-2 sm:px-2">
-                    <p className="mt-1 text-justify text-sm">
+                    <p className="mt-1 text-justify text-sm print:text-xs">
                       As a software architect and developer, I've spent my career mastering the art
                       of building <b>scalable systems</b>. My expertise lies in{' '}
                       <b>decoupled architectures</b>,<b> microservices</b>, and{' '}
@@ -743,7 +754,7 @@ export default function About({ authorDetails }) {
                                 <div className="mb-2 space-x-2 text-sm">
                                   <span className="font-medium ">{item.date}</span>
                                 </div>
-                                <div className="mt-1 text-sm">
+                                <div className="mt-1 text-sm print:text-xs">
                                   <div dangerouslySetInnerHTML={{ __html: item.body }} />
                                 </div>
 
