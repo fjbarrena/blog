@@ -634,7 +634,8 @@ export default function About({ authorDetails }) {
               <div>
                 <h1 className="text-2xl font-bold ">Francisco Javier Barrena</h1>
                 <p className="text-sm font-medium ">
-                  CTO {` • `} Senior Tech Lead {` • `} Application Security
+                  CTO {` • `} Senior Tech Lead {` • `} Engineering Manager {` • `} Application
+                  Security
                 </p>
                 <p className="mt-2 text-sm">
                   <div className="mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
